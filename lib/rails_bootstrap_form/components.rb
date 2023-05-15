@@ -3,6 +3,11 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
-  VERSION = "0.2.1".freeze
-  REQUIRED_RAILS_VERSION = "~> 7.0".freeze
+  module Components
+    extend ActiveSupport::Autoload
+
+    autoload :HelpText
+
+    include HelpText
+  end
 end

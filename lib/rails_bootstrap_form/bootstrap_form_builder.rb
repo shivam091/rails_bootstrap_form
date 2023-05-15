@@ -4,6 +4,11 @@
 
 module RailsBootstrapForm
   class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
+
+    include RailsBootstrapForm::FieldWrapperBuilder
+    include RailsBootstrapForm::Components
+    include RailsBootstrapForm::Inputs
+
     delegate :capture, :concat, :tag, to: :@template
 
     attr_accessor :bootstrap_form_options

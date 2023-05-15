@@ -9,3 +9,10 @@
 
 # rspec failure tracking
 .rspec_status
+
+
+demo/db/*.sqlite3
+demo/log/**
+demo/tmp/**/*
+demo/*.byebug_history
+demo/public/assets
