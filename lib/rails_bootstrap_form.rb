@@ -13,6 +13,7 @@ module RailsBootstrapForm
     autoload :Configuration
     autoload :BootstrapFormOptions
     autoload :BootstrapFormBuilder
+    autoload :FieldWrapperBuilder
   end
 
   class << self
