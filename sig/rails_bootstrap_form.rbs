@@ -1,0 +1,10 @@
+# -*- encoding: utf-8 -*-
+# -*- frozen_string_literal: true -*-
+# -*- warn_indent: true -*-
+
+# See the writing guide of rbs: https://github.com/ruby/rbs#guides
+
+module RailsBootstrapForm
+  VERSION: String
+  REQUIRED_RAILS_VERSION: String
+end

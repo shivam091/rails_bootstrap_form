@@ -1,0 +1,10 @@
+# -*- encoding: utf-8 -*-
+# -*- frozen_string_literal: true -*-
+# -*- warn_indent: true -*-
+
+gems = "#{__dir__}/common.gemfile"
+eval File.read(gems), binding, gems
+
+# 7.0.0 has an issue with Ruby 3.1.
+# And a test case has an issue with 7.0.1
+gem "rails", "~> 7.0.2"
