@@ -24,10 +24,28 @@ module RailsBootstrapForm
       week_field
     ].freeze
 
+    DATE_SELECT_HELPERS = %i[
+      date_select
+      time_select
+      datetime_select
+    ].freeze
+
     FIELD_HELPERS.each do |field_tag_name|
       define_method(field_tag_name) do |attribute, options = {}|
         field_wrapper_builder(attribute, options) do
           super(attribute, options)
+        end
+      end
+    end
+
+    DATE_SELECT_HELPERS.each do |field_tag_name|
+      define_method(field_tag_name) do |attribute, options = {}, html_options = {}, &block|
+        options = options.reverse_merge(bootstrap_form: {field_class: "form-select"})
+
+        field_wrapper_builder(attribute, options, html_options) do
+          tag.div(class: control_specific_class(field_tag_name)) do
+            super(attribute, options, html_options)
+          end
         end
       end
     end
