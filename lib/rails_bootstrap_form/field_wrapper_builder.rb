@@ -44,6 +44,7 @@ module RailsBootstrapForm
         bootstrap_options.field_class,
         bootstrap_options.additional_field_class
       ]
+      field_classes << "is-invalid" if is_invalid?(attribute)
       css_options[:class] = field_classes.flatten.compact
 
       css_options

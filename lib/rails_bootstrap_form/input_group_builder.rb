@@ -14,6 +14,7 @@ module RailsBootstrapForm
         append = attach_input(bootstrap_options, :append)
 
         input = prepend + input + append
+        input += generate_error(attribute)
 
         input = tag.div(input, class: input_group_classes(attribute, bootstrap_options))
 
@@ -22,6 +23,8 @@ module RailsBootstrapForm
 
       def input_group_classes(attribute, bootstrap_options)
         classes = ["input-group", bootstrap_options.additional_input_group_class]
+        # Require `has-validation` class if field has errors.
+        classes << "has-validation" if is_invalid?(attribute)
         classes.flatten.compact
       end
 
