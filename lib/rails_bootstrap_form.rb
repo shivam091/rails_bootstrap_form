@@ -9,12 +9,20 @@ module RailsBootstrapForm
   extend ActiveSupport::Autoload
 
   eager_autoload do
-
+    autoload :Configuration
   end
 
   class << self
     def eager_load!
       super
+    end
+
+    def config
+      @config ||= RailsBootstrapForm::Configuration.new
+    end
+
+    def configure
+      yield config
     end
   end
 end

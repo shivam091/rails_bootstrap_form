@@ -2,7 +2,6 @@
 # -*- frozen_string_literal: true -*-
 # -*- warn_indent: true -*-
 
-module RailsBootstrapForm
-  VERSION = "0.1.1".freeze
-  REQUIRED_RAILS_VERSION = "~> 7.0".freeze
+class ApplicationRecord < ActiveRecord::Base
+  primary_abstract_class
 end
