@@ -82,6 +82,10 @@ module RailsBootstrapForm
     # Default is false.
     attr_accessor :floating
 
+    # Default CSS class that will be applied to all static fields.
+    # Default is `form-control-plaintext`.
+    attr_accessor :static_field_class
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -140,6 +144,8 @@ module RailsBootstrapForm
       @additional_label_class = nil
 
       @floating = false
+
+      @static_field_class = "form-control-plaintext"
     end
 
     private :set_defaults
