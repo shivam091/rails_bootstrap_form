@@ -2,8 +2,7 @@
 # -*- frozen_string_literal: true -*-
 # -*- warn_indent: true -*-
 
-Rails.application.routes.draw do
-  root to: "users#index"
-
-  resources :users
+class UserSkill < ApplicationRecord
+  belongs_to :user
+  belongs_to :skill
 end

@@ -1,0 +1,49 @@
+<div class="card card-primary my-3">
+  <div class="card-header fw-bold">
+    Profile Form (Without RailsBootstrapForm)
+  </div>
+  <div class="card-body">
+    <%= form_for @user do |form| %>
+      <%= form.text_field :name, autocomplete: "new-name" %>
+      <%= form.email_field :email %>
+      <%= form.password_field :password, autocomplete: "new-password" %>
+      <%= form.phone_field :mobile_number %>
+      <%= form.date_field :birth_date %>
+      <%= form.check_box :terms %>
+      <%= form.range_field :excellence %>
+      <%= form.url_field :blog_url %>
+      <%= form.url_field :favorite_color %>
+      <%= form.select :fruit_id, options_for_select(::Fruit.pluck(:name, :id), form.object.fruit_id), include_blank: "Select Favorite Fruit" %>
+      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name do |b| %>
+        <%= b.check_box + b.text %>
+      <% end %>
+      <%= form.fields_for :address, include_id: false do |address_form| %>
+        <%= address_form.text_area :street %>
+        <%= address_form.text_field :state %>
+        <%= address_form.text_field :city %>
+        <%= address_form.text_field :postal_code %>
+        <%= address_form.select :country_id, options_for_select(::Country.pluck(:name, :id), address_form.object.country_id), include_blank: "Select Country" %>
+      <% end %>
+      <div class="mt-3">
+        <%= form.submit "Register", class: "btn btn-primary" %>
+        <%= link_to "Cancel", users_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="card card-primary">
+  <div class="card-header fw-bold">
+    Login Form (Without RailsBootstrapForm)
+  </div>
+  <div class="card-body">
+    <%= form_for @user do |form| %>
+      <%= form.email_field :email %>
+      <%= form.password_field :password, autocomplete: "new-password" %>
+      <div class="mt-3">
+        <%= form.submit "Login", class: "btn btn-primary" %>
+        <%= link_to "Cancel", users_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
