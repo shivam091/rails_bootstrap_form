@@ -3,6 +3,9 @@
 # -*- warn_indent: true -*-
 
 class User < ApplicationRecord
+  validates :name, presence: true, length: {in: 2..50}
+  validates :email, presence: true
+
   has_one :address, dependent: :destroy
 
   has_many :user_skills, dependent: :destroy

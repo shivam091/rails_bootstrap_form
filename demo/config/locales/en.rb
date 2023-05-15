@@ -26,6 +26,7 @@
           fruit_id: "Favorite fruit",
           terms: "I accept terms and conditions",
           excellence: "Excellence",
+          skill_ids: "Skills",
         },
         user_skill: {
           user_id: "User",
