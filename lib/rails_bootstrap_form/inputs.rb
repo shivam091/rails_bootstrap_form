@@ -58,6 +58,14 @@ module RailsBootstrapForm
       end
     end
 
+    def collection_select(attribute, collection, value_method, text_method, options = {}, html_options = {})
+      options = options.reverse_merge(bootstrap_form: {field_class: "form-select"})
+
+      field_wrapper_builder(attribute, options, html_options) do
+        super(attribute, collection, value_method, text_method, options, html_options)
+      end
+    end
+
     def range_field(attribute, options = {})
       options = options.reverse_merge(bootstrap_form: {field_class: "form-range"})
 
