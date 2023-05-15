@@ -34,6 +34,27 @@ module RailsBootstrapForm
     # Default is nil.
     attr_accessor :help_text
 
+    # An option to override automatically generated label text.
+    attr_accessor :label_text
+
+    # An option to custmize whether the label is to be displayed or not.
+    attr_accessor :skip_label
+
+    # An option to customize whether the label is only visible to screen readers.
+    attr_accessor :hide_label
+
+    # The CSS class that will be used when the label is only accessible by screen
+    # readers. Default is `visually-hidden`
+    attr_accessor :hide_class
+
+    # Default CSS class that will be applied to all label tags.
+    # Default is `form-label`.
+    attr_accessor :label_class
+
+    # An additional CSS class that will be added along with the existing
+    # `label_class` of the label. Default is nil.
+    attr_accessor :additional_label_class
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -83,6 +104,13 @@ module RailsBootstrapForm
       @additional_field_class = nil
 
       @help_text = nil
+
+      @label_text = ""
+      @skip_label = false
+      @hide_label = false
+      @hide_class = "visually-hidden"
+      @label_class = "form-label"
+      @additional_label_class = nil
     end
 
     private :set_defaults
