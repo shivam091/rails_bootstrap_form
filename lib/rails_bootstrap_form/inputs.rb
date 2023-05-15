@@ -55,5 +55,19 @@ module RailsBootstrapForm
         super(attribute, options)
       end
     end
+
+    def time_zone_select(attribute, priority_zones = nil, options = {}, html_options = {})
+      options = options.reverse_merge(bootstrap_form: {field_class: "form-select"})
+
+      field_wrapper_builder(attribute, options, html_options) do
+        super(attribute, priority_zones, options, html_options)
+      end
+    end
+
+    def hidden_field(attribute, options = {})
+      options[:value] = object.send(attribute) unless options.key?(:value)
+
+      super(attribute, options)
+    end
   end
 end
