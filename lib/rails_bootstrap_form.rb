@@ -10,6 +10,7 @@ module RailsBootstrapForm
 
   eager_autoload do
     autoload :Configuration
+    autoload :BootstrapFormOptions
   end
 
   class << self
