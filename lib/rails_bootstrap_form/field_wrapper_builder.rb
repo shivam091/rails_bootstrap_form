@@ -13,9 +13,11 @@ module RailsBootstrapForm
     end
 
     def field_wrapper(attribute, bootstrap_options, options, &block)
+      label = label(attribute, bootstrap_options)
       help_text = help_text(attribute, bootstrap_options)
 
       tag.div(class: field_wrapper_classes) do
+        concat(label)
         concat(capture(&block))
         concat(help_text)
       end

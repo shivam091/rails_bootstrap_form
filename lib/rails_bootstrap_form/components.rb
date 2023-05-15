@@ -7,7 +7,9 @@ module RailsBootstrapForm
     extend ActiveSupport::Autoload
 
     autoload :HelpText
+    autoload :Labels
 
     include HelpText
+    include Labels
   end
 end
