@@ -14,6 +14,7 @@ module RailsBootstrapForm
     autoload :BootstrapFormOptions
     autoload :BootstrapFormBuilder
     autoload :FieldWrapperBuilder
+    autoload :InputGroupBuilder
     autoload :Components
     autoload :Inputs
   end
@@ -21,6 +22,7 @@ module RailsBootstrapForm
   class << self
     def eager_load!
       super
+      RailsBootstrapForm::InputGroupBuilder.eager_load!
       RailsBootstrapForm::Components.eager_load!
     end
 

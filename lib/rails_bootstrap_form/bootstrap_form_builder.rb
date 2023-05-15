@@ -6,6 +6,7 @@ module RailsBootstrapForm
   class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
     include RailsBootstrapForm::FieldWrapperBuilder
+    include RailsBootstrapForm::InputGroupBuilder
     include RailsBootstrapForm::Components
     include RailsBootstrapForm::Inputs
 

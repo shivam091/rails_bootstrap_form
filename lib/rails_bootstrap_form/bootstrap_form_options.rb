@@ -55,6 +55,26 @@ module RailsBootstrapForm
     # `label_class` of the label. Default is nil.
     attr_accessor :additional_label_class
 
+    # Input group specific options. Input groups allow prepending and appending
+    # arbitrary html or text to the field.
+    #
+    # Example:
+    #
+    #   form.text_field :dollars, bootstrap_form: {input_group: {prepend: "$", append: ".00"}}
+    #   form.text_field :search, bootstrap_form: {input_group: {append: button_tag("Go", type: :submit, class: "btn btn-secondary")}}
+    #
+    # Raw or HTML content to be prepended to the field.
+    # Default is `nil`.
+    attr_accessor :prepend
+
+    # Raw or HTML content to be appended to the field.
+    # Default is `nil`.
+    attr_accessor :append
+
+    # Append additional CSS class added to the input group wrapper.
+    # Default is `nil`.
+    attr_accessor :additional_input_group_class
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
