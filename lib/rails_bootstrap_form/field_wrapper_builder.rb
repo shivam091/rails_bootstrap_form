@@ -16,12 +16,24 @@ module RailsBootstrapForm
       label = label(attribute, bootstrap_options)
       help_text = help_text(attribute, bootstrap_options)
 
-      tag.div(class: field_wrapper_classes) do
-        concat(label)
-        concat(input_group_wrapper(attribute, bootstrap_options) do
-          capture(&block)
-        end)
-        concat(help_text)
+      if bootstrap_options.floating
+        tag.div(class: field_wrapper_classes) do
+          concat(input_group_wrapper(attribute, bootstrap_options) do
+            tag.div(class: floating_label_classes(attribute)) do
+              concat(capture(&block))
+              concat(label)
+            end
+          end)
+          concat(help_text)
+        end
+      else
+        tag.div(class: field_wrapper_classes) do
+          concat(label)
+          concat(input_group_wrapper(attribute, bootstrap_options) do
+            capture(&block)
+          end)
+          concat(help_text)
+        end
       end
     end
 
@@ -46,14 +58,26 @@ module RailsBootstrapForm
       ]
       field_classes << "is-invalid" if is_invalid?(attribute)
 
+      css_options[:class] = field_classes.flatten.compact
+
       css_options.merge!(required_field_options(attribute, options))
 
-      css_options[:class] = field_classes.flatten.compact
+      if bootstrap_options.floating
+        css_options[:placeholder] ||= label_text(attribute, bootstrap_options)
+      end
 
       css_options
     end
 
+    def floating_label_classes(attribute)
+      classes = Array("form-floating")
+      # Floating label fields with input group requires `is-invalid` class in
+      # order to display error messages.
+      classes << "is-invalid" if is_invalid?(attribute)
+      classes
+    end
+
     private :field_wrapper, :field_wrapper_classes, :form_wrapper_default_class,
-            :field_css_options
+            :field_css_options, :floating_label_classes
   end
 end

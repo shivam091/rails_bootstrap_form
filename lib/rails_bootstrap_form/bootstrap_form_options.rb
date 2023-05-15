@@ -35,12 +35,15 @@ module RailsBootstrapForm
     attr_accessor :help_text
 
     # An option to override automatically generated label text.
+    # Default is `nil`.
     attr_accessor :label_text
 
     # An option to custmize whether the label is to be displayed or not.
+    # Default is `false`.
     attr_accessor :skip_label
 
     # An option to customize whether the label is only visible to screen readers.
+    # Default is `false`.
     attr_accessor :hide_label
 
     # The CSS class that will be used when the label is only accessible by screen
@@ -52,7 +55,7 @@ module RailsBootstrapForm
     attr_accessor :label_class
 
     # An additional CSS class that will be added along with the existing
-    # `label_class` of the label. Default is nil.
+    # `label_class` of the label. Default is `nil`.
     attr_accessor :additional_label_class
 
     # Input group specific options. Input groups allow prepending and appending
@@ -74,6 +77,10 @@ module RailsBootstrapForm
     # Append additional CSS class added to the input group wrapper.
     # Default is `nil`.
     attr_accessor :additional_input_group_class
+
+    # Option to control whether the field should have a floating label.
+    # Default is false.
+    attr_accessor :floating
 
     def initialize(options = {})
       set_defaults
@@ -125,12 +132,14 @@ module RailsBootstrapForm
 
       @help_text = nil
 
-      @label_text = ""
+      @label_text = nil
       @skip_label = false
       @hide_label = false
       @hide_class = "visually-hidden"
       @label_class = "form-label"
       @additional_label_class = nil
+
+      @floating = false
     end
 
     private :set_defaults
