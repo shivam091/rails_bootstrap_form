@@ -13,8 +13,9 @@ module RailsBootstrapForm
     autoload :Configuration
     autoload :BootstrapFormOptions
     autoload :BootstrapFormBuilder
-    autoload :FieldWrapperBuilder
     autoload :Components
+    autoload :FieldWrapperBuilder
+    autoload :InputGroupBuilder
     autoload :Inputs
   end
 

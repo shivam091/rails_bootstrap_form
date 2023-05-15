@@ -18,7 +18,7 @@ module RailsBootstrapForm
           end
         end
 
-        def required_field_options(options, attribute)
+        def required_field_options(attribute, options)
           required = is_field_required?(attribute, options)
 
           {}.tap do |option|

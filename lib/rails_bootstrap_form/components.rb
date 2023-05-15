@@ -9,9 +9,11 @@ module RailsBootstrapForm
     autoload :HelpText
     autoload :Labels
     autoload :RequiredField
+    autoload :Errors
 
     include HelpText
     include Labels
     include RequiredField
+    include Errors
   end
 end

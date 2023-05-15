@@ -7,6 +7,7 @@ module RailsBootstrapForm
 
     include RailsBootstrapForm::FieldWrapperBuilder
     include RailsBootstrapForm::Components
+    include RailsBootstrapForm::InputGroupBuilder
     include RailsBootstrapForm::Inputs
 
     delegate :capture, :concat, :tag, to: :@template
