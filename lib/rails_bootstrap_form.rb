@@ -15,12 +15,14 @@ module RailsBootstrapForm
     autoload :BootstrapFormBuilder
     autoload :FieldWrapperBuilder
     autoload :Components
+    autoload :Inputs
   end
 
   class << self
     def eager_load!
       super
       RailsBootstrapForm::Components.eager_load!
+      RailsBootstrapForm::Inputs.eager_load!
     end
 
     def config
