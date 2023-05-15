@@ -20,6 +20,7 @@ module RailsBootstrapForm
         def label_classes(attribute, bootstrap_options)
           classes = [bootstrap_options.label_class, bootstrap_options.additional_label_class]
           classes << bootstrap_options.hide_class if bootstrap_options.hide_label
+          classes << "required" if is_attribute_required?(attribute)
           classes.flatten.compact
         end
 

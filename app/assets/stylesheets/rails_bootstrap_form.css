@@ -1,1 +1,10 @@
-
+label.is-invalid, .invalid-feedback {
+  color: var(--bs-danger);
+}
+label.required::after {
+  color: var(--bs-danger);
+  content: "*";
+  padding-left: .25rem;
+  top: -2px;
+  font-weight: bolder;
+}

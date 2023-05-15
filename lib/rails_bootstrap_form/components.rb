@@ -8,8 +8,10 @@ module RailsBootstrapForm
 
     autoload :HelpText
     autoload :Labels
+    autoload :RequiredField
 
     include HelpText
     include Labels
+    include RequiredField
   end
 end
