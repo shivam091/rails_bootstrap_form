@@ -1,0 +1,42 @@
+<div class="card card-primary">
+  <div class="card-header">
+    <div class="text-end">
+      <%= link_to "New user", new_user_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered table-stripped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile number</th>
+            <th scope="col">Favorite Fruit</th>
+            <th scope="col">Country</th>
+            <th scope="col" width="15%">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each.with_index(1) do |user, index| %>
+            <tr style="vertical-align: middle;">
+              <td><%= index %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.mobile_number %></td>
+              <td><%= user.fruit_name %></td>
+              <td><%= user.address.country_name %></td>
+              <td>
+                <%= link_to "Edit", edit_user_path(user), class: "btn btn-sm btn-secondary" %>
+                <div class="d-inline-block">
+                  <%= button_to "Delete", user, class: "btn btn-sm btn-danger", method: :delete %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
