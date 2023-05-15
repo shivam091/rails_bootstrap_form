@@ -23,7 +23,6 @@ module RailsBootstrapForm
     def eager_load!
       super
       RailsBootstrapForm::Components.eager_load!
-      RailsBootstrapForm::InputGroupBuilder.eager_load!
     end
 
     def config
