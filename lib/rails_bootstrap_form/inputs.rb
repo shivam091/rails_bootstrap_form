@@ -39,5 +39,21 @@ module RailsBootstrapForm
         super(attribute, choices, options, html_options, &block)
       end
     end
+
+    def range_field(attribute, options = {})
+      options = options.reverse_merge(bootstrap_form: {field_class: "form-range"})
+
+      field_wrapper_builder(attribute, options) do
+        super(attribute, options)
+      end
+    end
+
+    def color_field(attribute, options = {})
+      options = options.reverse_merge(bootstrap_form: {field_class: "form-control form-control-color"})
+
+      field_wrapper_builder(attribute, options) do
+        super(attribute, options)
+      end
+    end
   end
 end
