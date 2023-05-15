@@ -28,6 +28,12 @@ module RailsBootstrapForm
     # `field_class` of the field. Default is nil.
     attr_accessor :additional_field_class
 
+    # Describes help text for the HTML field. Help text is automatically read
+    # from translation file. If you want to customize it, you can pass string.
+    # You can also set it false if you do not want help text displayed.
+    # Default is nil.
+    attr_accessor :help_text
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -75,6 +81,8 @@ module RailsBootstrapForm
 
       @field_class = "form-control"
       @additional_field_class = nil
+
+      @help_text = nil
     end
 
     private :set_defaults

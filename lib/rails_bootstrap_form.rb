@@ -14,11 +14,13 @@ module RailsBootstrapForm
     autoload :BootstrapFormOptions
     autoload :BootstrapFormBuilder
     autoload :FieldWrapperBuilder
+    autoload :Components
   end
 
   class << self
     def eager_load!
       super
+      RailsBootstrapForm::Components.eager_load!
     end
 
     def config
