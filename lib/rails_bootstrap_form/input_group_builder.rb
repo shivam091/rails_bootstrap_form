@@ -10,13 +10,17 @@ module RailsBootstrapForm
       def input_group_wrapper(attribute, bootstrap_options, &block)
         input = capture(&block) || ActiveSupport::SafeBuffer.new
 
-        prepend = attach_input(bootstrap_options, :prepend)
-        append = attach_input(bootstrap_options, :append)
+        if input_group_required?(bootstrap_options)
+          prepend = attach_input(bootstrap_options, :prepend)
+          append = attach_input(bootstrap_options, :append)
 
-        input = prepend + input + append
-        input += generate_error(attribute)
+          input = prepend + input + append
+          input += generate_error(attribute)
 
-        input = tag.div(input, class: input_group_classes(attribute, bootstrap_options))
+          input = tag.div(input, class: input_group_classes(attribute, bootstrap_options))
+        else
+          input += generate_error(attribute)
+        end
 
         input
       end
@@ -42,8 +46,15 @@ module RailsBootstrapForm
         tag.span(content.html_safe, class: "input-group-text")
       end
 
+      def input_group_required?(bootstrap_options)
+        [
+          bootstrap_options.prepend,
+          bootstrap_options.append
+        ].any?(&:present?)
+      end
+
       private :input_group_wrapper, :input_group_classes, :attach_input,
-              :input_group_content
+              :input_group_content, :input_group_required?
     end
   end
 end
