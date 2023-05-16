@@ -13,7 +13,7 @@ module RailsBootstrapForm
 
           help_text = (bootstrap_options.help_text || scoped_help_text(attribute))
 
-          tag.span(help_text, class: "form-text text-muted") if help_text.present?
+          tag.div(help_text, class: "form-text text-muted") if help_text.present?
         end
 
         def object_class
