@@ -120,5 +120,25 @@ module RailsBootstrapForm
 
       text_field(attribute, static_options)
     end
+
+    def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
+      bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+
+      options[:class] = check_box_classes(attribute, options)
+      
+      check_box_field = super(attribute, options, checked_value, unchecked_value)
+      check_box_help_text = help_text(attribute, bootstrap_options)
+
+      check_box_label = check_box_label(attribute, options, bootstrap_options, checked_value, &block)
+
+      check_box_html = tag.div(class: check_box_wrapper_class(bootstrap_options)) do
+        concat(check_box_field)
+        concat(check_box_label)
+        concat(check_box_help_text)
+        concat(generate_error(attribute)) if is_invalid?(attribute)
+      end
+
+      check_box_html
+    end
   end
 end

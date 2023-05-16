@@ -10,10 +10,12 @@ module RailsBootstrapForm
     autoload :Labels
     autoload :RequiredField
     autoload :Errors
+    autoload :CheckBox
 
     include HelpText
     include Labels
     include RequiredField
     include Errors
+    include CheckBox
   end
 end
