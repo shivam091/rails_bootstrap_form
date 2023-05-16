@@ -13,3 +13,10 @@ end
 ::Skill::DEFAULT_OPTIONS.each do |skill|
   ::Skill.find_or_create_by(name: skill)
 end
+
+::City::DEFAULT_OPTIONS.each do |country, cities|
+  country = ::Country.find_by(name: country)
+  country.present? && cities.each do |city|
+    country.cities.find_or_create_by(name: city)
+  end
+end

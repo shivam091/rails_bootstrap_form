@@ -14,4 +14,5 @@ class Country < ApplicationRecord
   ].freeze
 
   has_many :addresses, dependent: :restrict_with_exception
+  has_many :cities, dependent: :destroy
 end
