@@ -8,12 +8,12 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       def self.included(base_class)
-        def label(attribute, bootstrap_options)
+        def draw_label(attribute, bootstrap_options)
           unless bootstrap_options.skip_label
             label_class = label_classes(attribute, bootstrap_options)
             label_text = label_text(attribute, bootstrap_options)
 
-            super(attribute, label_text, class: label_class)
+            label(attribute, label_text, class: label_class)
           end
         end
 
@@ -29,7 +29,7 @@ module RailsBootstrapForm
           bootstrap_options.label_text || object&.class.try(:human_attribute_name, attribute)
         end
 
-        private :label, :label_classes, :label_text
+        private :draw_label, :label_classes, :label_text
       end
     end
   end
