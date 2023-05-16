@@ -40,7 +40,7 @@ module RailsBootstrapForm
 
     DATE_SELECT_HELPERS.each do |field_tag_name|
       define_method(field_tag_name) do |attribute, options = {}, html_options = {}, &block|
-        options = options.reverse_merge(bootstrap_form: {field_class: "form-select"})
+        options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
 
         field_wrapper_builder(attribute, options, html_options) do
           tag.div(class: control_specific_class(field_tag_name)) do
@@ -51,7 +51,7 @@ module RailsBootstrapForm
     end
 
     def select(attribute, choices = nil, options = {}, html_options = {}, &block)
-      options = options.reverse_merge(bootstrap_form: {field_class: "form-select"})
+      options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
 
       field_wrapper_builder(attribute, options, html_options) do
         super(attribute, choices, options, html_options, &block)
@@ -59,15 +59,23 @@ module RailsBootstrapForm
     end
 
     def collection_select(attribute, collection, value_method, text_method, options = {}, html_options = {})
-      options = options.reverse_merge(bootstrap_form: {field_class: "form-select"})
+      options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
 
       field_wrapper_builder(attribute, options, html_options) do
         super(attribute, collection, value_method, text_method, options, html_options)
       end
     end
 
+    def time_zone_select(attribute, priority_zones = nil, options = {}, html_options = {})
+      options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
+
+      field_wrapper_builder(attribute, options, html_options) do
+        super(attribute, priority_zones, options, html_options)
+      end
+    end
+
     def range_field(attribute, options = {})
-      options = options.reverse_merge(bootstrap_form: {field_class: "form-range"})
+      options = {bootstrap_form: {field_class: "form-range"}}.deep_merge!(options)
 
       field_wrapper_builder(attribute, options) do
         super(attribute, options)
@@ -75,18 +83,10 @@ module RailsBootstrapForm
     end
 
     def color_field(attribute, options = {})
-      options = options.reverse_merge(bootstrap_form: {field_class: "form-control form-control-color"})
+      options = {bootstrap_form: {field_class: "form-control form-control-color"}}.deep_merge!(options)
 
       field_wrapper_builder(attribute, options) do
         super(attribute, options)
-      end
-    end
-
-    def time_zone_select(attribute, priority_zones = nil, options = {}, html_options = {})
-      options = options.reverse_merge(bootstrap_form: {field_class: "form-select"})
-
-      field_wrapper_builder(attribute, options, html_options) do
-        super(attribute, priority_zones, options, html_options)
       end
     end
 
