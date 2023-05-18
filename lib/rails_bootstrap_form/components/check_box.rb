@@ -8,12 +8,13 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       def self.included(base_class)
-        def check_box_label(attribute, options, bootstrap_options, checked_value, &block)
+        def check_box_label(attribute, options, bootstrap_options, &block)
           unless bootstrap_options.skip_label
             label_options = {class: check_box_label_class(attribute, bootstrap_options, options)}
             label_options[:for] = options[:id] if options[:id].present?
 
-            label(attribute, label_options)
+            label_text = label_text(attribute, bootstrap_options)
+            label(attribute, label_text, label_options)
           end
         end
 
@@ -24,8 +25,9 @@ module RailsBootstrapForm
         end
 
         def check_box_label_class(attribute, bootstrap_options, options)
-          classes = Array("form-check-label")
+          classes = Array("form-check-label") << bootstrap_options.additional_label_class
           classes << "required" if is_field_required?(attribute, options)
+          classes << "is-invalid" if is_invalid?(attribute)
           classes << bootstrap_options.hide_class if bootstrap_options.hide_label
           classes.flatten.compact
         end
