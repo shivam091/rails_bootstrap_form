@@ -179,5 +179,33 @@ module RailsBootstrapForm
 
       inputs
     end
+
+    def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
+      inputs = ActiveSupport::SafeBuffer.new
+
+      collection.each_with_index do |object, index|
+        input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
+        input_options = {
+          bootstrap_form: {
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+          }
+        }.deep_merge!(options)
+
+        if (checked = input_options[:checked])
+          input_options[:checked] = collection_input_checked?(checked, object, object.send(value_method))
+        end
+
+        inputs << radio_button(attribute, input_value, input_options)
+      end
+
+      inputs
+    end
+
+    def collection_input_checked?(checked, obj, input_value)
+      checked == input_value || Array(checked).try(:include?, input_value) ||
+        checked == obj || Array(checked).try(:include?, obj)
+    end
+
+    private :collection_input_checked?
   end
 end
