@@ -18,7 +18,7 @@
       <%= form.fields_for :address, include_id: false do |address_form| %>
         <%= address_form.text_area :street %>
         <%= address_form.text_field :state %>
-        <%= address_form.grouped_collection_select :city, ::Country.all, :cities, :name, :id, :name %>
+        <%= address_form.grouped_collection_select :city, ::Country.all, :cities, :name, :id, :name, {include_blank: "Select city"} %>
         <%= address_form.text_field :postal_code %>
         <%= address_form.select :country_id, options_for_select(::Country.pluck(:name, :id), address_form.object.country_id),
             {include_blank: "Select Country", bootstrap_form: {}} %>
