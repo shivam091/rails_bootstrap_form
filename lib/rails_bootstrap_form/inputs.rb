@@ -5,6 +5,12 @@
 module RailsBootstrapForm
   module Inputs
 
+    extend ActiveSupport::Autoload
+
+    autoload :Base
+
+    include Base
+
     FIELD_HELPERS = %i[
       text_field
       url_field
@@ -200,12 +206,5 @@ module RailsBootstrapForm
 
       inputs
     end
-
-    def collection_input_checked?(checked, obj, input_value)
-      checked == input_value || Array(checked).try(:include?, input_value) ||
-        checked == obj || Array(checked).try(:include?, obj)
-    end
-
-    private :collection_input_checked?
   end
 end
