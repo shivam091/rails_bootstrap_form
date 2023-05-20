@@ -86,6 +86,10 @@ module RailsBootstrapForm
     # Default is `form-control-plaintext`.
     attr_accessor :static_field_class
 
+    # Option to control whether the check box should look like bootstrap switches.
+    # Default is `false`.
+    attr_accessor :switch
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -146,6 +150,8 @@ module RailsBootstrapForm
       @floating = false
 
       @static_field_class = "form-control-plaintext"
+
+      @switch = false
     end
 
     private :set_defaults

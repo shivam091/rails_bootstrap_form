@@ -120,5 +120,92 @@ module RailsBootstrapForm
 
       text_field(attribute, static_options)
     end
+
+    def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
+      bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+
+      options[:class] = check_box_classes(attribute, options)
+
+      check_box_field = super(attribute, options, checked_value, unchecked_value)
+      check_box_help_text = help_text(attribute, bootstrap_options)
+
+      check_box_label = check_box_label(attribute, checked_value, options, bootstrap_options, &block)
+
+      check_box_html = tag.div(class: check_box_wrapper_class(bootstrap_options)) do
+        concat(check_box_field)
+        concat(check_box_label)
+        concat(check_box_help_text)
+        concat(generate_error(attribute)) if is_invalid?(attribute)
+      end
+
+      check_box_html
+    end
+
+    def radio_button(attribute, value, options = {})
+      bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+
+      options[:class] = radio_button_classes(attribute, options)
+
+      radio_button_field = super(attribute, value, options)
+      radio_button_help_text = help_text(attribute, bootstrap_options)
+
+      radio_button_label = radio_button_label(attribute, value, options, bootstrap_options)
+
+      radio_button_html = tag.div(class: radio_button_wrapper_class(bootstrap_options)) do
+        concat(radio_button_field)
+        concat(radio_button_label)
+        concat(radio_button_help_text)
+        concat(generate_error(attribute)) if is_invalid?(attribute)
+      end
+
+      radio_button_html
+    end
+
+    def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
+      options[:multiple] = true
+
+      inputs = ActiveSupport::SafeBuffer.new
+
+      collection.each do |object|
+        input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
+        input_options = {
+          bootstrap_form: {
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+          }
+        }.deep_merge!(options)
+
+        inputs << check_box(attribute, input_options, input_value, nil)
+      end
+
+      inputs
+    end
+
+    def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
+      inputs = ActiveSupport::SafeBuffer.new
+
+      collection.each do |object|
+        input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
+        input_options = {
+          bootstrap_form: {
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+          }
+        }.deep_merge!(options)
+
+        if (checked = input_options[:checked])
+          input_options[:checked] = collection_input_checked?(checked, object, object.send(value_method))
+        end
+
+        inputs << radio_button(attribute, input_value, input_options)
+      end
+
+      inputs
+    end
+
+    def collection_input_checked?(checked, obj, input_value)
+      checked == input_value || Array(checked).try(:include?, input_value) ||
+        checked == obj || Array(checked).try(:include?, obj)
+    end
+
+    private :collection_input_checked?
   end
 end

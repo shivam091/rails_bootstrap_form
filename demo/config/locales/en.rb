@@ -42,7 +42,8 @@
       },
       help_texts: {
         user: {
-          email: "Please use official email address"
+          email: "Please use official email address",
+          terms: "You must first accept terms and conditions in order to continue"
         }
       },
     }
