@@ -141,6 +141,26 @@ module RailsBootstrapForm
       check_box_html
     end
 
+    def radio_button(attribute, value, options = {})
+      bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+
+      options[:class] = radio_button_classes(attribute, options)
+
+      radio_button_field = super(attribute, value, options)
+      radio_button_help_text = help_text(attribute, bootstrap_options)
+
+      radio_button_label = radio_button_label(attribute, value, options, bootstrap_options)
+
+      radio_button_html = tag.div(class: radio_button_wrapper_class(bootstrap_options)) do
+        concat(radio_button_field)
+        concat(radio_button_label)
+        concat(radio_button_help_text)
+        concat(generate_error(attribute)) if is_invalid?(attribute)
+      end
+
+      radio_button_html
+    end
+
     def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
       options[:multiple] = true
 

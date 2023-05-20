@@ -11,11 +11,13 @@ module RailsBootstrapForm
     autoload :RequiredField
     autoload :Errors
     autoload :CheckBox
+    autoload :RadioButton
 
     include HelpText
     include Labels
     include RequiredField
     include Errors
     include CheckBox
+    include RadioButton
   end
 end
