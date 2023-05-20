@@ -183,8 +183,12 @@ module RailsBootstrapForm
         inputs << check_box(attribute, input_options, input_value, nil)
       end
 
+      if options.delete(:include_hidden) { true }
+        inputs.prepend hidden_field(attribute, value: "", multiple: true)
+      end
+
       field_wrapper_builder(attribute, options, html_options) do
-        concat(tag.div(control_specific_class(:collection_check_boxes)) do
+        concat(tag.div(class: control_specific_class(:collection_check_boxes)) do
           concat(inputs)
         end)
       end
@@ -209,7 +213,7 @@ module RailsBootstrapForm
       end
 
       field_wrapper_builder(attribute, options, html_options) do
-        concat(tag.div(control_specific_class(:collection_radio_buttons)) do
+        concat(tag.div(class: control_specific_class(:collection_radio_buttons)) do
           concat(inputs)
         end)
       end
