@@ -9,15 +9,12 @@
       <%= form.text_field :password, autocomplete: "new-password" %>
       <%= form.phone_field :mobile_number %>
       <%= form.date_field :birth_date %>
-      <%= form.check_box :terms %>
+      <%= form.check_box :terms, bootstrap_form: {switch: false}, required: true %>
       <%= form.range_field :excellence %>
       <%= form.url_field :blog_url %>
+      <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {bootstrap_form: {layout: :inline}, checked: form.object.fruit_id} %>
       <%= form.color_field :favorite_color %>
-      <%= form.select :fruit_id, options_for_select(::Fruit.pluck(:name, :id), form.object.fruit_id),
-          {include_blank: "Select Favorite Fruit"} %>
-      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name do |b| %>
-        <%= b.check_box + b.text %>
-      <% end %>
+      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap_form: {layout: :inline}} %>
       <%= form.fields_for :address, include_id: false do |address_form| %>
         <%= address_form.text_area :street %>
         <%= address_form.text_field :state %>

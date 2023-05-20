@@ -4,7 +4,15 @@
 
 class User < ApplicationRecord
   validates :name, presence: true, length: {in: 2..50}
-  validates :email, presence: true
+  validates :terms, acceptance: true
+  validates :email,
+            :password,
+            :mobile_number,
+            :birth_date,
+            :favorite_color,
+            :fruit_id,
+            :skill_ids,
+            presence: true
 
   has_one :address, dependent: :destroy
 
