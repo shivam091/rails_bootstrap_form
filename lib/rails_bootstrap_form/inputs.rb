@@ -160,8 +160,8 @@ module RailsBootstrapForm
       radio_button_html = tag.div(class: radio_button_wrapper_class(bootstrap_options)) do
         concat(radio_button_field)
         concat(radio_button_label)
-        concat(radio_button_help_text)
-        concat(generate_error(attribute)) if is_invalid?(attribute)
+        concat(radio_button_help_text) unless bootstrap_options.inline?
+        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
       end
 
       radio_button_html
@@ -176,7 +176,7 @@ module RailsBootstrapForm
         input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
         input_options = {
           bootstrap_form: {
-            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
           }
         }.deep_merge!(options)
 
@@ -208,7 +208,11 @@ module RailsBootstrapForm
         inputs << radio_button(attribute, input_value, input_options)
       end
 
-      inputs
+      field_wrapper_builder(attribute, options, html_options) do
+        concat(tag.div(control_specific_class(:collection_radio_buttons)) do
+          concat(inputs)
+        end)
+      end
     end
   end
 end

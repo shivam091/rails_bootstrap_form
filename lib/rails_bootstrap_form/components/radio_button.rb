@@ -43,14 +43,14 @@ module RailsBootstrapForm
 
         def radio_button_label_class(attribute, bootstrap_options, options)
           classes = Array("form-check-label") << bootstrap_options.additional_label_class
-          classes << "required" if is_field_required?(attribute, options)
+          classes << "required" if is_field_required?(attribute, options) && !bootstrap_options.inline?
           classes << "is-invalid" if is_invalid?(attribute)
           classes << bootstrap_options.hide_class if bootstrap_options.hide_label
           classes.flatten.compact
         end
 
         def radio_button_wrapper_class(bootstrap_options)
-          classes = ["mb-3", "form-check"]
+          classes = Array("form-check")
           classes << "form-check-inline" if bootstrap_options.inline?
           classes.flatten.compact
         end
