@@ -140,8 +140,8 @@ module RailsBootstrapForm
       check_box_html = tag.div(class: check_box_wrapper_class(bootstrap_options)) do
         concat(check_box_field)
         concat(check_box_label)
-        concat(check_box_help_text)
-        concat(generate_error(attribute)) if is_invalid?(attribute)
+        concat(check_box_help_text) unless bootstrap_options.inline?
+        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
       end
 
       check_box_html
@@ -176,14 +176,18 @@ module RailsBootstrapForm
         input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
         input_options = {
           bootstrap_form: {
-            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
           }
         }.deep_merge!(options)
 
         inputs << check_box(attribute, input_options, input_value, nil)
       end
 
-      inputs
+      field_wrapper_builder(attribute, options, html_options) do
+        concat(tag.div(control_specific_class(:collection_check_boxes)) do
+          concat(inputs)
+        end)
+      end
     end
 
     def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
