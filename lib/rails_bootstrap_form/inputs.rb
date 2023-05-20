@@ -166,7 +166,7 @@ module RailsBootstrapForm
 
       inputs = ActiveSupport::SafeBuffer.new
 
-      collection.each_with_index do |object, index|
+      collection.each do |object|
         input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
         input_options = {
           bootstrap_form: {
@@ -183,7 +183,7 @@ module RailsBootstrapForm
     def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
       inputs = ActiveSupport::SafeBuffer.new
 
-      collection.each_with_index do |object, index|
+      collection.each do |object|
         input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
         input_options = {
           bootstrap_form: {
