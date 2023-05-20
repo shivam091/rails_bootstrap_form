@@ -129,7 +129,7 @@ module RailsBootstrapForm
       check_box_field = super(attribute, options, checked_value, unchecked_value)
       check_box_help_text = help_text(attribute, bootstrap_options)
 
-      check_box_label = check_box_label(attribute, options, bootstrap_options, &block)
+      check_box_label = check_box_label(attribute, checked_value, options, bootstrap_options, &block)
 
       check_box_html = tag.div(class: check_box_wrapper_class(bootstrap_options)) do
         concat(check_box_field)
@@ -139,6 +139,25 @@ module RailsBootstrapForm
       end
 
       check_box_html
+    end
+
+    def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
+      options[:multiple] = true
+
+      inputs = ActiveSupport::SafeBuffer.new
+
+      collection.each_with_index do |object, index|
+        input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
+        input_options = {
+          bootstrap_form: {
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+          }
+        }.deep_merge!(options)
+
+        inputs << check_box(attribute, input_options, input_value, nil)
+      end
+
+      inputs
     end
   end
 end

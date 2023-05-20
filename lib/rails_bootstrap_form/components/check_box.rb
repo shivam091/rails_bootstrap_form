@@ -8,14 +8,34 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       def self.included(base_class)
-        def check_box_label(attribute, options, bootstrap_options, &block)
+        def check_box_label(attribute, checked_value, options, bootstrap_options, &block)
           unless bootstrap_options.skip_label
-            label_options = {class: check_box_label_class(attribute, bootstrap_options, options)}
+            label_options = {
+              class: check_box_label_class(attribute, bootstrap_options, options)
+            }
             label_options[:for] = options[:id] if options[:id].present?
 
-            label_text = label_text(attribute, bootstrap_options)
-            label(attribute, label_text, label_options)
+            label_name = if options[:multiple]
+              check_box_value(attribute, checked_value)
+            else
+              attribute
+            end
+
+            label_text = check_box_label_text(attribute, options, bootstrap_options, &block)
+
+            label(label_name, label_text, label_options)
           end
+        end
+
+        def check_box_label_text(attribute, options, bootstrap_options, &block)
+          block ? capture(&block) : label_text(attribute, bootstrap_options)
+        end
+
+        def check_box_value(attribute, value)
+          # label's `for` attribute needs to match checkbox tag's id,
+          # IE sanitized value, IE
+          # https://github.com/rails/rails/blob/5-0-stable/actionview/lib/action_view/helpers/tags/base.rb#L123-L125
+          "#{attribute}_#{value.to_s.gsub(/\s/, "_").gsub(/[^-[[:word:]]]/, "").mb_chars.downcase}"
         end
 
         def check_box_classes(attribute, options)
@@ -35,6 +55,7 @@ module RailsBootstrapForm
         def check_box_wrapper_class(bootstrap_options)
           classes = ["mb-3", "form-check"]
           classes << "form-switch" if bootstrap_options.switch
+          classes << "form-check-inline" if bootstrap_options.inline?
           classes.flatten.compact
         end
 
