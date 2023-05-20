@@ -43,7 +43,9 @@
       help_texts: {
         user: {
           email: "Please use official email address",
-          terms: "You must first accept terms and conditions in order to continue"
+          terms: "You must first accept terms and conditions in order to continue",
+          skill_ids: "Select your strong skills",
+          fruit_id: "Select your favorite fruit"
         }
       },
     }

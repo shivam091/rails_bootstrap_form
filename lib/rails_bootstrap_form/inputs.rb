@@ -5,6 +5,12 @@
 module RailsBootstrapForm
   module Inputs
 
+    extend ActiveSupport::Autoload
+
+    autoload :Base
+
+    include Base
+
     FIELD_HELPERS = %i[
       text_field
       url_field
@@ -134,8 +140,8 @@ module RailsBootstrapForm
       check_box_html = tag.div(class: check_box_wrapper_class(bootstrap_options)) do
         concat(check_box_field)
         concat(check_box_label)
-        concat(check_box_help_text)
-        concat(generate_error(attribute)) if is_invalid?(attribute)
+        concat(check_box_help_text) unless bootstrap_options.inline?
+        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
       end
 
       check_box_html
@@ -154,8 +160,8 @@ module RailsBootstrapForm
       radio_button_html = tag.div(class: radio_button_wrapper_class(bootstrap_options)) do
         concat(radio_button_field)
         concat(radio_button_label)
-        concat(radio_button_help_text)
-        concat(generate_error(attribute)) if is_invalid?(attribute)
+        concat(radio_button_help_text) unless bootstrap_options.inline?
+        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
       end
 
       radio_button_html
@@ -177,7 +183,15 @@ module RailsBootstrapForm
         inputs << check_box(attribute, input_options, input_value, nil)
       end
 
-      inputs
+      if options.delete(:include_hidden) { true }
+        inputs.prepend hidden_field(attribute, value: "", multiple: true)
+      end
+
+      field_wrapper_builder(attribute, options, html_options) do
+        concat(tag.div(class: control_specific_class(:collection_check_boxes)) do
+          concat(inputs)
+        end)
+      end
     end
 
     def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
@@ -198,14 +212,11 @@ module RailsBootstrapForm
         inputs << radio_button(attribute, input_value, input_options)
       end
 
-      inputs
+      field_wrapper_builder(attribute, options, html_options) do
+        concat(tag.div(class: control_specific_class(:collection_radio_buttons)) do
+          concat(inputs)
+        end)
+      end
     end
-
-    def collection_input_checked?(checked, obj, input_value)
-      checked == input_value || Array(checked).try(:include?, input_value) ||
-        checked == obj || Array(checked).try(:include?, obj)
-    end
-
-    private :collection_input_checked?
   end
 end
