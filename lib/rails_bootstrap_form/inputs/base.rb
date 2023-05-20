@@ -13,7 +13,11 @@ module RailsBootstrapForm
             checked == obj || Array(checked).try(:include?, obj)
         end
 
-        private :collection_input_checked?
+        def control_specific_class(field_tag_name)
+          "rails-bootstrap-forms-#{field_tag_name.to_s.tr("_", "-")}"
+        end
+
+        private :collection_input_checked?, :control_specific_class
       end
     end
   end

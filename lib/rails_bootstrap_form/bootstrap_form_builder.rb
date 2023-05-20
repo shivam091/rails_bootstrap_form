@@ -25,10 +25,6 @@ module RailsBootstrapForm
       options[:html].reverse_merge!(RailsBootstrapForm.config.default_form_attributes)
     end
 
-    def control_specific_class(field_tag_name)
-      "rails-bootstrap-forms-#{field_tag_name.to_s.tr("_", "-")}"
-    end
-
-    private :apply_default_form_options, :control_specific_class
+    private :apply_default_form_options
   end
 end
