@@ -1,6 +1,9 @@
 label.is-invalid, .invalid-feedback {
   color: var(--bs-form-invalid-color);
 }
+.invalid-feedback {
+  display: block;
+}
 label.required::after {
   color: var(--bs-form-invalid-color);
   content: "*";

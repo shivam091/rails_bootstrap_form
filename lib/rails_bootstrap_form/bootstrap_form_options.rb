@@ -104,14 +104,19 @@ module RailsBootstrapForm
     # The default value is `col-form-label`.
     attr_accessor :label_col_class
 
-    # CSS class for label column when using horizontal form.
+    # Default CSS class for label column when using horizontal form.
     # The default value is `col-sm-2`.
     attr_accessor :label_col_wrapper_class
 
-    # CSS class for control column when using horizontal form.
+    # Default CSS class for control column when using horizontal form.
     # The default value is `col-sm-10`.
+    attr_accessor :field_col_wrapper_class
 
-    attr_accessor :control_col_wrapper_class
+    # Default CSS class for adding offset to the fields when using horizontal
+    # form.
+    # The default value is `offset-sm-2`
+    attr_accessor :field_offset_class
+
     # Option to render checkboxes and radio buttons inline.
     # The default value if `false`.
     #
@@ -145,7 +150,7 @@ module RailsBootstrapForm
     # to a given form field. For example, we can change grid just for one field:
     #
     #   bootstrap_form_with model: @user do |f|
-    #     f.text_field :email, bootstrap_form: {label_col_wrapper_class: "col-md-6", control_col_wrapper_class: "col-md-6"}
+    #     f.text_field :email, bootstrap_form: {label_col_wrapper_class: "col-md-6", field_col_wrapper_class: "col-md-6"}
     #     f.password_field :password
     #   end
     #
@@ -188,8 +193,9 @@ module RailsBootstrapForm
 
       @label_col_class = "col-form-label"
       @label_col_wrapper_class = "col-sm-2"
-      @control_col_wrapper_class = "col-sm-10"
-      
+      @field_col_wrapper_class = "col-sm-10"
+      @field_offset_class = "offset-sm-2"
+
       @inline = false
     end
 

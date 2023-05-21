@@ -141,10 +141,21 @@ module RailsBootstrapForm
         concat(check_box_field)
         concat(check_box_label)
         concat(check_box_help_text) unless bootstrap_options.inline?
-        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
+        concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
       end
 
-      check_box_html
+      if (bootstrap_options.inline? || bootstrap_options.layout_vertical?)
+        check_box_html
+      else
+        check_box_container_classes = [bootstrap_options.field_col_wrapper_class]
+        check_box_container_classes << bootstrap_options.field_offset_class unless bootstrap_options.inline?
+
+        tag.div(class: field_wrapper_classes(bootstrap_options)) do
+          tag.div(class: check_box_container_classes) do
+            check_box_html
+          end
+        end
+      end
     end
 
     def radio_button(attribute, value, options = {})
@@ -161,10 +172,21 @@ module RailsBootstrapForm
         concat(radio_button_field)
         concat(radio_button_label)
         concat(radio_button_help_text) unless bootstrap_options.inline?
-        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
+        concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
       end
 
-      radio_button_html
+      if (bootstrap_options.inline? || bootstrap_options.layout_vertical?)
+        radio_button_html
+      else
+        radio_button_container_classes = [bootstrap_options.field_col_wrapper_class]
+        radio_button_container_classes << bootstrap_options.field_offset_class unless bootstrap_options.inline?
+
+        tag.div(class: field_wrapper_classes(bootstrap_options)) do
+          tag.div(class: radio_button_container_classes) do
+            radio_button_html
+          end
+        end
+      end
     end
 
     def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)

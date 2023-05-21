@@ -19,7 +19,7 @@ module RailsBootstrapForm
       if bootstrap_options.layout_horizontal?
         tag.div(**field_wrapper_options(bootstrap_options)) do
           concat(label)
-          concat(tag.div(class: bootstrap_options.control_col_wrapper_class) do
+          concat(tag.div(class: bootstrap_options.field_col_wrapper_class) do
             concat(input_group_wrapper(attribute, bootstrap_options) do
               capture(&block)
             end)
