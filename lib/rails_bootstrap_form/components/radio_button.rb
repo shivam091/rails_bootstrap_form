@@ -57,7 +57,8 @@ module RailsBootstrapForm
 
         def radio_button_wrapper_class(bootstrap_options)
           classes = Array("form-check")
-          classes << (bootstrap_options.inline? ? "form-check-inline" : "mb-3")
+          classes << "form-check-inline" if bootstrap_options.inline?
+          classes << "mb-3"
           classes.flatten.compact
         end
 
