@@ -13,7 +13,7 @@ module RailsBootstrapForm
     end
 
     def field_wrapper(attribute, bootstrap_options, options, &block)
-      label = draw_label(attribute, bootstrap_options)
+      label = draw_label(attribute, options, bootstrap_options)
       help_text = help_text(attribute, bootstrap_options)
 
       if bootstrap_options.floating
