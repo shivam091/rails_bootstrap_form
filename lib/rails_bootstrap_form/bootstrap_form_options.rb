@@ -90,6 +90,10 @@ module RailsBootstrapForm
     # Default is `false`.
     attr_accessor :switch
 
+    # Controls the HTML attributes and options that will be added to the field wrapper.
+    # Default is `{}`.
+    attr_accessor :wrapper_options
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -105,10 +109,6 @@ module RailsBootstrapForm
 
     def vertical?
       @layout.to_s == "vertical"
-    end
-
-    def floating?
-      @layout.to_s == "floating"
     end
 
     # This will return a copy of `BootstrapFormOptions` object with new options set
@@ -152,6 +152,8 @@ module RailsBootstrapForm
       @static_field_class = "form-control-plaintext"
 
       @switch = false
+
+      @wrapper_options = {}
     end
 
     private :set_defaults

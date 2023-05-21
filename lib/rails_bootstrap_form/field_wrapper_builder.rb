@@ -17,7 +17,7 @@ module RailsBootstrapForm
       help_text = help_text(attribute, bootstrap_options)
 
       if bootstrap_options.floating
-        tag.div(class: field_wrapper_classes) do
+        tag.div(**field_wrapper_options(bootstrap_options)) do
           concat(input_group_wrapper(attribute, bootstrap_options) do
             tag.div(class: floating_label_classes(attribute)) do
               concat(capture(&block))
@@ -27,7 +27,7 @@ module RailsBootstrapForm
           concat(help_text)
         end
       else
-        tag.div(class: field_wrapper_classes) do
+        tag.div(**field_wrapper_options(bootstrap_options)) do
           concat(label)
           concat(input_group_wrapper(attribute, bootstrap_options) do
             capture(&block)
@@ -37,12 +37,15 @@ module RailsBootstrapForm
       end
     end
 
+    def field_wrapper_options(bootstrap_options)
+      {}.tap do |option|
+        option[:class] = field_wrapper_classes
+      end.merge(bootstrap_options.wrapper_options)
+    end
+
     def field_wrapper_classes
       classes = [form_wrapper_default_class]
       classes.flatten.compact
-    end
-
-    def field_wrapper_options
     end
 
     def form_wrapper_default_class

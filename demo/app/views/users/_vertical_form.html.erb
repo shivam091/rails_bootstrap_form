@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <%= bootstrap_form_for @user, bootstrap_form: {} do |form| %>
-      <%= form.text_field :name, autocomplete: "new-name", bootstrap_form: {} %>
+      <%= form.text_field :name, autocomplete: "new-name", class: "dsds", bootstrap_form: {} %>
       <%= form.text_field :email, autocomplete: "new-email", bootstrap_form: {} %>
       <%= form.text_field :password, autocomplete: "new-password" %>
       <%= form.phone_field :mobile_number %>
