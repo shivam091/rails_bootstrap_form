@@ -61,6 +61,9 @@ module RailsBootstrapForm
         bootstrap_options.additional_field_class
       ]
       field_classes << "is-invalid" if is_invalid?(attribute)
+      if is_size_valid?(bootstrap_options)
+        field_classes << "#{bootstrap_options.field_class}-#{bootstrap_options.size}"
+      end
 
       css_options[:class] = field_classes.flatten.compact
       css_options.merge!(required_field_options(attribute, options))

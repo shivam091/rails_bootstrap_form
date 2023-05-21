@@ -94,6 +94,10 @@ module RailsBootstrapForm
     # Default is `{}`.
     attr_accessor :wrapper_options
 
+    # Option to specify the size of input groups and fields.
+    # The valid values are `sm` and `lg`. The default value is `nil`.
+    attr_accessor :size
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -154,6 +158,8 @@ module RailsBootstrapForm
       @switch = false
 
       @wrapper_options = {}
+
+      @size = nil
     end
 
     private :set_defaults
