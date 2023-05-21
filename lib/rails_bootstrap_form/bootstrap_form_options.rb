@@ -98,21 +98,32 @@ module RailsBootstrapForm
     # The valid values are `sm` and `lg`. The default value is `nil`.
     attr_accessor :size
 
+    # Option to render checkboxes and radio buttons inline.
+    # The default value if `false`.
+    #
+    # Example:
+    #   form.collection_radio_buttons :choices, ["yes", "no"], :to_s, :to_s, bootstrap_form: {inline: true}
+    attr_accessor :inline
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
     end
 
-    def horizontal?
+    def layout_horizontal?
       @layout.to_s == "horizontal"
     end
 
-    def inline?
+    def layout_inline?
       @layout.to_s == "inline"
     end
 
-    def vertical?
+    def layout_vertical?
       @layout.to_s == "vertical"
+    end
+
+    def inline?
+      self.inline
     end
 
     # This will return a copy of `BootstrapFormOptions` object with new options set
@@ -160,6 +171,8 @@ module RailsBootstrapForm
       @wrapper_options = {}
 
       @size = nil
+
+      @inline = false
     end
 
     private :set_defaults
