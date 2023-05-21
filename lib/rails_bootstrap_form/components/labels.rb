@@ -22,7 +22,7 @@ module RailsBootstrapForm
 
         def label_classes(attribute, bootstrap_options)
           classes = []
-          classes << if bootstrap_options.horizontal?
+          classes << if bootstrap_options.layout_horizontal?
             [bootstrap_options.label_col_wrapper_class, bootstrap_options.label_col_class]
           else
             bootstrap_options.label_class

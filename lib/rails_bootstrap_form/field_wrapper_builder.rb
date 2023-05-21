@@ -16,7 +16,7 @@ module RailsBootstrapForm
       label = draw_label(attribute, options, bootstrap_options)
       help_text = help_text(attribute, bootstrap_options)
 
-      if bootstrap_options.horizontal?
+      if bootstrap_options.layout_horizontal?
         tag.div(**field_wrapper_options(bootstrap_options)) do
           concat(label)
           concat(tag.div(class: bootstrap_options.control_col_wrapper_class) do
@@ -57,7 +57,7 @@ module RailsBootstrapForm
 
     def field_wrapper_classes(bootstrap_options)
       classes = []
-      classes << "row" if bootstrap_options.horizontal?
+      classes << "row" if bootstrap_options.layout_horizontal?
       classes << "mb-3"
       classes.flatten.compact
     end
@@ -78,7 +78,7 @@ module RailsBootstrapForm
       css_options[:class] = field_classes.flatten.compact
       css_options.merge!(required_field_options(attribute, options))
 
-      if (bootstrap_options.floating && !bootstrap_options.horizontal?)
+      if (bootstrap_options.floating && !bootstrap_options.layout_horizontal?)
         css_options[:placeholder] ||= label_text(attribute, bootstrap_options)
       end
 
