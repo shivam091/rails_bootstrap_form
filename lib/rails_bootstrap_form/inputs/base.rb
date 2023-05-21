@@ -17,7 +17,11 @@ module RailsBootstrapForm
           "rails-bootstrap-forms-#{field_tag_name.to_s.tr("_", "-")}"
         end
 
-        private :collection_input_checked?, :control_specific_class
+        def is_size_valid?(bootstrap_options)
+          bootstrap_options.size && %i(sm lg).include?(bootstrap_options.size)
+        end
+
+        private :collection_input_checked?, :control_specific_class, :is_size_valid?
       end
     end
   end

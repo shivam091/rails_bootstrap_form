@@ -26,7 +26,10 @@ module RailsBootstrapForm
       end
 
       def input_group_classes(attribute, bootstrap_options)
-        classes = ["input-group", bootstrap_options.additional_input_group_class]
+        classes = Array("input-group") << bootstrap_options.additional_input_group_class
+        if is_size_valid?(bootstrap_options)
+          classes << "input-group-#{bootstrap_options.size}"
+        end
         # Require `has-validation` class if field has errors.
         classes << "has-validation" if is_invalid?(attribute)
         classes.flatten.compact

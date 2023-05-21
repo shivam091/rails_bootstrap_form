@@ -45,7 +45,7 @@ module RailsBootstrapForm
     end
 
     DATE_SELECT_HELPERS.each do |field_tag_name|
-      define_method(field_tag_name) do |attribute, options = {}, html_options = {}, &block|
+      define_method(field_tag_name) do |attribute, options = {}, html_options = {}|
         options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
 
         field_wrapper_builder(attribute, options, html_options) do
@@ -137,7 +137,7 @@ module RailsBootstrapForm
 
       check_box_label = check_box_label(attribute, checked_value, options, bootstrap_options, &block)
 
-      check_box_html = tag.div(class: check_box_wrapper_class(bootstrap_options)) do
+      check_box_html = tag.div(**check_box_wrapper_options(bootstrap_options)) do
         concat(check_box_field)
         concat(check_box_label)
         concat(check_box_help_text) unless bootstrap_options.inline?
@@ -157,7 +157,7 @@ module RailsBootstrapForm
 
       radio_button_label = radio_button_label(attribute, value, options, bootstrap_options)
 
-      radio_button_html = tag.div(class: radio_button_wrapper_class(bootstrap_options)) do
+      radio_button_html = tag.div(**radio_button_wrapper_options(bootstrap_options)) do
         concat(radio_button_field)
         concat(radio_button_label)
         concat(radio_button_help_text) unless bootstrap_options.inline?

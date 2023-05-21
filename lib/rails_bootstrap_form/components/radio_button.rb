@@ -28,6 +28,12 @@ module RailsBootstrapForm
           end
         end
 
+        def radio_button_wrapper_options(bootstrap_options)
+          {}.tap do |option|
+            option[:class] = radio_button_wrapper_class(bootstrap_options)
+          end.merge(bootstrap_options.wrapper_options)
+        end
+
         def radio_button_value(attribute, value)
           # label's `for` attribute needs to match checkbox tag's id,
           # IE sanitized value, IE
@@ -51,7 +57,7 @@ module RailsBootstrapForm
 
         def radio_button_wrapper_class(bootstrap_options)
           classes = Array("form-check")
-          classes << "form-check-inline" if bootstrap_options.inline?
+          classes << (bootstrap_options.inline? ? "form-check-inline" : "mb-3")
           classes.flatten.compact
         end
 

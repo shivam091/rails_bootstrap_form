@@ -5,6 +5,7 @@
 ENV["RAILS_ENV"] ||= "test"
 
 require_relative "../demo/config/environment"
+require "simplecov"
 
 def spec_root
   Pathname.new(File.expand_path(__dir__))
@@ -12,6 +13,13 @@ end
 
 def test_directory_path
   spec_root / "test"
+end
+
+SimpleCov.start "rails" do
+  add_filter "spec/"
+  add_filter ".github/"
+  add_filter "lib/generators/templates/"
+  add_filter "lib/rails_bootstrap_form/version"
 end
 
 RSpec.configure do |config|

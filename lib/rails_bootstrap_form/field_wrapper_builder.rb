@@ -13,11 +13,11 @@ module RailsBootstrapForm
     end
 
     def field_wrapper(attribute, bootstrap_options, options, &block)
-      label = draw_label(attribute, bootstrap_options)
+      label = draw_label(attribute, options, bootstrap_options)
       help_text = help_text(attribute, bootstrap_options)
 
       if bootstrap_options.floating
-        tag.div(class: field_wrapper_classes) do
+        tag.div(**field_wrapper_options(bootstrap_options)) do
           concat(input_group_wrapper(attribute, bootstrap_options) do
             tag.div(class: floating_label_classes(attribute)) do
               concat(capture(&block))
@@ -27,7 +27,7 @@ module RailsBootstrapForm
           concat(help_text)
         end
       else
-        tag.div(class: field_wrapper_classes) do
+        tag.div(**field_wrapper_options(bootstrap_options)) do
           concat(label)
           concat(input_group_wrapper(attribute, bootstrap_options) do
             capture(&block)
@@ -37,12 +37,15 @@ module RailsBootstrapForm
       end
     end
 
+    def field_wrapper_options(bootstrap_options)
+      {}.tap do |option|
+        option[:class] = field_wrapper_classes
+      end.merge(bootstrap_options.wrapper_options)
+    end
+
     def field_wrapper_classes
       classes = [form_wrapper_default_class]
       classes.flatten.compact
-    end
-
-    def field_wrapper_options
     end
 
     def form_wrapper_default_class
@@ -52,14 +55,17 @@ module RailsBootstrapForm
     def field_css_options(attribute, bootstrap_options, options, html_options)
       css_options = (html_options || options)
 
-      field_classes = [
+      field_classes = Array(options[:class])
+      field_classes << [
         bootstrap_options.field_class,
         bootstrap_options.additional_field_class
       ]
       field_classes << "is-invalid" if is_invalid?(attribute)
+      if is_size_valid?(bootstrap_options)
+        field_classes << "#{bootstrap_options.field_class}-#{bootstrap_options.size}"
+      end
 
       css_options[:class] = field_classes.flatten.compact
-
       css_options.merge!(required_field_options(attribute, options))
 
       if bootstrap_options.floating
