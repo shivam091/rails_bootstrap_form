@@ -61,7 +61,8 @@ module RailsBootstrapForm
         def check_box_wrapper_class(bootstrap_options)
           classes = Array("form-check")
           classes << "form-switch" if bootstrap_options.switch
-          classes << (bootstrap_options.inline? ? "form-check-inline" : "mb-3")
+          classes << "form-check-inline" if bootstrap_options.inline?
+          classes << "mb-3"
           classes.flatten.compact
         end
 

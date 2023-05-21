@@ -12,13 +12,13 @@
       <%= form.check_box :terms, bootstrap_form: {switch: false}, required: true %>
       <%= form.range_field :excellence %>
       <%= form.url_field :blog_url %>
-      <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {bootstrap_form: {layout: :inline}, checked: form.object.fruit_id} %>
+      <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {bootstrap_form: {inline: true}, checked: form.object.fruit_id} %>
       <%= form.color_field :favorite_color %>
-      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap_form: {layout: :inline}} %>
+      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap_form: {inline: true}} %>
       <%= form.fields_for :address, include_id: false do |address_form| %>
         <%= address_form.text_area :street %>
         <%= address_form.text_field :state %>
-        <%= address_form.grouped_collection_select :city, ::Country.all, :cities, :name, :id, :name, {include_blank: "Select city"} %>
+        <%= address_form.grouped_collection_select :city, ::Country.includes(:cities), :cities, :name, :id, :name, {include_blank: "Select city"} %>
         <%= address_form.text_field :postal_code %>
         <%= address_form.select :country_id, options_for_select(::Country.pluck(:name, :id), address_form.object.country_id),
             {include_blank: "Select Country", bootstrap_form: {}} %>
