@@ -55,14 +55,14 @@ module RailsBootstrapForm
     def field_css_options(attribute, bootstrap_options, options, html_options)
       css_options = (html_options || options)
 
-      field_classes = [
+      field_classes = Array(options[:class])
+      field_classes << [
         bootstrap_options.field_class,
         bootstrap_options.additional_field_class
       ]
       field_classes << "is-invalid" if is_invalid?(attribute)
 
       css_options[:class] = field_classes.flatten.compact
-
       css_options.merge!(required_field_options(attribute, options))
 
       if bootstrap_options.floating
