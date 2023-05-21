@@ -50,7 +50,8 @@ module RailsBootstrapForm
     # readers. Default is `visually-hidden`
     attr_accessor :hide_class
 
-    # Default CSS class that will be applied to all label tags.
+    # Default CSS class that will be applied to all label tags when layout is
+    # vertical.
     # Default is `form-label`.
     attr_accessor :label_class
 
@@ -98,6 +99,19 @@ module RailsBootstrapForm
     # The valid values are `sm` and `lg`. The default value is `nil`.
     attr_accessor :size
 
+    # Default CSS class that will be applied to all label tags when layout is
+    # horizontal.
+    # The default value is `col-form-label`.
+    attr_accessor :label_col_class
+
+    # CSS class for label column when using horizontal form.
+    # The default value is `col-sm-2`.
+    attr_accessor :label_col_wrapper_class
+
+    # CSS class for control column when using horizontal form.
+    # The default value is `col-sm-10`.
+    attr_accessor :control_col_wrapper_class
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -120,7 +134,7 @@ module RailsBootstrapForm
     # to a given form field. For example, we can change grid just for one field:
     #
     #   bootstrap_form_with model: @user do |f|
-    #     f.text_field :email, bootstrap_form: {label_col_class: "col-md-6", control_col_class: "col-md-6"}
+    #     f.text_field :email, bootstrap_form: {label_col_wrapper_class: "col-md-6", control_col_wrapper_class: "col-md-6"}
     #     f.password_field :password
     #   end
     #
@@ -160,6 +174,10 @@ module RailsBootstrapForm
       @wrapper_options = {}
 
       @size = nil
+
+      @label_col_class = "col-form-label"
+      @label_col_wrapper_class = "col-sm-2"
+      @control_col_wrapper_class = "col-sm-10"
     end
 
     private :set_defaults
