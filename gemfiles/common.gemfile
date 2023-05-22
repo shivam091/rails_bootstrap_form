@@ -25,6 +25,14 @@ group :development do
   gem "puma"
 end
 
+group :test do
+  # make it easy and painless to work with XML and HTML from Ruby.
+  gem "nokogiri"
+
+  # Solve your XML/HTML comparison or diffing needs.
+  gem "compare-xml"
+end
+
 group :development, :test do
   gem "byebug"
 end

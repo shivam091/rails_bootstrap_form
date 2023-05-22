@@ -34,4 +34,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "generator_spec"
+  spec.add_dependency("actionpack", RailsBootstrapForm::REQUIRED_RAILS_VERSION)
+  spec.add_dependency("activemodel", RailsBootstrapForm::REQUIRED_RAILS_VERSION)
 end
