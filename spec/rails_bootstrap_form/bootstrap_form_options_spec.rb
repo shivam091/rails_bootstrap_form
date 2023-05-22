@@ -150,4 +150,20 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
 
     expect(actual).to match_html(expected)
   end
+
+  it "checks label wrapper css class for horizontal form" do
+    options = described_class.new
+    expect(options.label_col_wrapper_class).to eq("col-sm-2")
+
+    options = described_class.new(label_col_wrapper_class: "col-md-4")
+    expect(options.label_col_wrapper_class).to eq("col-md-4")
+  end
+
+  it "checks field wrapper css class for horizontal form" do
+    options = described_class.new
+    expect(options.field_col_wrapper_class).to eq("col-sm-10")
+
+    options = described_class.new(field_col_wrapper_class: "col-md-3")
+    expect(options.field_col_wrapper_class).to eq("col-md-3")
+  end
 end
