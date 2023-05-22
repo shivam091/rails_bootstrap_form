@@ -9,6 +9,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11-alpine
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
@@ -16,10 +29,18 @@ jobs:
           - "3.2.2"
     steps:
     - uses: actions/checkout@v3
+    - name: Install prerequisites
+      run: |
+        sudo apt-get install -y libvips
+        sudo apt-get install -yqq libpq-dev
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
+    - name: Set up database
+      run: |
+        bundle exec rake db:create
+        bundle exec rake db:migrate
     - name: Run test cases
       run: bundle exec rake
