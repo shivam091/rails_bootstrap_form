@@ -7,6 +7,8 @@ module RailsBootstrapForm
     module RadioButton
       extend ActiveSupport::Concern
 
+      include RailsBootstrapForm::Helpers
+
       def self.included(base_class)
         def radio_button_label(attribute, value, options, bootstrap_options)
           unless bootstrap_options.skip_label
@@ -58,11 +60,18 @@ module RailsBootstrapForm
         def radio_button_wrapper_class(bootstrap_options)
           classes = Array("form-check")
           classes << "form-check-inline" if bootstrap_options.inline?
-          classes << "mb-3"
+          classes << "mb-3" unless (bootstrap_options.layout_horizontal? || bootstrap_options.inline?)
           classes.flatten.compact
         end
 
-        private :radio_button_label, :radio_button_classes, :radio_button_label_class, :radio_button_wrapper_class
+        def radio_button_container_classes(bootstrap_options)
+          classes = Array(bootstrap_options.field_col_wrapper_class)
+          classes << field_offset_class(bootstrap_options.label_col_wrapper_class)
+          classes.flatten.compact
+        end
+
+        private :radio_button_label, :radio_button_classes, :radio_button_label_class,
+                :radio_button_wrapper_class, :radio_button_container_classes
       end
     end
   end

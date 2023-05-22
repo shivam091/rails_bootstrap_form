@@ -17,6 +17,7 @@ module RailsBootstrapForm
     autoload :FieldWrapperBuilder
     autoload :InputGroupBuilder
     autoload :Inputs
+    autoload :Helpers
   end
 
   class << self

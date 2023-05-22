@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_bootstrap_form (0.5.3)
+    rails_bootstrap_form (0.6.0)
 
 GEM
   remote: http://rubygems.org/

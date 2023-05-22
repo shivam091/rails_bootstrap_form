@@ -6,7 +6,7 @@
 
 RSpec.describe RailsBootstrapForm do
   it "has a valid version number" do
-    expect(RailsBootstrapForm::VERSION).to eq("0.5.3")
+    expect(RailsBootstrapForm::VERSION).to eq("0.6.0")
   end
 
   it "has a valid rails version number" do
