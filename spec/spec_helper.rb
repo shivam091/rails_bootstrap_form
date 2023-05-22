@@ -41,6 +41,9 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.include ActionView::Helpers::FormHelper
+  config.include ActionView::Context if defined?(ActionView::Context)
+
   config.before(:suite) do
     FileUtils.mkdir_p(test_directory_path)
   end
