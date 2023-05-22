@@ -15,14 +15,22 @@ gem "sassc-rails"
 # Add bootstrap support
 gem "bootstrap", "~> 5.3.0.alpha3"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# Use postgresql as the database for Active Record
+gem "pg", "~> 1.1"
 
 # Library to show coverage of the code.
 gem "simplecov"
 
 group :development do
   gem "puma"
+end
+
+group :test do
+  # make it easy and painless to work with XML and HTML from Ruby.
+  gem "nokogiri"
+
+  # Solve your XML/HTML comparison or diffing needs.
+  gem "compare-xml"
 end
 
 group :development, :test do
