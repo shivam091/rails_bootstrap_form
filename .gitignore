@@ -16,3 +16,4 @@ demo/log/**
 demo/tmp/**/*
 demo/*.byebug_history
 demo/public/assets
+demo/config/database.yml
