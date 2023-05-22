@@ -141,10 +141,22 @@ module RailsBootstrapForm
         concat(check_box_field)
         concat(check_box_label)
         concat(check_box_help_text) unless bootstrap_options.inline?
-        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
+        concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
       end
 
-      check_box_html
+      if bootstrap_options.inline?
+        check_box_html
+      else
+        if bootstrap_options.layout_horizontal?
+          tag.div(class: field_wrapper_classes(bootstrap_options)) do
+            tag.div(class: check_box_container_classes(bootstrap_options)) do
+              check_box_html
+            end
+          end
+        else
+          check_box_html
+        end
+      end
     end
 
     def radio_button(attribute, value, options = {})
@@ -161,10 +173,22 @@ module RailsBootstrapForm
         concat(radio_button_field)
         concat(radio_button_label)
         concat(radio_button_help_text) unless bootstrap_options.inline?
-        concat(generate_error(attribute)) if is_invalid?(attribute) && !bootstrap_options.inline?
+        concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
       end
 
-      radio_button_html
+      if bootstrap_options.inline?
+        radio_button_html
+      else
+        if bootstrap_options.layout_horizontal?
+          tag.div(class: field_wrapper_classes(bootstrap_options)) do
+            tag.div(class: radio_button_container_classes(bootstrap_options)) do
+              radio_button_html
+            end
+          end
+        else
+          radio_button_html
+        end
+      end
     end
 
     def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
@@ -176,7 +200,8 @@ module RailsBootstrapForm
         input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
         input_options = {
           bootstrap_form: {
-            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
+            inline: true
           }
         }.deep_merge!(options)
 
@@ -184,7 +209,7 @@ module RailsBootstrapForm
       end
 
       if options.delete(:include_hidden) { true }
-        inputs.prepend hidden_field(attribute, value: "", multiple: true)
+        inputs.prepend(hidden_field(attribute, value: "", multiple: options[:multiple]))
       end
 
       field_wrapper_builder(attribute, options, html_options) do
@@ -201,7 +226,8 @@ module RailsBootstrapForm
         input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
         input_options = {
           bootstrap_form: {
-            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+            label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
+            inline: true
           }
         }.deep_merge!(options)
 

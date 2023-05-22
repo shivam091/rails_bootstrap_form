@@ -21,6 +21,10 @@ module RailsBootstrapForm
           bootstrap_options.size && %i(sm lg).include?(bootstrap_options.size)
         end
 
+        def field_offset_class(label_col_wrapper_class)
+          label_col_wrapper_class.gsub(/\bcol-(\w+)-(\d)\b/, 'offset-\1-\2')
+        end
+
         private :collection_input_checked?, :control_specific_class, :is_size_valid?
       end
     end

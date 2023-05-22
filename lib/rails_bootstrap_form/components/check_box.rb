@@ -7,6 +7,8 @@ module RailsBootstrapForm
     module CheckBox
       extend ActiveSupport::Concern
 
+      include RailsBootstrapForm::Inputs::Base
+
       def self.included(base_class)
         def check_box_label(attribute, checked_value, options, bootstrap_options, &block)
           unless bootstrap_options.skip_label
@@ -62,11 +64,18 @@ module RailsBootstrapForm
           classes = Array("form-check")
           classes << "form-switch" if bootstrap_options.switch
           classes << "form-check-inline" if bootstrap_options.inline?
-          classes << "mb-3"
+          classes << "mb-3" unless (bootstrap_options.layout_horizontal? || bootstrap_options.inline?)
           classes.flatten.compact
         end
 
-        private :check_box_label, :check_box_classes, :check_box_label_class, :check_box_wrapper_class
+        def check_box_container_classes(bootstrap_options)
+          classes = [bootstrap_options.field_col_wrapper_class]
+          classes << field_offset_class(bootstrap_options.label_col_wrapper_class)
+          classes.flatten.compact
+        end
+
+        private :check_box_label, :check_box_classes, :check_box_label_class,
+                :check_box_wrapper_class, :check_box_container_classes
       end
     end
   end
