@@ -11,8 +11,11 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_05_16_044126) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "addresses", primary_key: "user_id", force: :cascade do |t|
-    t.integer "country_id"
+    t.bigint "country_id"
     t.string "street"
     t.string "city"
     t.string "state"
@@ -25,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_044126) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
-    t.integer "country_id"
+    t.bigint "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_cities_on_country_id"
@@ -50,8 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_044126) do
   end
 
   create_table "user_skills", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "skill_id"
+    t.bigint "user_id"
+    t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["skill_id"], name: "index_user_skills_on_skill_id"
@@ -65,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_044126) do
     t.string "mobile_number"
     t.string "blog_url"
     t.date "birth_date"
-    t.integer "fruit_id"
+    t.bigint "fruit_id"
     t.boolean "terms"
     t.string "excellence"
     t.string "favorite_color"

@@ -15,11 +15,11 @@ gem "sassc-rails"
 # Add bootstrap support
 gem "bootstrap", "~> 5.3.0.alpha3"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
-
 # Library to show coverage of the code.
 gem "simplecov"
+
+# Use postgresql as the database for Active Record
+gem "pg", "~> 1.1"
 
 group :development do
   gem "puma"
