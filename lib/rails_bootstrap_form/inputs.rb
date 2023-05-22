@@ -3,14 +3,9 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
+  include Helpers
+
   module Inputs
-
-    extend ActiveSupport::Autoload
-
-    autoload :Base
-
-    include Base
-
     FIELD_HELPERS = %i[
       text_field
       url_field

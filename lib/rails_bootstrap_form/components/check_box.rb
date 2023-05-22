@@ -7,7 +7,7 @@ module RailsBootstrapForm
     module CheckBox
       extend ActiveSupport::Concern
 
-      include RailsBootstrapForm::Inputs::Base
+      include RailsBootstrapForm::Helpers
 
       def self.included(base_class)
         def check_box_label(attribute, checked_value, options, bootstrap_options, &block)
@@ -69,7 +69,7 @@ module RailsBootstrapForm
         end
 
         def check_box_container_classes(bootstrap_options)
-          classes = [bootstrap_options.field_col_wrapper_class]
+          classes = Array(bootstrap_options.field_col_wrapper_class)
           classes << field_offset_class(bootstrap_options.label_col_wrapper_class)
           classes.flatten.compact
         end
