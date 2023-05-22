@@ -3,7 +3,7 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
-  module Components
+  module Helpers
     module RequiredField
       extend ActiveSupport::Concern
 

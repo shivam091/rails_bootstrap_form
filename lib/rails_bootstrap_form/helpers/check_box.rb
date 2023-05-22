@@ -3,11 +3,9 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
-  module Components
+  module Helpers
     module CheckBox
       extend ActiveSupport::Concern
-
-      include RailsBootstrapForm::Helpers
 
       def self.included(base_class)
         def check_box_label(attribute, checked_value, options, bootstrap_options, &block)

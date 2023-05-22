@@ -5,6 +5,21 @@
 module RailsBootstrapForm
   module Helpers
     extend ActiveSupport::Concern
+    extend ActiveSupport::Autoload
+
+    autoload :HelpText
+    autoload :Labels
+    autoload :RequiredField
+    autoload :Errors
+    autoload :CheckBox
+    autoload :RadioButton
+
+    include HelpText
+    include Labels
+    include RequiredField
+    include Errors
+    include CheckBox
+    include RadioButton
 
     def self.included(base_class)
       def collection_input_checked?(checked, obj, input_value)
