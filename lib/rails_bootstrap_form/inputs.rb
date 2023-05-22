@@ -140,18 +140,15 @@ module RailsBootstrapForm
       check_box_html = tag.div(**check_box_wrapper_options(bootstrap_options)) do
         concat(check_box_field)
         concat(check_box_label)
-        concat(check_box_help_text) unless bootstrap_options.inline?
         concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
+        concat(check_box_help_text) unless bootstrap_options.inline?
       end
 
       if (bootstrap_options.inline? || bootstrap_options.layout_vertical?)
         check_box_html
       else
-        check_box_container_classes = [bootstrap_options.field_col_wrapper_class]
-        check_box_container_classes << bootstrap_options.field_offset_class unless bootstrap_options.inline?
-
         tag.div(class: field_wrapper_classes(bootstrap_options)) do
-          tag.div(class: check_box_container_classes) do
+          tag.div(class: check_box_container_classes(bootstrap_options)) do
             check_box_html
           end
         end
@@ -171,18 +168,15 @@ module RailsBootstrapForm
       radio_button_html = tag.div(**radio_button_wrapper_options(bootstrap_options)) do
         concat(radio_button_field)
         concat(radio_button_label)
-        concat(radio_button_help_text) unless bootstrap_options.inline?
         concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
+        concat(radio_button_help_text) unless bootstrap_options.inline?
       end
 
       if (bootstrap_options.inline? || bootstrap_options.layout_vertical?)
         radio_button_html
       else
-        radio_button_container_classes = [bootstrap_options.field_col_wrapper_class]
-        radio_button_container_classes << bootstrap_options.field_offset_class unless bootstrap_options.inline?
-
         tag.div(class: field_wrapper_classes(bootstrap_options)) do
-          tag.div(class: radio_button_container_classes) do
+          tag.div(class: radio_button_container_classes(bootstrap_options)) do
             radio_button_html
           end
         end

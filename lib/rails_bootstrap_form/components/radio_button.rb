@@ -58,11 +58,18 @@ module RailsBootstrapForm
         def radio_button_wrapper_class(bootstrap_options)
           classes = Array("form-check")
           classes << "form-check-inline" if bootstrap_options.inline?
-          classes << "mb-3" if bootstrap_options.layout_vertical?
+          classes << "mb-3" if (!bootstrap_options.inline? && !bootstrap_options.layout_horizontal?)
           classes.flatten.compact
         end
 
-        private :radio_button_label, :radio_button_classes, :radio_button_label_class, :radio_button_wrapper_class
+        def radio_button_container_classes(bootstrap_options)
+          classes = [bootstrap_options.field_col_wrapper_class]
+          classes << bootstrap_options.field_offset_class unless bootstrap_options.inline?
+          classes.flatten.compact
+        end
+
+        private :radio_button_label, :radio_button_classes, :radio_button_label_class,
+                :radio_button_wrapper_class, :radio_button_container_classes
       end
     end
   end

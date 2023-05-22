@@ -62,11 +62,18 @@ module RailsBootstrapForm
           classes = Array("form-check")
           classes << "form-switch" if bootstrap_options.switch
           classes << "form-check-inline" if bootstrap_options.inline?
-          classes << "mb-3" if bootstrap_options.layout_vertical?
+          classes << "mb-3" if (!bootstrap_options.inline? && !bootstrap_options.layout_horizontal?)
           classes.flatten.compact
         end
 
-        private :check_box_label, :check_box_classes, :check_box_label_class, :check_box_wrapper_class
+        def check_box_container_classes(bootstrap_options)
+          classes = [bootstrap_options.field_col_wrapper_class]
+          classes << bootstrap_options.field_offset_class unless bootstrap_options.inline?
+          classes.flatten.compact
+        end
+
+        private :check_box_label, :check_box_classes, :check_box_label_class,
+                :check_box_wrapper_class, :check_box_container_classes
       end
     end
   end
