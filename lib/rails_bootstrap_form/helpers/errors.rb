@@ -3,7 +3,7 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
-  module Components
+  module Helpers
     module Errors
       extend ActiveSupport::Concern
 

@@ -3,8 +3,6 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
-  include Helpers
-
   module Inputs
     FIELD_HELPERS = %i[
       text_field
