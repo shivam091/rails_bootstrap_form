@@ -13,9 +13,9 @@
       <%= form.radio_button :terms, 1, required: true %>
       <%= form.range_field :excellence %>
       <%= form.url_field :blog_url %>
-      <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {bootstrap_form: {inline: true}, checked: form.object.fruit_id} %>
+      <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {bootstrap_form: {}, checked: form.object.fruit_id} %>
       <%= form.color_field :favorite_color %>
-      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap_form: {inline: true}} %>
+      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap_form: {}} %>
       <%= form.fields_for :address, include_id: false, bootstrap_form: {layout: :horizontal} do |address_form| %>
         <%= address_form.text_area :street %>
         <%= address_form.text_field :state %>
