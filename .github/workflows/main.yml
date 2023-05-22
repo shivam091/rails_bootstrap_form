@@ -27,9 +27,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install prerequisites
-        run: |
-          sudo apt-get install -y libvips
-          sudo apt-get install -yqq libpq-dev
+      run: |
+        sudo apt-get install -y libvips
+        sudo apt-get install -yqq libpq-dev
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
