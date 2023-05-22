@@ -7,6 +7,10 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../demo/config/environment"
 require "simplecov"
 
+# Requires supporting files with custom matchers and macros, etc,
+# in ./support/ and its subdirectories.
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |file| require file }
+
 def spec_root
   Pathname.new(File.expand_path(__dir__))
 end
