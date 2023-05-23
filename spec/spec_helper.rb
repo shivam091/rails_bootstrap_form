@@ -55,7 +55,13 @@ RSpec.configure do |config|
   config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
   config.include Rails.application.routes.url_helpers
   config.include ActionDispatch::Routing::PolymorphicRoutes
-  
+
+  config.before(:each) do
+    @user = ::User.new
+    @vertical_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap_form: {layout: :horizontal})
+  end
+
   config.before(:suite) do
     FileUtils.mkdir_p(test_directory_path)
   end

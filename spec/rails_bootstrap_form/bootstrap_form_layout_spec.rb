@@ -7,8 +7,6 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
-  let(:user) { ::User.new }
-
   it "checks markup of vertical form" do
     expected = <<~HTML.strip_heredoc
       <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
@@ -46,7 +44,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       </form>
     HTML
 
-    actual = bootstrap_form_with(model: user, url: "/test") do |form|
+    actual = bootstrap_form_with(model: @user, url: "/test") do |form|
       concat(form.text_field(:name))
       concat(form.email_field(:email))
       concat(form.password_field(:password))
@@ -111,7 +109,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       </form>
     HTML
 
-    actual = bootstrap_form_with(model: user, url: "/test", bootstrap_form: {layout: :horizontal}) do |form|
+    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap_form: {layout: :horizontal}) do |form|
       concat(form.text_field(:name))
       concat(form.email_field(:email))
       concat(form.password_field(:password))
