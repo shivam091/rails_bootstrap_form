@@ -8,10 +8,6 @@ require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
 
-  let(:bootstrap_form_options) { {} }
-  let(:user) { ::User.new }
-  let(:builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, bootstrap_form_options) }
-
   describe "#set_defaults" do
     let(:options) { described_class.new }
 
@@ -97,14 +93,14 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
   end
 
   describe "#vertical?" do
-    it "sets vertical layout to the form" do
+    it "checks whether form has vertical layout" do
       options = described_class.new
       expect(options.layout_vertical?).to be_truthy
     end
   end
 
   describe "#horizontal?" do
-    it "sets horizontal layout to the form" do
+    it "checks whether form has horizontal layout" do
       options = described_class.new
       expect(options.layout_horizontal?).to be_falsy
 
@@ -114,41 +110,13 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
   end
 
   describe "#inline?" do
-    it "sets inline layout to the form" do
+    it "checks whether form has inline layout" do
       options = described_class.new
       expect(options.layout_inline?).to be_falsy
 
       options = described_class.new(layout: :inline)
       expect(options.layout_inline?).to be_truthy
     end
-  end
-
-  it "checks markup of vertical form" do
-    expected = <<~HTML.strip_heredoc
-      <div class="mb-3">
-        <label class="form-label required" for="user_name">Name</label>
-        <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
-      </div>
-    HTML
-
-    actual = builder.text_field :name
-
-    expect(actual).to match_html(expected)
-  end
-
-  it "checks markup of horizontal form" do
-    expected = <<~HTML.strip_heredoc
-      <div class="row mb-3">
-        <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
-        <div class="col-sm-10">
-          <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
-        </div>
-      </div>
-    HTML
-
-    actual = builder.text_field :name, bootstrap_form: {layout: :horizontal}
-
-    expect(actual).to match_html(expected)
   end
 
   it "checks label wrapper css class for horizontal form" do

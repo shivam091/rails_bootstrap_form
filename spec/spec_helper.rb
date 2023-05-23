@@ -41,9 +41,21 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  # This setting enables warnings. It's recommended, but in some cases may
+  # be too noisy due to issues in dependencies.
+  # config.warnings = true
+
+  # Print the 10 slowest examples and example groups at the
+  # end of the spec run, to help surface which specs are running
+  # particularly slow.
+  config.profile_examples = 10
+
   config.include ActionView::Helpers::FormHelper
   config.include ActionView::Context if defined?(ActionView::Context)
-
+  config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
+  config.include Rails.application.routes.url_helpers
+  config.include ActionDispatch::Routing::PolymorphicRoutes
+  
   config.before(:suite) do
     FileUtils.mkdir_p(test_directory_path)
   end
