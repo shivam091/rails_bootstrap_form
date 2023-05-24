@@ -4,6 +4,11 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.7.0](https://github.com/shivam091/rails_bootstrap_form/compare/v0.6.2...v0.7.0) - 2023-05-24
+
+### What's new
+- Added helper methods for rendering submit buttons on forms.
+
 ## [0.6.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.6.1...v0.6.2) - 2023-05-24
 
 ### What's fixed

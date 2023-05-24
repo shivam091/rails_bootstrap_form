@@ -31,6 +31,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.label_col_class).to eq("col-form-label")
       expect(options.label_col_wrapper_class).to eq("col-sm-2")
       expect(options.field_col_wrapper_class).to eq("col-sm-10")
+      expect(options.render_as_button).to be_falsy
     end
   end
 
@@ -56,6 +57,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
         label_col_class: "col-form-label",
         label_col_wrapper_class: "col-sm-3",
         field_col_wrapper_class: "col-sm-9",
+        render_as_button: true
       )
     end
 
@@ -79,6 +81,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.label_col_class).to eq("col-form-label")
       expect(options.label_col_wrapper_class).to eq("col-sm-3")
       expect(options.field_col_wrapper_class).to eq("col-sm-9")
+      expect(options.render_as_button).to be_truthy
     end
   end
 
@@ -120,37 +123,44 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
   end
 
   describe "#floating?" do
-    it "checks whether floating option is true" do
+    it "checks whether floating option is false" do
       options = described_class.new
       expect(options.floating?).to be_falsy
     end
   end
 
   describe "#inline?" do
-    it "checks whether inline option is true" do
+    it "checks whether inline option is false" do
       options = described_class.new
       expect(options.inline?).to be_falsy
     end
   end
 
   describe "#switch?" do
-    it "checks whether switch option is true" do
+    it "checks whether switch option is false" do
       options = described_class.new
       expect(options.switch?).to be_falsy
     end
   end
 
   describe "#skip_label?" do
-    it "checks whether skip_label option is true" do
+    it "checks whether skip_label option is false" do
       options = described_class.new
       expect(options.skip_label?).to be_falsy
     end
   end
 
   describe "#hide_label?" do
-    it "checks whether hide_label option is true" do
+    it "checks whether hide_label option is false" do
       options = described_class.new
       expect(options.hide_label?).to be_falsy
+    end
+  end
+
+  describe "#render_as_button?" do
+    it "checks whether render_as_button option is false" do
+      options = described_class.new
+      expect(options.render_as_button?).to be_falsy
     end
   end
 end

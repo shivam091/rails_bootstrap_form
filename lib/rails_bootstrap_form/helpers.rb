@@ -13,6 +13,7 @@ module RailsBootstrapForm
     autoload :Errors
     autoload :CheckBox
     autoload :RadioButton
+    autoload :Buttons
 
     include HelpText
     include Labels
@@ -20,6 +21,7 @@ module RailsBootstrapForm
     include Errors
     include CheckBox
     include RadioButton
+    include Buttons
 
     def self.included(base_class)
       def collection_input_checked?(checked, obj, input_value)
@@ -39,7 +41,19 @@ module RailsBootstrapForm
         label_col_wrapper_class.gsub(/\bcol-(\w+)-(\d)\b/, 'offset-\1-\2')
       end
 
-      private :collection_input_checked?, :control_specific_class, :is_size_valid?
+      def add_css_class!(options, css_class)
+        the_class = [options[:class], css_class].compact
+        options[:class] = the_class if the_class.present?
+      end
+
+      def remove_css_class!(options, css_class)
+        the_class = options[:class].to_s.split(" ")
+        options[:class] = (the_class - [css_class]).compact.join(" ")
+        options.delete(:class) if options[:class].blank?
+      end
+
+      private :collection_input_checked?, :control_specific_class, :is_size_valid?,
+              :add_css_class!, :remove_css_class!
     end
   end
 end
