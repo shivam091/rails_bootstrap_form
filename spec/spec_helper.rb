@@ -7,6 +7,10 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../demo/config/environment"
 require "simplecov"
 
+# Requires supporting files with custom matchers and macros, etc,
+# in ./support/ and its subdirectories.
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |file| require file }
+
 def spec_root
   Pathname.new(File.expand_path(__dir__))
 end
@@ -35,6 +39,27 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  # This setting enables warnings. It's recommended, but in some cases may
+  # be too noisy due to issues in dependencies.
+  # config.warnings = true
+
+  # Print the 10 slowest examples and example groups at the
+  # end of the spec run, to help surface which specs are running
+  # particularly slow.
+  config.profile_examples = 10
+
+  config.include ActionView::Helpers::FormHelper
+  config.include ActionView::Context if defined?(ActionView::Context)
+  config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
+  config.include Rails.application.routes.url_helpers
+  config.include ActionDispatch::Routing::PolymorphicRoutes
+
+  config.before(:each) do
+    @user = ::User.new
+    @vertical_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, {})
+    @horizontal_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap_form: {layout: :horizontal})
   end
 
   config.before(:suite) do

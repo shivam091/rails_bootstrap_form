@@ -3,11 +3,9 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
-  module Components
+  module Helpers
     module RadioButton
       extend ActiveSupport::Concern
-
-      include RailsBootstrapForm::Helpers
 
       def self.included(base_class)
         def radio_button_label(attribute, value, options, bootstrap_options)
