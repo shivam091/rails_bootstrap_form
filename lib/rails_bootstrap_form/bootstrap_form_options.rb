@@ -119,6 +119,11 @@ module RailsBootstrapForm
     # The default value is `col-sm-10`.
     attr_accessor :field_col_wrapper_class
 
+    # Option to render submit button using `<button type="submit">` instead of
+    # `<input type="submit">`.
+    # The default value is `false`.
+    attr_accessor :render_as_button
+
     def initialize(options = {})
       set_defaults
       set_bootstrap_form_options(options)
@@ -157,7 +162,7 @@ module RailsBootstrapForm
       end
     end
 
-    %i(inline floating switch skip_label hide_label).each do |method|
+    %i(inline floating switch skip_label hide_label render_as_button).each do |method|
       define_method("#{method}?") { self.send(method) }
     end
 
@@ -191,6 +196,8 @@ module RailsBootstrapForm
       @label_col_class = "col-form-label"
       @label_col_wrapper_class = "col-sm-2"
       @field_col_wrapper_class = "col-sm-10"
+
+      @render_as_button = false
     end
 
     private :set_defaults
