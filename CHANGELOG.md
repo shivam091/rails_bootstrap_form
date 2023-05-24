@@ -4,6 +4,12 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.6.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.6.1...v0.6.2) - 2023-05-24
+
+### What's fixed
+- Added support for setting bootstrap options of parent form to `fields_for` ([#10](https://github.com/shivam091/rails_bootstrap_form/issues/10))
+- Ignore skip_label option when field has floating labels ([#9](https://github.com/shivam091/rails_bootstrap_form/issues/9))
+
 ## [0.6.1](https://github.com/shivam091/rails_bootstrap_form/compare/v0.6.0...v0.6.1) - 2023-05-24
 
 ### What's changed
