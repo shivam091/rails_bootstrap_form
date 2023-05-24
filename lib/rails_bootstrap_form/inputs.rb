@@ -38,6 +38,7 @@ module RailsBootstrapForm
     autoload :TimeZoneSelect
     autoload :UrlField
     autoload :WeekField
+    autoload :WeekdaySelect
 
     include Base
     include CheckBox
@@ -71,5 +72,6 @@ module RailsBootstrapForm
     include TimeZoneSelect
     include UrlField
     include WeekField
+    include WeekdaySelect
   end
 end
