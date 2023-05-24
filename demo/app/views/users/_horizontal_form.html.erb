@@ -14,7 +14,7 @@
       <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id} %>
       <%= form.color_field :favorite_color %>
       <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name %>
-      <%= form.fields_for :address, include_id: false, bootstrap_form: {layout: :horizontal} do |address_form| %>
+      <%= form.fields_for :address, include_id: false do |address_form| %>
         <%= address_form.text_area :street %>
         <%= address_form.text_field :state %>
         <%= address_form.grouped_collection_select :city, ::Country.includes(:cities), :cities, :name, :id, :name, {include_blank: "Select city"} %>
