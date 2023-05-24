@@ -118,4 +118,39 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.layout_inline?).to be_truthy
     end
   end
+
+  describe "#floating?" do
+    it "checks whether floating option is true" do
+      options = described_class.new
+      expect(options.floating?).to be_falsy
+    end
+  end
+
+  describe "#inline?" do
+    it "checks whether inline option is true" do
+      options = described_class.new
+      expect(options.inline?).to be_falsy
+    end
+  end
+
+  describe "#switch?" do
+    it "checks whether switch option is true" do
+      options = described_class.new
+      expect(options.switch?).to be_falsy
+    end
+  end
+
+  describe "#skip_label?" do
+    it "checks whether skip_label option is true" do
+      options = described_class.new
+      expect(options.skip_label?).to be_falsy
+    end
+  end
+
+  describe "#hide_label?" do
+    it "checks whether hide_label option is true" do
+      options = described_class.new
+      expect(options.hide_label?).to be_falsy
+    end
+  end
 end

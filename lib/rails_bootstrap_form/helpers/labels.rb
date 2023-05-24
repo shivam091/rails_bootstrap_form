@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       def self.included(base_class)
         def draw_label(attribute, options, bootstrap_options)
-          unless bootstrap_options.skip_label && !bootstrap_options.floating
+          unless bootstrap_options.skip_label? && !bootstrap_options.floating?
             label_options = {
               class: label_classes(attribute, bootstrap_options)
             }
@@ -28,7 +28,7 @@ module RailsBootstrapForm
             bootstrap_options.label_class
           end
           classes << bootstrap_options.additional_label_class
-          classes << bootstrap_options.hide_class if bootstrap_options.hide_label
+          classes << bootstrap_options.hide_class if bootstrap_options.hide_label?
           classes << "required" if is_attribute_required?(attribute)
           classes << "is-invalid" if is_invalid?(attribute)
           classes.flatten.compact

@@ -136,10 +136,6 @@ module RailsBootstrapForm
       @layout.to_s == "vertical"
     end
 
-    def inline?
-      self.inline
-    end
-
     # This will return a copy of `BootstrapFormOptions` object with new options set
     # that don't affect original object. This way we can have options specific
     # to a given form field. For example, we can change grid just for one field:
@@ -159,6 +155,10 @@ module RailsBootstrapForm
       options.is_a?(Hash) && options.each do |key, value|
         public_send("#{key}=", value)
       end
+    end
+
+    %i(inline floating switch skip_label hide_label).each do |method|
+      define_method("#{method}?") { self.send(method) }
     end
 
     def set_defaults

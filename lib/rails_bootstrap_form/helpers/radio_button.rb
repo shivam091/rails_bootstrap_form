@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       def self.included(base_class)
         def radio_button_label(attribute, value, options, bootstrap_options)
-          unless bootstrap_options.skip_label
+          unless bootstrap_options.skip_label?
             label_options = {
               value: value,
               class: radio_button_label_class(attribute, bootstrap_options, options)
@@ -51,7 +51,7 @@ module RailsBootstrapForm
           classes = Array("form-check-label") << bootstrap_options.additional_label_class
           classes << "required" if is_field_required?(attribute, options) && !bootstrap_options.inline?
           classes << "is-invalid" if is_invalid?(attribute)
-          classes << bootstrap_options.hide_class if bootstrap_options.hide_label
+          classes << bootstrap_options.hide_class if bootstrap_options.hide_label?
           classes.flatten.compact
         end
 

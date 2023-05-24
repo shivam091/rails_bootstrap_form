@@ -27,7 +27,7 @@ module RailsBootstrapForm
           end)
         end
       else
-        if bootstrap_options.floating
+        if bootstrap_options.floating?
           tag.div(**field_wrapper_options(bootstrap_options)) do
             concat(input_group_wrapper(attribute, bootstrap_options) do
               tag.div(class: floating_label_classes(attribute)) do
@@ -82,7 +82,7 @@ module RailsBootstrapForm
       css_options[:class] = field_classes.flatten.compact
       css_options.merge!(required_field_options(attribute, options))
 
-      if (bootstrap_options.floating && !bootstrap_options.layout_horizontal?)
+      if (bootstrap_options.floating? && !bootstrap_options.layout_horizontal?)
         css_options[:placeholder] ||= label_text(attribute, bootstrap_options)
       end
 

@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       def self.included(base_class)
         def check_box_label(attribute, checked_value, options, bootstrap_options, &block)
-          unless bootstrap_options.skip_label
+          unless bootstrap_options.skip_label?
             label_options = {
               class: check_box_label_class(attribute, bootstrap_options, options)
             }
@@ -54,13 +54,13 @@ module RailsBootstrapForm
           classes = Array("form-check-label") << bootstrap_options.additional_label_class
           classes << "required" if is_field_required?(attribute, options) && !bootstrap_options.inline?
           classes << "is-invalid" if is_invalid?(attribute)
-          classes << bootstrap_options.hide_class if bootstrap_options.hide_label
+          classes << bootstrap_options.hide_class if bootstrap_options.hide_label?
           classes.flatten.compact
         end
 
         def check_box_wrapper_class(bootstrap_options)
           classes = Array("form-check")
-          classes << "form-switch" if bootstrap_options.switch
+          classes << "form-switch" if bootstrap_options.switch?
           classes << "form-check-inline" if bootstrap_options.inline?
           classes << "mb-3" unless (bootstrap_options.layout_horizontal? || bootstrap_options.inline?)
           classes.flatten.compact
