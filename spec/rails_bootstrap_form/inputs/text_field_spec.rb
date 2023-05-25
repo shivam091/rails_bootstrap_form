@@ -9,7 +9,7 @@ require "spec_helper"
 RSpec.describe RailsBootstrapForm::Inputs::TextField do
   describe "#text_field" do
     it "renders text field correctly in vertical layout" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -22,7 +22,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "renders text field correctly in horizontal layout" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
           <div class="col-sm-10">
@@ -37,7 +37,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "supports floating labels in vertical layout" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <div class="form-floating">
             <input class="form-control" aria-required="true" required="required" placeholder="Name" type="text" name="user[name]" id="user_name" />
@@ -52,7 +52,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "does not support floating labels for horizontal layout" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
           <div class="col-sm-10">
@@ -67,7 +67,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "skips label of the field" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
         </div>
@@ -79,7 +79,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "hides label of the field" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label visually-hidden required" for="user_name">Name</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -92,7 +92,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "adds additional css class to the field" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <input class="form-control custom-class" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -105,7 +105,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "adds additional css class to a label of the field" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label custom-class required" for="user_name">Name</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -118,7 +118,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "changes css class of the field" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <input class="custom-form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -131,7 +131,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "changes css class of the label" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="custom-form-label required" for="user_name">Name</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -144,7 +144,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "adds help text to the field" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -158,7 +158,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "displays help text from locale file" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_email">Email address</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[email]" id="user_email" />
@@ -172,7 +172,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "sets customize label text" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Full name</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -185,7 +185,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "adds additional wrapper options" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3" data-controller="hello">
           <label class="form-label required" for="user_name">Name</label>
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -198,7 +198,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "supports input group" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <div class="input-group">
@@ -215,7 +215,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "supports button in input group" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <div class="input-group">
@@ -231,7 +231,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "supports multiple addons in input group" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <div class="input-group">
@@ -249,7 +249,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "supports input group with floating labels" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <div class="input-group">
             <span class="input-group-text">$</span>
@@ -268,7 +268,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
     end
 
     it "changes size of the field" do
-      expected = <<~HTML.strip_heredoc
+      expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
           <input class="form-control form-control-sm" aria-required="true" required="required" type="text" name="user[name]" id="user_name">

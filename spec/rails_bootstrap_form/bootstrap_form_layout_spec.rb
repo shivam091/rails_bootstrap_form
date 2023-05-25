@@ -8,7 +8,7 @@ require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
   it "checks markup of vertical form" do
-    expected = <<~HTML.strip_heredoc
+    expected = <<~HTML
       <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -58,7 +58,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
   end
 
   it "checks markup of horizontal form" do
-    expected = <<~HTML.strip_heredoc
+    expected = <<~HTML
       <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_name">Name</label>

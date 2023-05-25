@@ -24,7 +24,7 @@ RSpec.describe RailsBootstrapForm::Generators::InstallGenerator, type: :generato
   it "matches the content of initializer file" do
     assert_file("config/initializers/rails_bootstrap_form.rb") do |content|
       assert_includes(content,
-        <<-STRING.strip_heredoc
+        <<~STRING
           RailsBootstrapForm.configure do |config|
             # to make forms non-compliant with W3C.
             config.default_form_attributes = {role: "form", novalidate: true}
