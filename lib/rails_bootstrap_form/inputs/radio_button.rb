@@ -34,6 +34,8 @@ module RailsBootstrapForm
                   radio_button_html
                 end
               end
+            elsif bootstrap_options.layout_inline?
+              tag.div(class: "col-12") { radio_button_html }
             else
               radio_button_html
             end

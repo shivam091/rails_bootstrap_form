@@ -62,7 +62,10 @@ module RailsBootstrapForm
           classes = Array("form-check")
           classes << "form-switch" if bootstrap_options.switch?
           classes << "form-check-inline" if bootstrap_options.inline?
-          classes << "mb-3" unless (bootstrap_options.layout_horizontal? || bootstrap_options.inline?)
+          unless (bootstrap_options.layout_inline? || bootstrap_options.layout_horizontal? || bootstrap_options.inline?)
+            classes << "mb-3"
+          end
+
           classes.flatten.compact
         end
 
