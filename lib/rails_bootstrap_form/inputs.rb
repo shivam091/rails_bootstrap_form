@@ -27,6 +27,7 @@ module RailsBootstrapForm
     autoload :PhoneField
     autoload :RadioButton
     autoload :RangeField
+    autoload :RichTextArea
     autoload :SearchField
     autoload :Select
     autoload :StaticField
@@ -61,6 +62,7 @@ module RailsBootstrapForm
     include PhoneField
     include RadioButton
     include RangeField
+    include RichTextArea
     include SearchField
     include Select
     include StaticField
