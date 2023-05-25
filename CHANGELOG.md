@@ -4,6 +4,11 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.7.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.7.1...v0.7.2) - 2023-05-25
+
+### What's new
+- Added wrapper method for `rich_text_area`.
+
 ## [0.7.1](https://github.com/shivam091/rails_bootstrap_form/compare/v0.7.0...v0.7.1) - 2023-05-24
 
 ### What's new
