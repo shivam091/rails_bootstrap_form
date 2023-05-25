@@ -2,6 +2,14 @@
   <%= render partial: "users/form_without_bootstrap_helpers" %>
 <% end %>
 
-<%= render partial: "users/vertical_form" %>
+<% if true %>
+  <%= render partial: "users/inline_form" %>
+<% end %>
 
-<%= render partial: "users/horizontal_form" %>
+<% if true %>
+  <%= render partial: "users/vertical_form" %>
+<% end %>
+
+<% if true %>
+  <%= render partial: "users/horizontal_form" %>
+<% end %>

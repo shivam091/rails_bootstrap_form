@@ -3,6 +3,9 @@
 # -*- warn_indent: true -*-
 
 class User < ApplicationRecord
+
+  attr_accessor :remember_me
+
   validates :name, presence: true, length: {in: 2..50}
   validates :terms, acceptance: true
   validates :email,

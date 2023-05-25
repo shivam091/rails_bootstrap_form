@@ -27,6 +27,7 @@
           terms: "I accept terms and conditions",
           excellence: "Excellence",
           skill_ids: "Skills",
+          remember_me: "Keep me signed in",
         },
         user_skill: {
           user_id: "User",
