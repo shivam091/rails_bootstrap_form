@@ -17,6 +17,7 @@ module RailsBootstrapForm
     def initialize(object_name, object, template, options)
       @bootstrap_form_options = RailsBootstrapForm::BootstrapFormOptions.new(options[:bootstrap_form])
       apply_default_form_options(options)
+      apply_default_form_classes(options)
       super(object_name, object, template, options)
     end
 
@@ -31,12 +32,20 @@ module RailsBootstrapForm
       options[:html].reverse_merge!(RailsBootstrapForm.config.default_form_attributes)
     end
 
+    def apply_default_form_classes(options)
+      return unless @bootstrap_form_options.layout_inline?
+
+      options[:html][:class] =
+        ([*options[:html][:class]&.split(/\s+/)] + %w[row row-cols-lg-auto g-3 align-items-center])
+        .compact.uniq.join(" ")
+    end
+
     def fields_for_options(record_object, fields_options)
       field_options = record_object if record_object.is_a?(Hash) && record_object.extractable_options?
       field_options = {bootstrap_form: options[:bootstrap_form]}.deep_merge!(field_options)
       field_options
     end
 
-    private :apply_default_form_options, :fields_for_options
+    private :apply_default_form_options, :fields_for_options, :apply_default_form_classes
   end
 end
