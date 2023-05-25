@@ -67,6 +67,36 @@ The current configuration options are:
 |---------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `default_form_attributes` | | Set this option to `{role: "form"}` to make forms non-compliant with W3C, but generate the `role="form"` attribute. |
 
+## Bootstrap configuration options
+
+Here's a list of all possible options you can pass via `bootstrap_form` option that can be attached to the `bootstrap_form_for` or `bootstrap_form_with` or any field helpers inside of it:
+
+| Option | Description | Default value |
+| ------ | ------------- | ----------- |
+| `layout` | Controls form and field layout. It can be `vertical` `horizontal`, or `inline`. | vertical |
+| `field_class` | A CSS class that will be applied to all form fields and it can be overridden by the `BootstrapFormOptions` object. | form-control |
+| `additional_field_class` | An additional CSS class that will be added along with the existing `field_class` of the field. | nil |
+| `help_text` | Describes help text for the HTML field. Help text is automatically read from translation file. If you want to customize it, you can pass a string. You can also set it `false` if you do not want help text displayed. | nil |
+| `label_text` | An option to override automatically generated label text. | nil |
+| `skip_label` | An option to custmize whether the label is to be displayed or not. | false |
+| `hide_label` | An option to customize whether the label is only visible to screen readers. | false |
+| `hide_class` | The CSS class that will be used when the label is only accessible by screen readers. | visually-hidden |
+| `label_class` | A CSS class that will be applied to all label tags when layout is vertical. | form-label |
+| `additional_label_class` | An additional CSS class that will be added along with the existing `label_class` of the label. | nil |
+| `prepend` | Raw or HTML content to be prepended to the field. | nil |
+| `append` | Raw or HTML content to be appended to the field. | nil |
+| `additional_input_group_class` | Append additional CSS class added to the input group wrapper. | nil |
+| `floating` | An option to control whether the field should have a floating label. | false |
+| `static_field_class` | A CSS class that will be applied to all static fields. | form-control-plaintext |
+| `switch` | An option to control whether the check box should look like bootstrap switches. | false |
+| `wrapper_options` | An option to controls the HTML attributes and options that will be added to the field wrapper. | {} |
+| `size` | An option to specify the size of input groups, buttons, labels, and fields. | nil |
+| `inline` | An option to render checkboxes and radio buttons inline. | false |
+| `label_col_class` | A CSS class that will be applied to all label tags when layout is `horizontal`. | col-form-label |
+| `label_col_wrapper_class` | A CSS class for label column when using `horizontal` form. | col-sm-2 |
+| `field_col_wrapper_class` | A CSS class for control column when using `horizontal` form. | col-sm-10 |
+| `render_as_button` | An option to render submit button using `<button type="submit">` instead of `<input type="submit">`. | false |
+
 ## Usage
 
 ### bootstrap_form_for
