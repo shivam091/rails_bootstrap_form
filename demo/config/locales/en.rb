@@ -27,6 +27,7 @@
           terms: "I accept terms and conditions",
           excellence: "Excellence",
           skill_ids: "Skills",
+          username: "Username",
           remember_me: "Keep me signed in",
         },
         user_skill: {
@@ -46,7 +47,7 @@
           email: "Please use official email address",
           terms: "You must first accept terms and conditions in order to continue",
           skill_ids: "Select your strong skills",
-          fruit_id: "Select your favorite fruit"
+          fruit_id: "Select your favorite fruit",
         }
       },
     }

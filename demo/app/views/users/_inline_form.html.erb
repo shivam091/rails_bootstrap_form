@@ -1,10 +1,10 @@
 <div class="card card-primary my-3">
   <div class="card-header fw-bold">
-    Profile Form (Inline layout)
+    Inline layout
   </div>
   <div class="card-body">
     <%= bootstrap_form_for @user, bootstrap_form: {layout: :inline} do |form| %>
-      <%= form.text_field :email, autocomplete: "new-email" %>
+      <%= form.text_field :username, autocomplete: "new-username" %>
       <%= form.password_field :password, autocomplete: "new-password" %>
       <%= form.check_box :remember_me %>
       <%= form.primary "Login" %>
