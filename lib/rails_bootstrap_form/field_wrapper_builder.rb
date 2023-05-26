@@ -58,12 +58,12 @@ module RailsBootstrapForm
     def field_wrapper_classes(bootstrap_options)
       classes = []
       classes << "row" if bootstrap_options.layout_horizontal?
-      classes << form_wrapper_default_class
+      classes << form_wrapper_default_class(bootstrap_options)
       classes.flatten.compact
     end
 
-    def form_wrapper_default_class
-      "mb-3"
+    def form_wrapper_default_class(bootstrap_options)
+      bootstrap_options.layout_inline? ? "col-12" : "mb-3"
     end
 
     def field_css_options(attribute, bootstrap_options, options, html_options)
@@ -82,7 +82,7 @@ module RailsBootstrapForm
       css_options[:class] = field_classes.flatten.compact
       css_options.merge!(required_field_options(attribute, options))
 
-      if (bootstrap_options.floating? && !bootstrap_options.layout_horizontal?)
+      if placeholder_required?(bootstrap_options)
         css_options[:placeholder] ||= label_text(attribute, bootstrap_options)
       end
 
@@ -95,6 +95,10 @@ module RailsBootstrapForm
       # order to display error messages.
       classes << "is-invalid" if is_invalid?(attribute)
       classes
+    end
+
+    def placeholder_required?(bootstrap_options)
+      (bootstrap_options.floating? && !bootstrap_options.layout_horizontal?) || bootstrap_options.layout_inline?
     end
 
     private :field_wrapper, :field_wrapper_classes, :form_wrapper_default_class,

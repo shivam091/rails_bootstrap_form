@@ -12,10 +12,16 @@ module RailsBootstrapForm
           value, options = nil, value if value.is_a?(Hash)
           bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
 
-          if (bootstrap_options.render_as_button? || block)
+          button_html = if (bootstrap_options.render_as_button? || block)
             button(value, options, &block)
           else
             submit(value, options)
+          end
+
+          if bootstrap_options.layout_inline?
+            tag.div(class: "col-12") { button_html }
+          else
+            button_html
           end
         end
 

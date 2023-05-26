@@ -22,6 +22,9 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.hide_class).to eq("visually-hidden")
       expect(options.label_class).to eq("form-label")
       expect(options.additional_label_class).to be_nil
+      expect(options.prepend).to be_nil
+      expect(options.append).to be_nil
+      expect(options.additional_input_group_class).to be_nil
       expect(options.floating).to be_falsy
       expect(options.static_field_class).to eq("form-control-plaintext")
       expect(options.switch).to be_falsy
@@ -48,6 +51,9 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
         hide_class: "sr-only",
         label_class: "col-form-label",
         additional_label_class: "form-label",
+        prepend: "$",
+        append: "0.0",
+        additional_input_group_class: "custom-input-group",
         floating: true,
         static_field_class: "form-control-plaintext",
         switch: true,
@@ -72,6 +78,9 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.hide_class).to eq("sr-only")
       expect(options.label_class).to eq("col-form-label")
       expect(options.additional_label_class).to eq("form-label")
+      expect(options.prepend).to eq("$")
+      expect(options.append).to eq("0.0")
+      expect(options.additional_input_group_class).to eq("custom-input-group")
       expect(options.floating).to be_truthy
       expect(options.static_field_class).to eq("form-control-plaintext")
       expect(options.switch).to be_truthy

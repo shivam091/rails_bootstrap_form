@@ -34,6 +34,8 @@ module RailsBootstrapForm
                   check_box_html
                 end
               end
+            elsif bootstrap_options.layout_inline?
+              tag.div(class: "col-12") { check_box_html }
             else
               check_box_html
             end
