@@ -24,7 +24,7 @@ module RailsBootstrapForm
           classes = []
           classes << label_layout_classes(bootstrap_options)
           classes << bootstrap_options.additional_label_class
-          classes << bootstrap_options.hide_class if require_hide_class?(bootstrap_options)
+          classes << bootstrap_options.hide_class if hide_class_required?(bootstrap_options)
           classes << "required" if is_attribute_required?(attribute)
           classes << "is-invalid" if is_invalid?(attribute)
           classes.flatten.compact
@@ -42,12 +42,12 @@ module RailsBootstrapForm
           bootstrap_options.label_text || object&.class.try(:human_attribute_name, attribute)
         end
 
-        def require_hide_class?(bootstrap_options)
+        def hide_class_required?(bootstrap_options)
           bootstrap_options.hide_label? || (bootstrap_options.layout_inline? && !bootstrap_options.floating?)
         end
 
         private :draw_label, :label_classes, :label_text, :label_layout_classes,
-                :require_hide_class?
+                :hide_class_required?
       end
     end
   end

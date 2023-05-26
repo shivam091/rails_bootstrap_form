@@ -16,15 +16,16 @@ module RailsBootstrapForm
   #
   class BootstrapFormOptions
 
-    # Controls form and field layout. It can be "vertical, "horizontal", or "inline".
+    # Controls layout of form and field helpers. It can be "vertical,
+    # "horizontal", or "inline". The default value is `vertical`.
     attr_accessor :layout
 
-    # A CSS class that will be applied to all form fields and it can be overridden
-    # by the `BootstrapFormOptions` object. The default value is `form-control`.
+    # A CSS class that will be applied to all form fields.
+    # The default value is `form-control`.
     attr_accessor :field_class
 
     # An additional CSS class that will be added along with the existing
-    # `field_class` of the field. The default value is nil.
+    # css classes of field helpers. The default value is nil.
     attr_accessor :additional_field_class
 
     # Describes help text for the HTML field. Help text is automatically read
@@ -33,20 +34,20 @@ module RailsBootstrapForm
     # The default value is nil.
     attr_accessor :help_text
 
-    # An option to override automatically generated label text.
+    # An option to customize automatically generated label text.
     # The default value is `nil`.
     attr_accessor :label_text
 
-    # An option to custmize whether the label is to be displayed or not.
+    # An option to control whether the label is to be displayed or not.
     # The default value is `false`.
     attr_accessor :skip_label
 
-    # An option to customize whether the label is only visible to screen readers.
+    # An option to control whether the label is only visible to a screen readers.
     # The default value is `false`.
     attr_accessor :hide_label
 
-    # The CSS class that will be used when the label is only accessible by screen
-    # readers. The default value is `visually-hidden`
+    # The CSS class that will be used when the label is only accessible to a
+    # screen readers. The default value is `visually-hidden`.
     attr_accessor :hide_class
 
     # A CSS class that will be applied to all label tags when layout is
@@ -54,8 +55,8 @@ module RailsBootstrapForm
     # The default value is `form-label`.
     attr_accessor :label_class
 
-    # An additional CSS class that will be added along with the existing
-    # `label_class` of the label. The default value is `nil`.
+    # An additional CSS class that will be added along with the existing label
+    # css classes. The default value is `nil`.
     attr_accessor :additional_label_class
 
     # Input group specific options. Input groups allow prepending and appending
@@ -74,8 +75,8 @@ module RailsBootstrapForm
     # The default value is `nil`.
     attr_accessor :append
 
-    # Append additional CSS class added to the input group wrapper.
-    # The default value is `nil`.
+    # An additional CSS class that will be added to existing input group wrapper
+    # css classes. The default value is `nil`.
     attr_accessor :additional_input_group_class
 
     # An option to control whether the field should have a floating label.
@@ -86,35 +87,34 @@ module RailsBootstrapForm
     # The default value is `form-control-plaintext`.
     attr_accessor :static_field_class
 
-    # An option to control whether the check box should look like bootstrap switches.
+    # An option to control whether the check box should look like Bootstrap switches.
     # The default value is `false`.
     attr_accessor :switch
 
-    # An option to controls the HTML attributes and options that will be added
-    # to the field wrapper. The default value is `{}`.
+    # An option to control the HTML attributes and options that will be added to
+    # the field wrapper. The default value is `{}`.
     attr_accessor :wrapper_options
 
-    # An option to specify the size of input groups and fields.
+    # An option to control the size of input groups, buttons, labels, and fields.
     # The valid values are `sm` and `lg`. The default value is `nil`.
     attr_accessor :size
 
-    # An option to render checkboxes and radio buttons inline.
-    # The default value if `false`.
+    # An option to group checkboxes and radio buttons on the same horizontal row.
+    # The default value is `false`.
     #
     # Example:
     #   form.collection_radio_buttons :choices, ["yes", "no"], :to_s, :to_s, bootstrap_form: {inline: true}
     attr_accessor :inline
 
-    # A CSS class that will be applied to all label tags when layout is
-    # horizontal.
+    # A CSS class that will be applied to all labels when layout is horizontal.
     # The default value is `col-form-label`.
     attr_accessor :label_col_class
 
-    # A CSS class for label column when using horizontal form.
+    # A CSS class for label column when layout is horizontal.
     # The default value is `col-sm-2`.
     attr_accessor :label_col_wrapper_class
 
-    # A CSS class for control column when using horizontal form.
+    # A CSS class for field column when layout is horizontal.
     # The default value is `col-sm-10`.
     attr_accessor :field_col_wrapper_class
 
