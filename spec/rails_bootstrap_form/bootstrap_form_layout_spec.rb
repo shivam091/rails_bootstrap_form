@@ -74,4 +74,38 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
     expect(actual).to match_html(expected)
   end
+
+  it "checks markup of inline form" do
+    expected = <<~HTML
+      <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+        <div class="col-12">
+          <label class="form-label visually-hidden" for="user_username">Username</label>
+          <input class="form-control" placeholder="Username" type="text" name="user[username]" id="user_username" />
+        </div>
+        <div class="col-12">
+          <label class="form-label visually-hidden required" for="user_password">Password</label>
+          <input class="form-control" aria-required="true" required="required" placeholder="Password" type="password" name="user[password]" id="user_password" />
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input name="user[remember_me]" type="hidden" value="0" autocomplete="off" />
+            <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
+            <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+          </div>
+        </div>
+        <div class="col-12">
+          <input type="submit" name="commit" value="Login" class="btn btn-primary" data-disable-with="Login" />
+        </div>
+      </form>
+    HTML
+
+    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap_form: {layout: :inline}) do |form|
+      concat(form.text_field(:username))
+      concat(form.password_field(:password))
+      concat(form.check_box(:remember_me))
+      concat(form.primary("Login"))
+    end
+
+    expect(actual).to match_html(expected)
+  end
 end
