@@ -11,8 +11,8 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
     expected = <<~HTML
       <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="mb-3">
-          <label class="form-label required" for="user_email">Email address</label>
-          <input class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email" />
+          <label class="form-label" for="user_username">Username</label>
+          <input class="form-control" type="text" name="user[username]" id="user_username" />
         </div>
         <div class="mb-3">
           <label class="form-label required" for="user_password">Password</label>
@@ -28,7 +28,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
     HTML
 
     actual = bootstrap_form_with(model: @user, url: "/test") do |form|
-      concat(form.email_field(:email))
+      concat(form.text_field(:username))
       concat(form.password_field(:password))
       concat(form.check_box(:remember_me))
       concat(form.primary("Login"))
@@ -41,9 +41,9 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
     expected = <<~HTML
       <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="row mb-3">
-          <label class="col-form-label col-sm-2 required" for="user_email">Email address</label>
+          <label class="col-form-label col-sm-2" for="user_username">Username</label>
           <div class="col-sm-10">
-            <input class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email" />
+            <input class="form-control" type="text" name="user[username]" id="user_username" />
           </div>
         </div>
         <div class="row mb-3">
@@ -66,7 +66,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
     HTML
 
     actual = bootstrap_form_with(model: @user, url: "/test", bootstrap_form: {layout: :horizontal}) do |form|
-      concat(form.email_field(:email))
+      concat(form.text_field(:username))
       concat(form.password_field(:password))
       concat(form.check_box(:remember_me))
       concat(form.primary("Login"))
