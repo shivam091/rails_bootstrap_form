@@ -4,6 +4,11 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.8.0](https://github.com/shivam091/rails_bootstrap_form/compare/v0.7.2...v0.8.0) - 2023-05-26
+
+### What's new
+- Added support for `inline` layout for forms.
+
 ## [0.7.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.7.1...v0.7.2) - 2023-05-25
 
 ### What's new
