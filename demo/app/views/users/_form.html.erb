@@ -1,15 +1,21 @@
+<%= bootstrap_form_for @user do |form| %>
+  <%= form.fields_for :address, include_id: false do |address_form| %>
+    <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id} %>
+  <% end %>
+<% end %>
+
 <% if false %>
   <%= render partial: "users/form_without_bootstrap_helpers" %>
 <% end %>
 
-<% if true %>
+<% if false %>
   <%= render partial: "users/inline_form" %>
 <% end %>
 
-<% if true %>
+<% if false %>
   <%= render partial: "users/vertical_form" %>
 <% end %>
 
-<% if true %>
+<% if false %>
   <%= render partial: "users/horizontal_form" %>
 <% end %>

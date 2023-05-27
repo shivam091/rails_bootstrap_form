@@ -4,7 +4,7 @@
 
 class User < ApplicationRecord
 
-  attr_accessor :username, :remember_me
+  attr_accessor :username, :remember_me, :appointment_date, :appointment_time, :appointment_datetime, :weekly_off, :gender
 
   validates :name, presence: true, length: {in: 2..50}
   validates :terms, acceptance: true

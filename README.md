@@ -92,7 +92,6 @@ To get started, use the `bootstrap_form_for` helper in place of the Rails `form_
 
 This generates the following HTML:
 
-
 ```html
 <form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
@@ -128,7 +127,6 @@ To get started, use the `bootstrap_form_with` helper in place of the Rails `form
 ```
 
 This generates the following HTML:
-
 
 ```html
 <form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
@@ -642,5 +640,500 @@ This generates the following HTML:
     <input class="form-control form-control-sm" type="text" name="user[price]" id="user_price">
     <span class="input-group-text">.00</span>
   </div>
+</div>
+```
+
+## Field helpers
+
+Our field helpers accept the same arguments as the default Rails helpers. Here's an example of how you pass the arguments for each field helper:
+
+### select
+
+![select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/e21f092c-d439-4817-bba1-8ec0c21330c1)
+
+```erb
+<%= form.select :fruit_id, options_for_select(::Fruit.pluck(:name, :id), form.object.fruit_id), {include_blank: "Select fruit", bootstrap_form: {size: :sm, help_text: false}}, {} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_fruit_id">Favorite fruit</label>
+  <select class="form-select form-select-sm" aria-required="true" required="required" name="user[fruit_id]" id="user_fruit_id">
+    <option value="">Select fruit</option>
+    <option value="1">Mango</option>
+    <option value="2">Apple</option>
+    <option value="3">Orange</option>
+    <option value="4">Watermelon</option>
+  </select>
+</div>
+```
+
+### collection_select
+
+![collection_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/c3a24265-81a9-4d1b-aa01-2b066d2f8bc7)
+
+```erb
+<%= form.collection_select :fruit_id, ::Fruit.all, :id, :name, {include_blank: "Select fruit", bootstrap_form: {help_text: false}}, {selected: form.object.fruit_id} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_fruit_id">Favorite fruit</label>
+  <select class="form-select" aria-required="true" required="required" name="user[fruit_id]" id="user_fruit_id">
+    <option value="">Select fruit</option>
+    <option value="1">Mango</option>
+    <option value="2">Apple</option>
+    <option value="3">Orange</option>
+    <option value="4">Watermelon</option>
+  </select>
+</div>
+```
+
+### grouped_collection_select
+
+![grouped_collection_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/d8f90065-3aa8-4d52-9c3e-0486324b3624)
+
+```erb
+<%= form.grouped_collection_select :city, ::Country.includes(:cities), :cities, :name, :id, :name, {include_blank: "Select city", bootstrap_form: {floating: true}}, {} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <div class="form-floating">
+    <select class="form-select" aria-required="true" required="required" placeholder="City" name="user[address_attributes][city]" id="user_address_attributes_city">
+      <option value="">Select city</option>
+      <optgroup label="India">
+        <option value="1">Mumbai</option>
+        <option value="2">New Delhi</option>
+        <option value="3">Kolkata</option>
+        <option value="4">Chennai</option>
+      </optgroup>
+      <optgroup label="Ireland">
+        <option value="5">Dublin</option>
+        <option value="6">Galway</option>
+        <option value="7">Cork</option>
+        <option value="8">Belfast</option>
+      </optgroup>
+      <optgroup label="United States">
+        <option value="9">New York</option>
+        <option value="10">Los Angeles</option>
+        <option value="11">San Francisco</option>
+        <option value="12">Chicago</option>
+      </optgroup>
+      ...
+      ...
+    </select>
+    <label class="form-label required" for="user_address_attributes_city">City</label>
+  </div>
+</div>
+```
+
+### time_zone_select
+
+![time_zone_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/e161585c-1bbf-485c-9baf-c57b15258fe8)
+
+```erb
+<%= form.time_zone_select :timezone, ::ActiveSupport::TimeZone.all, {include_blank: "Select time zone", bootstrap_form: {label_text: "Preferred time zone"}}, {} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_timezone">Preferred time zone</label>
+  <select class="form-select" name="user[timezone]" id="user_timezone">
+    <option value="">Select time zone</option>
+    <option value="International Date Line West">(GMT-12:00) International Date Line West</option>
+    <option value="American Samoa">(GMT-11:00) American Samoa</option>
+    <option value="Midway Island">(GMT-11:00) Midway Island</option>
+    <option value="Hawaii">(GMT-10:00) Hawaii</option>
+    <option value="Alaska">(GMT-09:00) Alaska</option>
+    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+    <option value="Tijuana">(GMT-08:00) Tijuana</option>
+    <option value="Arizona">(GMT-07:00) Arizona</option>
+    ...
+    ...
+  </select>
+</div>
+```
+
+### date_select
+
+![date_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/03c441ca-efe6-4740-b37e-d1a8d0898c67)
+
+```erb
+<%= form.date_select :appointment_date, {selected: Date.today, bootstrap_form: {label_text: "Choose Appointment date"}}, {} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_appointment_date">Choose Appointment date</label>
+  <div class="rails-bootstrap-forms-date-select">
+    <select id="user_appointment_date_1i" name="user[appointment_date(1i)]" class="form-select">
+      <option value="2018">2018</option>
+      <option value="2019">2019</option>
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023" selected="selected">2023</option>
+      ...
+      ...
+    </select>
+    <select id="user_appointment_date_2i" name="user[appointment_date(2i)]" class="form-select">
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5" selected="selected">May</option>
+      ...
+      ...
+    </select>
+    <select id="user_appointment_date_3i" name="user[appointment_date(3i)]" class="form-select">
+      ...
+      ...
+      <option value="27" selected="selected">27</option>
+      <option value="28">28</option>
+      <option value="29">29</option>
+      <option value="30">30</option>
+      <option value="31">31</option>
+    </select>
+  </div>
+</div>
+```
+
+### time_select
+
+![time_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/5c536058-1f26-4f0a-98e5-8926cb0fc832)
+
+```erb
+<%= form.time_select :appointment_time, {selected: Time.now, bootstrap_form: {label_text: "Choose appointment time"}}, {} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_appointment_time">Choose appointment time</label>
+  <div class="rails-bootstrap-forms-time-select">
+    <input type="hidden" id="user_appointment_time_1i" name="user[appointment_time(1i)]" value="2023" autocomplete="off">
+    <input type="hidden" id="user_appointment_time_2i" name="user[appointment_time(2i)]" value="5" autocomplete="off">
+    <input type="hidden" id="user_appointment_time_3i" name="user[appointment_time(3i)]" value="27" autocomplete="off">
+    <select id="user_appointment_time_4i" name="user[appointment_time(4i)]" class="form-select">
+      ...
+      ...
+      <option value="18" selected="selected">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+    </select>
+    :
+    <select id="user_appointment_time_5i" name="user[appointment_time(5i)]" class="form-select">
+      <option value="00" selected="selected">00</option>
+      <option value="01">01</option>
+      <option value="02">02</option>
+      <option value="03">03</option>
+      <option value="04">04</option>
+      <option value="05">05</option>
+      ...
+      ...
+    </select>
+  </div>
+</div>
+```
+
+### datetime_select
+
+![datetime_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/727558f4-0696-4614-bbe8-3617a5fae3da)
+
+```erb
+<%= form.datetime_select :appointment_datetime, {selected: DateTime.now, bootstrap_form: {label_text: "Choose appointment date & time"}}, {} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_appointment_datetime">Choose appointment date &amp; time</label>
+  <div class="rails-bootstrap-forms-datetime-select">
+    <select id="user_appointment_datetime_1i" name="user[appointment_datetime(1i)]" class="form-select">
+      ...
+      ...
+      <option value="2023" selected="selected">2023</option>
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+      <option value="2027">2027</option>
+      <option value="2028">2028</option>
+    </select>
+    <select id="user_appointment_datetime_2i" name="user[appointment_datetime(2i)]" class="form-select">
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5" selected="selected">May</option>
+      ...
+      ...
+    </select>
+    <select id="user_appointment_datetime_3i" name="user[appointment_datetime(3i)]" class="form-select">
+      ...
+      ...
+      <option value="27" selected="selected">27</option>
+      <option value="28">28</option>
+      <option value="29">29</option>
+      <option value="30">30</option>
+      <option value="31">31</option>
+    </select>
+    —
+    <select id="user_appointment_datetime_4i" name="user[appointment_datetime(4i)]" class="form-select">
+      ...
+      ...
+      <option value="18" selected="selected">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+    </select>
+    :
+    <select id="user_appointment_datetime_5i" name="user[appointment_datetime(5i)]" class="form-select">
+      <option value="00">00</option>
+      <option value="01">01</option>
+      <option value="02">02</option>
+      <option value="03">03</option>
+      <option value="04" selected="selected">04</option>
+      ...
+      ...
+    </select>
+  </div>
+</div>
+```
+
+### weekday_select
+
+![weekday_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/e469a57d-3d22-4c9e-829b-4ba825593ae1)
+
+```erb
+<%= form.weekday_select :weekly_off, {selected: "Monday", bootstrap_form: {label_text: "Week off"}}, {} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_weekly_off">Week off</label>
+  <select class="form-select" name="user[weekly_off]" id="user_weekly_off">
+    <option selected="selected" value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+    <option value="Sunday">Sunday</option>
+  </select>
+</div>
+```
+
+### check_box
+
+You can use `check_box` form helper to render the check box. This helper will render check box and label for you.
+
+![check_box](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/5836650c-d536-4f4e-b768-75bca9dd7901)
+
+```erb
+<%= form.check_box :remember_me %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="form-check mb-3">
+  <input name="user[remember_me]" type="hidden" value="0" autocomplete="off">
+  <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+  <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+</div>
+```
+
+You can set `switch` option to `true` if you want check box to look like switches.
+
+![check_box_switch](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/20c493ce-7f2c-4ac9-a854-e1520cae6a54)
+
+```erb
+<%= form.check_box :remember_me, bootstrap_form: {switch: true} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="form-check form-switch mb-3">
+  <input name="user[remember_me]" type="hidden" value="0" autocomplete="off">
+  <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+  <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+</div>
+```
+
+This helper also renders help text if `help_text` option is set or information of the field is added to the locale file:
+
+![check_box_help_text](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/071a6ac3-112c-42d0-965f-cd7751fdff19)
+
+```erb
+<%= form.check_box :terms, required: true %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="form-check mb-3">
+  <input name="user[terms]" type="hidden" value="0" autocomplete="off">
+  <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+  <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
+  <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+</div>
+```
+
+### radio_button
+
+You can use `radio_button` form helper to render the radio button. This helper will render radio button and label for you.
+
+![radio_button](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/9afa4065-6eea-44a6-a5be-d2936d1d2f9c)
+
+```erb
+<%= form.radio_button :gender, :male, bootstrap_form: {label_text: "Male"} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" value="male" name="user[gender]" id="user_gender_male">
+  <label class="form-check-label" for="user_gender_male">Male</label>
+</div>
+```
+
+This helper also renders help text if `help_text` option is set or information of the field is added to the locale file:
+
+![radio_button_help_text](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/2409e822-c1bd-499b-b80f-e2948acf3403)
+
+```erb
+<%= form.radio_button :gender, :male, bootstrap_form: {label_text: "Male", help_text: "Please select your gender"} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" value="male" name="user[gender]" id="user_gender_male">
+  <label class="form-check-label" for="user_gender_male">Male</label>
+  <div class="form-text text-muted">Please select your gender</div>
+</div>
+```
+
+### collection_check_boxes
+
+This helper provides a way to create collection of check boxes. This helper accepts same arguments as Rails helper
+and takes care of rendering of labels and inputs for you.
+
+![collection_check_boxes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/2a4b3519-8f7e-4dcb-86d2-5ef5edff10bc)
+
+```erb
+<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_skill_ids">Skills</label>
+  <div class="rails-bootstrap-forms-collection-check-boxes">
+    <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="1" name="user[skill_ids][]" id="user_skill_ids_1">
+      <label class="form-check-label" for="user_skill_ids_1">Communication</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="2" name="user[skill_ids][]" id="user_skill_ids_2">
+      <label class="form-check-label" for="user_skill_ids_2">Problem Solving</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="3" name="user[skill_ids][]" id="user_skill_ids_3">
+      <label class="form-check-label" for="user_skill_ids_3">Leadership</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="4" name="user[skill_ids][]" id="user_skill_ids_4">
+      <label class="form-check-label" for="user_skill_ids_4">Writing</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="5" name="user[skill_ids][]" id="user_skill_ids_5">
+      <label class="form-check-label" for="user_skill_ids_5">Creativity</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="6" name="user[skill_ids][]" id="user_skill_ids_6">
+      <label class="form-check-label" for="user_skill_ids_6">Time Management</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="7" name="user[skill_ids][]" id="user_skill_ids_7">
+      <label class="form-check-label" for="user_skill_ids_7">Team Work</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="8" name="user[skill_ids][]" id="user_skill_ids_8">
+      <label class="form-check-label" for="user_skill_ids_8">Negotiation</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="9" name="user[skill_ids][]" id="user_skill_ids_9">
+      <label class="form-check-label" for="user_skill_ids_9">Decision Making</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" value="10" name="user[skill_ids][]" id="user_skill_ids_10">
+      <label class="form-check-label" for="user_skill_ids_10">Management</label>
+    </div>
+  </div>
+  <div class="form-text text-muted">Select your strong skills</div>
+</div>
+```
+
+### collection_radio_buttons
+
+This helper provides a way to create collection of check boxes. This helper accepts same arguments as Rails helper
+and takes care of rendering of labels and inputs for you.
+
+![collection_radio_buttons](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/178a6990-53fe-4276-b511-b12f8fd9d90f)
+
+```erb
+<%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_fruit_id">Favorite fruit</label>
+  <div class="rails-bootstrap-forms-collection-radio-buttons">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" value="1" name="user[fruit_id]" id="user_fruit_id_1">
+      <label class="form-check-label" for="user_fruit_id_1">Mango</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" value="2" name="user[fruit_id]" id="user_fruit_id_2">
+      <label class="form-check-label" for="user_fruit_id_2">Apple</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" value="3" name="user[fruit_id]" id="user_fruit_id_3">
+      <label class="form-check-label" for="user_fruit_id_3">Orange</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" value="4" name="user[fruit_id]" id="user_fruit_id_4">
+      <label class="form-check-label" for="user_fruit_id_4">Watermelon</label>
+    </div>
+  </div>
+  <div class="form-text text-muted">Select your favorite fruit</div>
 </div>
 ```
