@@ -232,9 +232,9 @@ datetime_select              email_field                  file_field
 grouped_collection_select    hidden_field                 month_field
 number_field                 password_field               phone_field
 radio_button                 range_field                  rich_text_area
-search_field                 select                       static_field                 
-telephone_field              text_area                    text_field                   
-time_field                   time_select                  time_zone_select             
+search_field                 select                       static_field
+telephone_field              text_area                    text_field
+time_field                   time_select                  time_zone_select
 url_field                    week_field                   weekday_select
 ```
 
@@ -706,7 +706,7 @@ This generates the following HTML:
 ```html
 <div class="mb-3">
   <div class="form-floating">
-    <select class="form-select" aria-required="true" required="required" placeholder="City" name="user[address_attributes][city]" id="user_address_attributes_city">
+    <select class="form-select" aria-required="true" required="required" placeholder="City" name="user[city]" id="user_city">
       <option value="">Select city</option>
       <optgroup label="India">
         <option value="1">Mumbai</option>
@@ -729,7 +729,7 @@ This generates the following HTML:
       ...
       ...
     </select>
-    <label class="form-label required" for="user_address_attributes_city">City</label>
+    <label class="form-label required" for="user_city">City</label>
   </div>
 </div>
 ```
@@ -1135,5 +1135,311 @@ This generates the following HTML:
     </div>
   </div>
   <div class="form-text text-muted">Select your favorite fruit</div>
+</div>
+```
+
+### text_field
+
+![text_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/88bc6eb0-53a6-4f5a-8dce-8499e6b2259d)
+
+```erb
+<%= form.text_field :name %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_name">Name</label>
+  <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
+</div>
+```
+
+### text_area
+
+![text_area](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/3dad9907-4cd1-4144-a596-2471cce3739b)
+
+```erb
+<%= form.text_area :street %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_street">Street</label>
+  <textarea class="form-control" aria-required="true" required="required" name="user[street]" id="user_street"></textarea>
+</div>
+```
+
+### color_field
+
+![color_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/d83f8231-076f-48cc-b27c-4076d6be8ab6)
+
+```erb
+<%= form.color_field :favorite_color %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_favorite_color">Favorite color</label>
+  <input class="form-control form-control-color" aria-required="true" required="required" value="#000000" type="color" name="user[favorite_color]" id="user_favorite_color">
+</div>
+```
+
+### date_field
+
+![date_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/fc2f6fc5-92c2-4596-929f-33388e4cd2a4)
+
+```erb
+<%= form.date_field :appointment_date %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_appointment_date">Appointment date</label>
+  <input class="form-control" aria-required="true" required="required" type="date" name="user[appointment_date]" id="user_appointment_date">
+</div>
+```
+
+### datetime_field
+
+![datetime_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/ce304f4c-85d9-46be-b130-d2a755f9b018)
+
+```erb
+<%= form.datetime_field :appointment_datetime %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_appointment_datetime">Appointment datetime</label>
+  <input class="form-control" type="datetime-local" name="user[appointment_datetime]" id="user_appointment_datetime">
+</div>
+```
+
+### datetime_local_field
+
+![datetime_local_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/75ee5833-9278-48bd-aac9-faed940b3045)
+
+```erb
+<%= form.datetime_local_field :appointment_datetime %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_appointment_datetime">Appointment datetime</label>
+  <input class="form-control" type="datetime-local" name="user[appointment_datetime]" id="user_appointment_datetime">
+</div>
+```
+
+### email_field
+
+![email_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/a9b61ca1-7eb9-47e4-9bb0-db9f964186e7)
+
+```erb
+<%= form.email_field :email %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_email">Email address</label>
+  <input class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
+</div>
+```
+
+### file_field
+
+![file_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/d9d41696-b2aa-43f7-9698-d6c339b01de0)
+
+```erb
+<%= form.file_field :avatar %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_avatar">Avatar</label>
+  <input class="form-control" type="file" name="user[avatar]" id="user_avatar">
+</div>
+```
+
+### month_field
+
+![month_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/39627509-fd90-425b-b4c5-b0a2afdb59ae)
+
+```erb
+<%= form.month_field :birth_month %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_birth_month">Birth month</label>
+  <input class="form-control" type="month" name="user[birth_month]" id="user_birth_month">
+</div>
+```
+
+### number_field
+
+![number_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/2d41823a-8b0c-4712-ba80-274725ac497a)
+
+```erb
+<%= form.number_field :age %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_age">Age</label>
+  <input class="form-control" type="number" name="user[age]" id="user_age">
+</div>
+```
+
+### password_field
+
+![password_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/594696b4-a8b4-460d-a1ed-f27bc21bcbf0)
+
+```erb
+<%= form.password_field :password %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_password">Password</label>
+  <input class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password">
+</div>
+```
+
+### phone_field
+
+![phone_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/44f2acec-2a01-4715-a26e-0ff98653fbaf)
+
+```erb
+<%= form.phone_field :mobile_number %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_mobile_number">Mobile number</label>
+  <input class="form-control" aria-required="true" required="required" type="tel" name="user[mobile_number]" id="user_mobile_number">
+</div>
+```
+
+### range_field
+
+![range_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/7173d6fe-9b6f-4d80-8a48-37e86e025661)
+
+```erb
+<%= form.range_field :excellence %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_excellence">Excellence</label>
+  <input class="form-range" type="range" name="user[excellence]" id="user_excellence">
+</div>
+```
+
+### search_field
+
+![search_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/b108c5d6-42b3-4fde-9717-dbb1cb8b8780)
+
+```erb
+<%= form.search_field :search %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_search">Search</label>
+  <input class="form-control" type="search" name="user[search]" id="user_search">
+</div>
+```
+
+### telephone_field
+
+![telephone_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/0f8ded9b-4dc5-4dea-9d3e-c8850776a0d4)
+
+```erb
+<%= form.telephone_field :mobile_number %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_mobile_number">Mobile number</label>
+  <input class="form-control" aria-required="true" required="required" type="tel" name="user[mobile_number]" id="user_mobile_number">
+</div>
+```
+
+### time_field
+
+![time_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/90ce4c18-d50c-4b8d-aef6-bc1971a38c99)
+
+```erb
+<%= form.time_field :appointment_time %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_appointment_time">Appointment time</label>
+  <input class="form-control" type="time" name="user[appointment_time]" id="user_appointment_time">
+</div>
+```
+
+### url_field
+
+![url_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/dfb8a3ab-a1b2-4ce8-a10b-619b3fb1a268)
+
+```erb
+<%= form.url_field :blog_url %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_blog_url">Blog URL</label>
+  <input class="form-control" type="url" name="user[blog_url]" id="user_blog_url">
+</div>
+```
+
+### week_field
+
+![week_field](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/609d0c59-c5ff-497c-8461-fc289ab06d6f)
+
+```erb
+<%= form.week_field :winter_holiday_week %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_winter_holiday_week">Winter holiday week</label>
+  <input class="form-control" type="week" name="user[winter_holiday_week]" id="user_winter_holiday_week">
 </div>
 ```
