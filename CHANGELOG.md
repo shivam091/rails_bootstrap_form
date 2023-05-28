@@ -4,6 +4,18 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.8.1](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.0...v0.8.1) - 2023-05-28
+
+### What's new
+
+- Updated README
+- Added support to add `required` class to label depending on field's `required` option
+- Added specs for `Labels`, `HelpText`, `InputGroupBuilder`, and `inline` form layout
+
+### What's changed
+- Replaced `div` by `fieldset` for dropdowns of `date_select`, `time_select`, and `datetime_select`
+- Removed block parameter from `collection_check_boxes` and `collection_radio_buttons`
+
 ## [0.8.0](https://github.com/shivam091/rails_bootstrap_form/compare/v0.7.2...v0.8.0) - 2023-05-26
 
 ### What's new
