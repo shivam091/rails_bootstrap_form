@@ -4,6 +4,12 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.8.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.1...v0.8.2) - 2023-05-28
+
+### What's fixed
+
+- Fixed error causing `fields_for` to fail when object is passed in method.
+
 ## [0.8.1](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.0...v0.8.1) - 2023-05-28
 
 ### What's new

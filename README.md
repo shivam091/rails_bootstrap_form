@@ -1,5 +1,7 @@
 # RailsBootstrapForm
 
+[![Gem Version](https://badge.fury.io/rb/rails_bootstrap_form.svg)](https://badge.fury.io/rb/rails_bootstrap_form)
+
 **rails_bootstrap_form** is a Rails form builder that makes it super easy to integrate [Bootstrap 5](https://getbootstrap.com/) forms into your Rails application.
 `rails_bootstrap_forms`'s form helpers generate the form field and its label along with all the Bootstrap mark-up required for proper Bootstrap display.
 
@@ -25,7 +27,7 @@ for setting up `application.scss` and `application.js`.
 Add the `rails_bootstrap_form` gem to your `Gemfile`:
 
 ```ruby
-gem "rails_bootstrap_form", "~> 0.8.1"
+gem "rails_bootstrap_form", "~> 0.8.2"
 ```
 
 Then:
