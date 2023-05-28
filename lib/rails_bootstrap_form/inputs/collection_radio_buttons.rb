@@ -8,7 +8,7 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       included do
-        def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
+        def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {})
           inputs = ActiveSupport::SafeBuffer.new
 
           collection.each do |object|

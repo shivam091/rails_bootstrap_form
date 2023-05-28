@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_044126) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_28_041919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_044126) do
     t.string "favorite_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.float "expected_ctc"
+    t.date "interview_date"
+    t.time "interview_time"
+    t.datetime "interview_datetime"
+    t.string "weekly_off"
+    t.string "gender"
     t.index ["fruit_id"], name: "index_users_on_fruit_id"
   end
 

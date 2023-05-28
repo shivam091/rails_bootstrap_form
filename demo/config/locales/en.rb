@@ -29,6 +29,12 @@
           skill_ids: "Skills",
           username: "Username",
           remember_me: "Keep me signed in",
+          expected_ctc: "Expected CTC",
+          interview_date: "Interview date",
+          interview_time: "Interview time",
+          interview_datetime: "Interview date & time",
+          weekly_off: "Week off",
+          gender: "Gender",
         },
         user_skill: {
           user_id: "User",
