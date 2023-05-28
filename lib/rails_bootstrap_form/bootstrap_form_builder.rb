@@ -42,7 +42,8 @@ module RailsBootstrapForm
 
     def fields_for_options(record_object, fields_options)
       field_options = record_object if record_object.is_a?(Hash) && record_object.extractable_options?
-      field_options = {bootstrap_form: options[:bootstrap_form]}.deep_merge!(field_options)
+      field_options = {bootstrap_form: options.fetch(:bootstrap_form, {})}
+      field_options.deep_merge!(field_options) if field_options.respond_to?(:deep_merge!)
       field_options
     end
 
