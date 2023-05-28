@@ -53,6 +53,13 @@ class UsersController < ApplicationController
       :blog_url,
       :fruit_id,
       :favorite_color,
+      :username,
+      :expected_ctc,
+      :interview_date,
+      :interview_time,
+      :interview_datetime,
+      :weekly_off,
+      :gender,
       skill_ids: [],
       address_attributes: [
         :street,
