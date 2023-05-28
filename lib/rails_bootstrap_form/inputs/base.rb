@@ -21,7 +21,7 @@ module RailsBootstrapForm
             options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
 
             field_wrapper_builder(attribute, options, html_options) do
-              tag.div(class: control_specific_class(field_name)) do
+              tag.fieldset(class: control_specific_class(field_name)) do
                 super(attribute, options, html_options)
               end
             end

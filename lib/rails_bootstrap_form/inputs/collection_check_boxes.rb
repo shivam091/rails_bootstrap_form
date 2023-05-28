@@ -8,7 +8,7 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       included do
-        def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {}, &block)
+        def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {})
           options[:multiple] = true
 
           inputs = ActiveSupport::SafeBuffer.new
