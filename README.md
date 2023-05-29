@@ -1,5 +1,6 @@
 # RailsBootstrapForm
 
+[![Ruby](https://github.com/shivam091/rails_bootstrap_form/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/shivam091/rails_bootstrap_form/actions/workflows/main.yml)
 [![Gem Version](https://badge.fury.io/rb/rails_bootstrap_form.svg)](https://badge.fury.io/rb/rails_bootstrap_form)
 
 **rails_bootstrap_form** is a Rails form builder that makes it super easy to integrate [Bootstrap 5](https://getbootstrap.com/) forms into your Rails application.
@@ -804,6 +805,143 @@ This generates the following HTML:
   <label class="form-label required" for="user_email">Email address</label>
   <input class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
 </div>
+```
+
+### fields_for
+
+Our `fields_for` helper accepts the same arguments as the [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-fields_for).
+
+`rails_bootstrap_form` allows us to set `bootstrap_form` option just like `bootstrap_form_for` and `bootstrap_form_with`. By setting this option on fields_for, it applies to all the fields defined for that form:
+
+![fields_for](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/f515302f-a92a-4b5c-a444-af91cbb00dff)
+
+```erb
+<%= bootstrap_form_for @user do |form| %>
+  <%= form.email_field :email, autocomplete: "new-email" %>
+  <%= form.password_field :password, autocomplete: "new-password", bootstrap_form: {layout: :horizontal} %>
+  <%= form.phone_field :mobile_number %>
+  <%= form.fields_for :address, include_id: false, bootstrap_form: {layout: :horizontal} do |address_form| %>
+    <%= address_form.select :country_id, options_for_select(::Country.pluck(:name, :id), address_form.object.country_id),
+        {include_blank: "Select Country"} %>
+  <% end %>
+  <%= form.check_box :terms, required: true %>
+  <%= form.primary "Register" %>
+<% end %>
+
+```
+
+This generates the following HTML:
+
+```html
+<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+  <div class="mb-3">
+    <label class="form-label required" for="user_email">Email address</label>
+    <input autocomplete="new-email" class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
+    <div class="form-text text-muted">Please use official email address</div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-form-label col-sm-2 required" for="user_password">Password</label>
+    <div class="col-sm-10">
+      <input autocomplete="new-password" class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password">
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label required" for="user_mobile_number">Mobile number</label>
+    <input class="form-control" aria-required="true" required="required" type="tel" name="user[mobile_number]" id="user_mobile_number">
+  </div>
+  <div class="row mb-3">
+    <label class="col-form-label col-sm-2 required" for="user_address_attributes_country_id">Country</label>
+    <div class="col-sm-10">
+      <select class="form-select" aria-required="true" required="required" name="user[address_attributes][country_id]" id="user_address_attributes_country_id">
+        <option value="">Select Country</option>
+        <option value="1">India</option>
+        <option value="2">Ireland</option>
+        <option value="3">United States</option>
+        <option value="4">United Kingdom</option>
+        <option value="5">Spain</option>
+        <option value="6">France</option>
+        <option value="7">Canada</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-check mb-3">
+    <input name="user[terms]" type="hidden" value="0" autocomplete="off">
+    <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+    <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
+    <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+  </div>
+  <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
+</form>
+```
+
+By setting `bootstrap_form` option on `bootstrap_form_for` or `bootstrap_form_with`, this option also applies to all the fields defined in fields_for block:
+
+![fields_for_horizontal](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/cb75e76b-e8a3-48f1-83a1-9eb150aa2466)
+
+```erb
+<%= bootstrap_form_for @user, bootstrap_form: {layout: :horizontal} do |form| %>
+  <%= form.email_field :email, autocomplete: "new-email" %>
+  <%= form.password_field :password, autocomplete: "new-password" %>
+  <%= form.phone_field :mobile_number %>
+  <%= form.fields_for :address, include_id: false do |address_form| %>
+    <%= address_form.select :country_id, options_for_select(::Country.pluck(:name, :id), address_form.object.country_id),
+        {include_blank: "Select Country"} %>
+  <% end %>
+  <%= form.check_box :terms, required: true %>
+  <%= form.primary "Register" %>
+<% end %>
+```
+
+This generates the following HTML:
+
+```html
+<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+  <div class="row mb-3">
+    <label class="col-form-label col-sm-2 required" for="user_email">Email address</label>
+    <div class="col-sm-10">
+      <input autocomplete="new-email" class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
+      <div class="form-text text-muted">Please use official email address</div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-form-label col-sm-2 required" for="user_password">Password</label>
+    <div class="col-sm-10">
+      <input autocomplete="new-password" class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-form-label col-sm-2 required" for="user_mobile_number">Mobile number</label>
+    <div class="col-sm-10">
+      <input class="form-control" aria-required="true" required="required" type="tel" name="user[mobile_number]" id="user_mobile_number">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-form-label col-sm-2 required" for="user_address_attributes_country_id">Country</label>
+    <div class="col-sm-10">
+      <select class="form-select" aria-required="true" required="required" name="user[address_attributes][country_id]" id="user_address_attributes_country_id">
+        <option value="">Select Country</option>
+        <option value="1">India</option>
+        <option value="2">Ireland</option>
+        <option value="3">United States</option>
+        <option value="4">United Kingdom</option>
+        <option value="5">Spain</option>
+        <option value="6">France</option>
+        <option value="7">Canada</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-sm-10 offset-sm-2">
+      <div class="form-check">
+        <input name="user[terms]" type="hidden" value="0" autocomplete="off">
+        <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+        <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
+        <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+      </div>
+    </div>
+  </div>
+  <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
+</form>
 ```
 
 ### file_field
