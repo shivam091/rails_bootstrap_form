@@ -4,6 +4,12 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.8.3](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.2...v0.8.3) - 2023-05-29
+
+### What's new
+
+- Added support to specify `bootstrap_form` option on `fields_for` helper
+
 ## [0.8.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.1...v0.8.2) - 2023-05-28
 
 ### What's fixed
