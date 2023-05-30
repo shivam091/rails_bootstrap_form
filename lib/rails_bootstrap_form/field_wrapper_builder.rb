@@ -52,7 +52,7 @@ module RailsBootstrapForm
     def field_wrapper_options(bootstrap_options)
       {}.tap do |option|
         option[:class] = field_wrapper_classes(bootstrap_options)
-      end.merge(bootstrap_options.wrapper_options)
+      end.merge(bootstrap_options.wrapper)
     end
 
     def field_wrapper_classes(bootstrap_options)

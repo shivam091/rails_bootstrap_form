@@ -93,7 +93,7 @@ module RailsBootstrapForm
 
     # An option to control the HTML attributes and options that will be added to
     # the field wrapper. The default value is `{}`.
-    attr_accessor :wrapper_options
+    attr_accessor :wrapper
 
     # An option to control the size of input groups, buttons, labels, and fields.
     # The valid values are `sm` and `lg`. The default value is `nil`.
@@ -190,7 +190,7 @@ module RailsBootstrapForm
 
       @switch = false
 
-      @wrapper_options = {}
+      @wrapper = {}
 
       @size = nil
 

@@ -192,7 +192,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {wrapper_options: {data: {controller: "hello"}}}
+      actual = @vertical_builder.text_field :name, bootstrap_form: {wrapper: {data: {controller: "hello"}}}
 
       expect(actual).to match_html(expected)
     end

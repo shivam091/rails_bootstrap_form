@@ -170,7 +170,7 @@ Here's a list of all possible options you can pass via `bootstrap_form` option t
 | `floating` | An option to control whether the field should have a floating label. | `false` |
 | `static_field_class` | A CSS class that will be applied to all static fields. | `form-control-plaintext` |
 | `switch` | An option to control whether the check box should look like Bootstrap switches. | `false` |
-| `wrapper_options` | An option to control the HTML attributes and options that will be added to a field wrapper. | `{}` |
+| `wrapper` | An option to control the HTML attributes and options that will be added to a field wrapper. | `{}` |
 | `size` | An option to control the size of input groups, buttons, labels, and fields. It can be `sm` or `lg`. | `nil` |
 | `inline` | An option to group checkboxes and radio buttons on the same horizontal row. | `false` |
 | `label_col_class` | A CSS class that will be applied to all labels when layout is `horizontal`. | `col-form-label` |
