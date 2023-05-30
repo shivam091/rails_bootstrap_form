@@ -11,7 +11,10 @@ module RailsBootstrapForm
         def time_zone_select(attribute, priority_zones = nil, options = {}, html_options = {})
           options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
 
-          field_wrapper_builder(attribute, options, html_options) do
+          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          return super if bootstrap_options.disabled?
+
+          field_wrapper_builder(attribute, bootstrap_options, options, html_options) do
             super(attribute, priority_zones, options, html_options)
           end
         end

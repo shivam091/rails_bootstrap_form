@@ -16,6 +16,10 @@ module RailsBootstrapForm
   #
   class BootstrapFormOptions
 
+    # Controls whether to render default Rails form builder element.
+    # The default value is `false`.
+    attr_accessor :disabled
+
     # Controls layout of form and field helpers. It can be "vertical,
     # "horizontal", or "inline". The default value is `vertical`.
     attr_accessor :layout
@@ -161,11 +165,13 @@ module RailsBootstrapForm
       end
     end
 
-    %i(inline floating switch skip_label hide_label render_as_button).each do |method|
+    %i(disabled inline floating switch skip_label hide_label render_as_button).each do |method|
       define_method("#{method}?") { self.send(method) }
     end
 
     def set_defaults
+      @disabled = false
+
       @layout = "vertical"
 
       @field_class = "form-control"

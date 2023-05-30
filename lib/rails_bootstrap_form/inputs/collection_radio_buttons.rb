@@ -9,6 +9,9 @@ module RailsBootstrapForm
 
       included do
         def collection_radio_buttons(attribute, collection, value_method, text_method, options = {}, html_options = {})
+          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          return super if bootstrap_options.disabled?
+
           inputs = ActiveSupport::SafeBuffer.new
 
           collection.each do |object|
@@ -27,7 +30,7 @@ module RailsBootstrapForm
             inputs << radio_button(attribute, input_value, input_options)
           end
 
-          field_wrapper_builder(attribute, options, html_options) do
+          field_wrapper_builder(attribute, bootstrap_options, options, html_options) do
             concat(tag.div(class: control_specific_class(:collection_radio_buttons)) do
               concat(inputs)
             end)
