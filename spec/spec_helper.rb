@@ -59,8 +59,8 @@ RSpec.configure do |config|
   config.before(:each) do
     @user = ::User.new
     @vertical_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap_form: {layout: :horizontal})
-    @inline_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap_form: {layout: :inline})
+    @horizontal_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap: {layout: :horizontal})
+    @inline_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap: {layout: :inline})
   end
 
   config.before(:suite) do

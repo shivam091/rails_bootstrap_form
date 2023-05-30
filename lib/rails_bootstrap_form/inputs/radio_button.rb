@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       included do
         def radio_button(attribute, value, options = {})
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
 
           options[:class] = radio_button_classes(attribute, options)
 

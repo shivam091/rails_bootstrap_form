@@ -6,12 +6,12 @@ module RailsBootstrapForm
   # Container for bootstrap specific form builder options. It controls options
   # that define form layout, grid sizing, and few other configurable options.
   # They are passed-in into form builder helper and field helpers via
-  # `:bootstrap_form` option.
+  # `:bootstrap` option.
   #
   # For example:
   #
-  #   bootstrap_form_with model: @user, bootstrap_form: {layout: :inline} do |f|
-  #      f.text_field :email, bootstrap_form: {label: {text: "Your email"}}
+  #   bootstrap_form_with model: @user, bootstrap: {layout: :inline} do |f|
+  #      f.text_field :email, bootstrap: {label: {text: "Your email"}}
   #   end
   #
   class BootstrapFormOptions
@@ -64,8 +64,8 @@ module RailsBootstrapForm
     #
     # Example:
     #
-    #   form.text_field :dollars, bootstrap_form: {input_group: {prepend: "$", append: ".00"}}
-    #   form.text_field :search, bootstrap_form: {input_group: {append: button_tag("Go", type: :submit, class: "btn btn-secondary")}}
+    #   form.text_field :dollars, bootstrap: {input_group: {prepend: "$", append: ".00"}}
+    #   form.text_field :search, bootstrap: {input_group: {append: button_tag("Go", type: :submit, class: "btn btn-secondary")}}
     #
     # Raw or HTML content to be prepended to the field.
     # The default value is `nil`.
@@ -103,7 +103,7 @@ module RailsBootstrapForm
     # The default value is `false`.
     #
     # Example:
-    #   form.collection_radio_buttons :choices, ["yes", "no"], :to_s, :to_s, bootstrap_form: {inline: true}
+    #   form.collection_radio_buttons :choices, ["yes", "no"], :to_s, :to_s, bootstrap: {inline: true}
     attr_accessor :inline
 
     # A CSS class that will be applied to all labels when layout is horizontal.
@@ -145,7 +145,7 @@ module RailsBootstrapForm
     # to a given form field. For example, we can change grid just for one field:
     #
     #   bootstrap_form_with model: @user do |f|
-    #     f.text_field :email, bootstrap_form: {label_col_wrapper_class: "col-md-6", field_col_wrapper_class: "col-md-6"}
+    #     f.text_field :email, bootstrap: {label_col_wrapper_class: "col-md-6", field_col_wrapper_class: "col-md-6"}
     #     f.password_field :password
     #   end
     #

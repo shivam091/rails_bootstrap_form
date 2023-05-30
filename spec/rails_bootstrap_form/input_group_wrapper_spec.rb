@@ -20,7 +20,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap_form: {prepend: "₹", append: ".00"}
+      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00"}
 
       expect(actual).to match_html(expected)
     end
@@ -39,7 +39,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap_form: {prepend: ["Net", "₹"], append: [".00", "per day"]}
+      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: ["Net", "₹"], append: [".00", "per day"]}
 
       expect(actual).to match_html(expected)
     end
@@ -55,7 +55,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap_form: {append: @vertical_builder.secondary("Search")}
+      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {append: @vertical_builder.secondary("Search")}
 
       expect(actual).to match_html(expected)
     end
@@ -72,7 +72,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap_form: {prepend: "₹", append: ".00", additional_input_group_class: "custom-class"}
+      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00", additional_input_group_class: "custom-class"}
 
       expect(actual).to match_html(expected)
     end
@@ -89,7 +89,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap_form: {prepend: "₹", append: ".00", size: :sm}
+      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00", size: :sm}
 
       expect(actual).to match_html(expected)
     end

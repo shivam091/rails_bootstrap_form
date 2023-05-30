@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       included do
         def time_zone_select(attribute, priority_zones = nil, options = {}, html_options = {})
-          options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
+          options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
 
           field_wrapper_builder(attribute, options, html_options) do
             super(attribute, priority_zones, options, html_options)

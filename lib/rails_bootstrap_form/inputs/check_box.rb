@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       included do
         def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
 
           options[:class] = check_box_classes(attribute, options)
 

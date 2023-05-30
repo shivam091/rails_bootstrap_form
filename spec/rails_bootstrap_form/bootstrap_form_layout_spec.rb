@@ -65,7 +65,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       </form>
     HTML
 
-    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap_form: {layout: :horizontal}) do |form|
+    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
       concat(form.text_field(:username))
       concat(form.password_field(:password))
       concat(form.check_box(:remember_me))
@@ -99,7 +99,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       </form>
     HTML
 
-    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap_form: {layout: :inline}) do |form|
+    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap: {layout: :inline}) do |form|
       concat(form.text_field(:username))
       concat(form.password_field(:password))
       concat(form.check_box(:remember_me))

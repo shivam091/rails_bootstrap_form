@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       included do
         def collection_select(attribute, collection, value_method, text_method, options = {}, html_options = {})
-          options = {bootstrap_form: {field_class: "form-select"}}.deep_merge!(options)
+          options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
 
           field_wrapper_builder(attribute, options, html_options) do
             super(attribute, collection, value_method, text_method, options, html_options)

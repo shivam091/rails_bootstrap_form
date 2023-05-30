@@ -16,7 +16,7 @@ module RailsBootstrapForm
           collection.each do |object|
             input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
             input_options = {
-              bootstrap_form: {
+              bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
                 inline: true
               }

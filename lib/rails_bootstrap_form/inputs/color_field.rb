@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       included do
         def color_field(attribute, options = {})
-          options = {bootstrap_form: {field_class: "form-control form-control-color"}}.deep_merge!(options)
+          options = {bootstrap: {field_class: "form-control form-control-color"}}.deep_merge!(options)
 
           field_wrapper_builder(attribute, options) do
             super(attribute, options)

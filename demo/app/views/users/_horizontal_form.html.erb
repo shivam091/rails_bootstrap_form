@@ -3,7 +3,7 @@
     Horizontal layout
   </div>
   <div class="card-body">
-    <%= bootstrap_form_for @user, bootstrap_form: {layout: :horizontal} do |form| %>
+    <%= bootstrap_form_for @user, bootstrap: {layout: :horizontal} do |form| %>
       <%= form.text_field :name, autocomplete: "new-name" %>
       <%= form.text_field :username, autocomplete: "new-username" %>
       <%= form.email_field :email, autocomplete: "new-email" %>
