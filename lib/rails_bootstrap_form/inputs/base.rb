@@ -7,6 +7,31 @@ module RailsBootstrapForm
     module Base
       extend ActiveSupport::Concern
 
+      included do
+        def inputs_collection(attribute, collection, value_method, text_method, options = {}, html_options = {})
+          inputs = ActiveSupport::SafeBuffer.new
+
+          collection.each do |object|
+            input_options = {
+              bootstrap: {
+                label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
+                inline: true
+              }
+            }.deep_merge!(options)
+
+            if (checked = input_options[:checked])
+              input_options[:checked] = collection_input_checked?(checked, object, object.send(value_method))
+            end
+
+            input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
+
+            inputs << yield(attribute, input_value, input_options)
+          end
+
+          inputs
+        end
+      end
+
       class_methods do
         def bootstrap_field(field_name)
           define_method(field_name) do |attribute, options = {}|
