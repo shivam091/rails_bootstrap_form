@@ -154,6 +154,7 @@ Here's a list of all possible options you can pass via `bootstrap` option that c
 
 | Option | Description | Default value |
 | ------ | ------------- | ----------- |
+| `disabled` | An option to disable **rails_bootstrap_form** helpers. Default rails form builder element is rendered when set to `true` | `false` |
 | `layout` | Controls layout of form and field helpers. It can be `vertical` `horizontal`, or `inline`. | `vertical` |
 | `field_class` | A CSS class that will be applied to all form fields. | `form-control` |
 | `additional_field_class` | An additional CSS class that will be added along with the existing css classes of field helpers. | `nil` |
@@ -219,6 +220,14 @@ This generates the following HTML:
   </div>
   <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
 </form>
+```
+
+### Disabling Bootstrap
+
+You can completely disable bootstrap and use default form builder by passing `disabled: true` option. For example:
+
+```erb
+<%= form.text_field :username, bootstrap: {disabled: true} %>
 ```
 
 ## Supported Form Helpers
@@ -1375,7 +1384,7 @@ Here's an example of how you pass both options and html_options hashes:
 ![weekday_select](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/e469a57d-3d22-4c9e-829b-4ba825593ae1)
 
 ```erb
-<%= form.weekday_select :weekly_off, {selected: "Monday", bootstrap: {label_text: "Week off"}}, {onchange: "this.form.submit();} %>
+<%= form.weekday_select :weekly_off, {selected: "Monday", bootstrap: {label_text: "Week off"}}, {onchange: "this.form.submit();"} %>
 ```
 
 This generates the following HTML:

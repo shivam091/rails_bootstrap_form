@@ -4,11 +4,22 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.9.0](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.3...v0.9.0) - 2023-05-31
+
+### What's new
+
+- Added `disabled` option to allow user to render default Rails form builder element.
+
+### BREAKING CHANGES
+
+- Renamed `wrapper_options` option to `wrapper`
+- Renamed `bootstrap_form` option to `bootstrap`
+
 ## [0.8.3](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.2...v0.8.3) - 2023-05-29
 
 ### What's new
 
-- Added support to specify `bootstrap_form` option on `fields_for` helper
+- Added support to specify `bootstrap` option on `fields_for` helper ([#30](https://github.com/shivam091/rails_bootstrap_form/issues/30))
 
 ## [0.8.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.1...v0.8.2) - 2023-05-28
 
