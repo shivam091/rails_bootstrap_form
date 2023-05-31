@@ -3,6 +3,6 @@
 # -*- warn_indent: true -*-
 
 module RailsBootstrapForm
-  VERSION = "0.8.3".freeze
+  VERSION = "0.9.0".freeze
   REQUIRED_RAILS_VERSION = "~> 7.0".freeze
 end
