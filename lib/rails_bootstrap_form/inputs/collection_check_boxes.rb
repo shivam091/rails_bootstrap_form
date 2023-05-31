@@ -14,7 +14,7 @@ module RailsBootstrapForm
 
           options[:multiple] = true
 
-          inputs = inputs_collection(attribute, collection, value_method, text_method, options, html_options) do |attribute, value, options|
+          inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap_options, options) do |attribute, value, options|
             check_box(attribute, options, value, nil)
           end
 

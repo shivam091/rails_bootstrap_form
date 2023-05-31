@@ -22,7 +22,7 @@ module RailsBootstrapForm
           check_box_html = tag.div(**check_box_wrapper_options(bootstrap_options)) do
             concat(check_box_field)
             concat(check_box_label)
-            concat(check_box_help_text) unless bootstrap_options.inline?
+            concat(check_box_help_text)
             concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
           end
 

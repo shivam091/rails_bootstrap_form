@@ -8,14 +8,15 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       included do
-        def inputs_collection(attribute, collection, value_method, text_method, options = {}, html_options = {})
+        def inputs_collection(attribute, collection, value_method, text_method, bootstrap_options, options = {})
           inputs = ActiveSupport::SafeBuffer.new
 
           collection.each do |object|
             input_options = {
               bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
-                inline: true
+                help_text: false,
+                inline: bootstrap_options.inline?
               }
             }.deep_merge!(options)
 

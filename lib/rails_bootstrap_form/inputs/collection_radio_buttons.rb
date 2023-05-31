@@ -12,7 +12,7 @@ module RailsBootstrapForm
           bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap_options.disabled?
 
-          inputs = inputs_collection(attribute, collection, value_method, text_method, options, html_options) do |attribute, value, options|
+          inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap_options, options) do |attribute, value, options|
             radio_button(attribute, value, options)
           end
 
