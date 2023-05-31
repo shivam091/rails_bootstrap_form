@@ -45,7 +45,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Buttons do
         <button name="button" type="submit" class="btn btn-primary">Register</button>
       HTML
 
-      actual = @vertical_builder.primary "Register", bootstrap_form: {render_as_button: true}
+      actual = @vertical_builder.primary "Register", bootstrap: {render_as_button: true}
 
       expect(actual).to match_html(expected)
     end

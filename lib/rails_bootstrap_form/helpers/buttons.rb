@@ -10,7 +10,7 @@ module RailsBootstrapForm
       def self.included(base_class)
         def render_button(value = nil, options = {}, &block)
           value, options = nil, value if value.is_a?(Hash)
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
 
           button_html = if (bootstrap_options.render_as_button? || block)
             button(value, options, &block)

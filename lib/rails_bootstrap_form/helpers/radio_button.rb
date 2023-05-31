@@ -31,7 +31,7 @@ module RailsBootstrapForm
         def radio_button_wrapper_options(bootstrap_options)
           {}.tap do |option|
             option[:class] = radio_button_wrapper_class(bootstrap_options)
-          end.merge(bootstrap_options.wrapper_options)
+          end.merge(bootstrap_options.wrapper)
         end
 
         def radio_button_value(attribute, value)

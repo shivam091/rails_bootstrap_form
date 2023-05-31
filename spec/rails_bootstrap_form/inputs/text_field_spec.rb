@@ -46,7 +46,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {floating: true}
+      actual = @vertical_builder.text_field :name, bootstrap: {floating: true}
 
       expect(actual).to match_html(expected)
     end
@@ -61,7 +61,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @horizontal_builder.text_field :name, bootstrap_form: {floating: true}
+      actual = @horizontal_builder.text_field :name, bootstrap: {floating: true}
 
       expect(actual).to match_html(expected)
     end
@@ -73,7 +73,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {skip_label: true}
+      actual = @vertical_builder.text_field :name, bootstrap: {skip_label: true}
 
       expect(actual).to match_html(expected)
     end
@@ -86,7 +86,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {hide_label: true}
+      actual = @vertical_builder.text_field :name, bootstrap: {hide_label: true}
 
       expect(actual).to match_html(expected)
     end
@@ -99,7 +99,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {additional_field_class: "custom-class"}
+      actual = @vertical_builder.text_field :name, bootstrap: {additional_field_class: "custom-class"}
 
       expect(actual).to match_html(expected)
     end
@@ -112,7 +112,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {additional_label_class: "custom-class"}
+      actual = @vertical_builder.text_field :name, bootstrap: {additional_label_class: "custom-class"}
 
       expect(actual).to match_html(expected)
     end
@@ -125,7 +125,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {field_class: "custom-form-control"}
+      actual = @vertical_builder.text_field :name, bootstrap: {field_class: "custom-form-control"}
 
       expect(actual).to match_html(expected)
     end
@@ -138,7 +138,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {label_class: "custom-form-label"}
+      actual = @vertical_builder.text_field :name, bootstrap: {label_class: "custom-form-label"}
 
       expect(actual).to match_html(expected)
     end
@@ -152,7 +152,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {help_text: "Please provide your full name"}
+      actual = @vertical_builder.text_field :name, bootstrap: {help_text: "Please provide your full name"}
 
       expect(actual).to match_html(expected)
     end
@@ -179,7 +179,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {label_text: "Full name"}
+      actual = @vertical_builder.text_field :name, bootstrap: {label_text: "Full name"}
 
       expect(actual).to match_html(expected)
     end
@@ -192,7 +192,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {wrapper_options: {data: {controller: "hello"}}}
+      actual = @vertical_builder.text_field :name, bootstrap: {wrapper: {data: {controller: "hello"}}}
 
       expect(actual).to match_html(expected)
     end
@@ -209,7 +209,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {prepend: "<strong>$</strong>", append: "0.0"}
+      actual = @vertical_builder.text_field :name, bootstrap: {prepend: "<strong>$</strong>", append: "0.0"}
 
       expect(actual).to match_html(expected)
     end
@@ -225,7 +225,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {append: (button_tag("Go", type: :submit, class: "btn btn-secondary"))}
+      actual = @vertical_builder.text_field :name, bootstrap: {append: (button_tag("Go", type: :submit, class: "btn btn-secondary"))}
 
       expect(actual).to match_html(expected)
     end
@@ -243,7 +243,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {prepend: ["$", "Rs"], append: "0.0"}
+      actual = @vertical_builder.text_field :name, bootstrap: {prepend: ["$", "Rs"], append: "0.0"}
 
       expect(actual).to match_html(expected)
     end
@@ -262,7 +262,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {prepend: "$", append: "0.0", floating: true}
+      actual = @vertical_builder.text_field :name, bootstrap: {prepend: "$", append: "0.0", floating: true}
 
       expect(actual).to match_html(expected)
     end
@@ -275,7 +275,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {size: :sm}
+      actual = @vertical_builder.text_field :name, bootstrap: {size: :sm}
 
       expect(actual).to match_html(expected)
     end

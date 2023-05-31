@@ -28,7 +28,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.floating).to be_falsy
       expect(options.static_field_class).to eq("form-control-plaintext")
       expect(options.switch).to be_falsy
-      expect(options.wrapper_options).to eq({})
+      expect(options.wrapper).to eq({})
       expect(options.size).to be_nil
       expect(options.inline).to be_falsy
       expect(options.label_col_class).to eq("col-form-label")
@@ -57,7 +57,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
         floating: true,
         static_field_class: "form-control-plaintext",
         switch: true,
-        wrapper_options: {data: {controller: "hello"}},
+        wrapper: {data: {controller: "hello"}},
         size: :sm,
         inline: true,
         label_col_class: "col-form-label",
@@ -84,7 +84,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.floating).to be_truthy
       expect(options.static_field_class).to eq("form-control-plaintext")
       expect(options.switch).to be_truthy
-      expect(options.wrapper_options).to eq(data: {controller: "hello"})
+      expect(options.wrapper).to eq(data: {controller: "hello"})
       expect(options.size).to eq(:sm)
       expect(options.inline).to be_truthy
       expect(options.label_col_class).to eq("col-form-label")

@@ -4,9 +4,7 @@
 
 module RailsBootstrapForm
   module FieldWrapperBuilder
-    def field_wrapper_builder(attribute, options, html_options = nil, &block)
-      bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
-
+    def field_wrapper_builder(attribute, bootstrap_options, options, html_options = nil, &block)
       field_options = field_css_options(attribute, bootstrap_options, options, html_options.try(:symbolize_keys!))
 
       field_wrapper(attribute, bootstrap_options, field_options, &block)
@@ -52,7 +50,7 @@ module RailsBootstrapForm
     def field_wrapper_options(bootstrap_options)
       {}.tap do |option|
         option[:class] = field_wrapper_classes(bootstrap_options)
-      end.merge(bootstrap_options.wrapper_options)
+      end.merge(bootstrap_options.wrapper)
     end
 
     def field_wrapper_classes(bootstrap_options)

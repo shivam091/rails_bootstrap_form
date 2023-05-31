@@ -31,7 +31,7 @@ RSpec.describe RailsBootstrapForm::Helpers::HelpText do
         </div>
       HTML
 
-      actual = @vertical_builder.email_field :email, bootstrap_form: {help_text: "Please use valid email."}
+      actual = @vertical_builder.email_field :email, bootstrap: {help_text: "Please use valid email."}
 
       expect(actual).to match_html(expected)
     end
@@ -44,7 +44,7 @@ RSpec.describe RailsBootstrapForm::Helpers::HelpText do
         </div>
       HTML
 
-      actual = @vertical_builder.email_field :email, bootstrap_form: {help_text: false}
+      actual = @vertical_builder.email_field :email, bootstrap: {help_text: false}
 
       expect(actual).to match_html(expected)
     end

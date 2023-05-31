@@ -15,7 +15,7 @@ module RailsBootstrapForm
           static_options = options.merge(
             readonly: true,
             disabled: true,
-            bootstrap_form: {
+            bootstrap: {
               field_class: bootstrap_form_options.static_field_class
             }
           )

@@ -6,15 +6,19 @@ module RailsBootstrapForm
   # Container for bootstrap specific form builder options. It controls options
   # that define form layout, grid sizing, and few other configurable options.
   # They are passed-in into form builder helper and field helpers via
-  # `:bootstrap_form` option.
+  # `:bootstrap` option.
   #
   # For example:
   #
-  #   bootstrap_form_with model: @user, bootstrap_form: {layout: :inline} do |f|
-  #      f.text_field :email, bootstrap_form: {label: {text: "Your email"}}
+  #   bootstrap_form_with model: @user, bootstrap: {layout: :inline} do |f|
+  #      f.text_field :email, bootstrap: {label: {text: "Your email"}}
   #   end
   #
   class BootstrapFormOptions
+
+    # Controls whether to render default Rails form builder element.
+    # The default value is `false`.
+    attr_accessor :disabled
 
     # Controls layout of form and field helpers. It can be "vertical,
     # "horizontal", or "inline". The default value is `vertical`.
@@ -64,8 +68,8 @@ module RailsBootstrapForm
     #
     # Example:
     #
-    #   form.text_field :dollars, bootstrap_form: {input_group: {prepend: "$", append: ".00"}}
-    #   form.text_field :search, bootstrap_form: {input_group: {append: button_tag("Go", type: :submit, class: "btn btn-secondary")}}
+    #   form.text_field :dollars, bootstrap: {input_group: {prepend: "$", append: ".00"}}
+    #   form.text_field :search, bootstrap: {input_group: {append: button_tag("Go", type: :submit, class: "btn btn-secondary")}}
     #
     # Raw or HTML content to be prepended to the field.
     # The default value is `nil`.
@@ -93,7 +97,7 @@ module RailsBootstrapForm
 
     # An option to control the HTML attributes and options that will be added to
     # the field wrapper. The default value is `{}`.
-    attr_accessor :wrapper_options
+    attr_accessor :wrapper
 
     # An option to control the size of input groups, buttons, labels, and fields.
     # The valid values are `sm` and `lg`. The default value is `nil`.
@@ -103,7 +107,7 @@ module RailsBootstrapForm
     # The default value is `false`.
     #
     # Example:
-    #   form.collection_radio_buttons :choices, ["yes", "no"], :to_s, :to_s, bootstrap_form: {inline: true}
+    #   form.collection_radio_buttons :choices, ["yes", "no"], :to_s, :to_s, bootstrap: {inline: true}
     attr_accessor :inline
 
     # A CSS class that will be applied to all labels when layout is horizontal.
@@ -145,7 +149,7 @@ module RailsBootstrapForm
     # to a given form field. For example, we can change grid just for one field:
     #
     #   bootstrap_form_with model: @user do |f|
-    #     f.text_field :email, bootstrap_form: {label_col_wrapper_class: "col-md-6", field_col_wrapper_class: "col-md-6"}
+    #     f.text_field :email, bootstrap: {label_col_wrapper_class: "col-md-6", field_col_wrapper_class: "col-md-6"}
     #     f.password_field :password
     #   end
     #
@@ -161,11 +165,13 @@ module RailsBootstrapForm
       end
     end
 
-    %i(inline floating switch skip_label hide_label render_as_button).each do |method|
+    %i(disabled inline floating switch skip_label hide_label render_as_button).each do |method|
       define_method("#{method}?") { self.send(method) }
     end
 
     def set_defaults
+      @disabled = false
+
       @layout = "vertical"
 
       @field_class = "form-control"
@@ -190,7 +196,7 @@ module RailsBootstrapForm
 
       @switch = false
 
-      @wrapper_options = {}
+      @wrapper = {}
 
       @size = nil
 

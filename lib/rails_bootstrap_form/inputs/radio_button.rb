@@ -9,7 +9,8 @@ module RailsBootstrapForm
 
       included do
         def radio_button(attribute, value, options = {})
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap_form))
+          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          return super if bootstrap_options.disabled?
 
           options[:class] = radio_button_classes(attribute, options)
 
@@ -25,20 +26,16 @@ module RailsBootstrapForm
             concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
           end
 
-          if bootstrap_options.inline?
-            radio_button_html
-          else
-            if bootstrap_options.layout_horizontal?
-              tag.div(class: field_wrapper_classes(bootstrap_options)) do
-                tag.div(class: radio_button_container_classes(bootstrap_options)) do
-                  radio_button_html
-                end
+          if (bootstrap_options.layout_horizontal? && !bootstrap_options.inline?)
+            tag.div(class: field_wrapper_classes(bootstrap_options)) do
+              tag.div(class: radio_button_container_classes(bootstrap_options)) do
+                radio_button_html
               end
-            elsif bootstrap_options.layout_inline?
-              tag.div(class: "col-12") { radio_button_html }
-            else
-              radio_button_html
             end
+          elsif bootstrap_options.layout_inline?
+            tag.div(class: "col-12") { radio_button_html }
+          else
+            radio_button_html
           end
         end
       end

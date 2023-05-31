@@ -30,7 +30,7 @@ module RailsBootstrapForm
         def check_box_wrapper_options(bootstrap_options)
           {}.tap do |option|
             option[:class] = check_box_wrapper_class(bootstrap_options)
-          end.merge(bootstrap_options.wrapper_options)
+          end.merge(bootstrap_options.wrapper)
         end
 
         def check_box_label_text(attribute, options, bootstrap_options, &block)

@@ -29,7 +29,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {label_text: "Full name"}
+      actual = @vertical_builder.text_field :name, bootstrap: {label_text: "Full name"}
 
       expect(actual).to match_html(expected)
     end
@@ -42,7 +42,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {hide_label: true}
+      actual = @vertical_builder.text_field :name, bootstrap: {hide_label: true}
 
       expect(actual).to match_html(expected)
     end
@@ -54,7 +54,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {skip_label: true}
+      actual = @vertical_builder.text_field :name, bootstrap: {skip_label: true}
 
       expect(actual).to match_html(expected)
     end
@@ -67,7 +67,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap_form: {additional_label_class: "custom-label"}
+      actual = @vertical_builder.text_field :name, bootstrap: {additional_label_class: "custom-label"}
 
       expect(actual).to match_html(expected)
     end

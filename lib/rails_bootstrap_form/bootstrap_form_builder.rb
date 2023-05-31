@@ -15,7 +15,7 @@ module RailsBootstrapForm
     attr_accessor :bootstrap_form_options
 
     def initialize(object_name, object, template, options)
-      @bootstrap_form_options = RailsBootstrapForm::BootstrapFormOptions.new(options[:bootstrap_form])
+      @bootstrap_form_options = RailsBootstrapForm::BootstrapFormOptions.new(options[:bootstrap])
       apply_default_form_options(options)
       apply_default_form_classes(options)
       super(object_name, object, template, options)
@@ -42,7 +42,7 @@ module RailsBootstrapForm
 
     def fields_for_options(record_object, fields_options)
       fields_options = record_object if record_object.is_a?(Hash) && record_object.extractable_options?
-      bootstrap_options = {bootstrap_form: options.fetch(:bootstrap_form, {})}
+      bootstrap_options = {bootstrap: options.fetch(:bootstrap, {})}
       fields_options = bootstrap_options.deep_merge!(fields_options)
       fields_options
     end
