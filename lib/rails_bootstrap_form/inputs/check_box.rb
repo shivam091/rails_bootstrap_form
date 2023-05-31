@@ -26,20 +26,16 @@ module RailsBootstrapForm
             concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
           end
 
-          if bootstrap_options.inline?
-            check_box_html
-          else
-            if bootstrap_options.layout_horizontal?
-              tag.div(class: field_wrapper_classes(bootstrap_options)) do
-                tag.div(class: check_box_container_classes(bootstrap_options)) do
-                  check_box_html
-                end
+          if (bootstrap_options.layout_horizontal? && !bootstrap_options.inline?)
+            tag.div(class: field_wrapper_classes(bootstrap_options)) do
+              tag.div(class: check_box_container_classes(bootstrap_options)) do
+                check_box_html
               end
-            elsif bootstrap_options.layout_inline?
-              tag.div(class: "col-12") { check_box_html }
-            else
-              check_box_html
             end
+          elsif bootstrap_options.layout_inline?
+            tag.div(class: "col-12") { check_box_html }
+          else
+            check_box_html
           end
         end
       end
