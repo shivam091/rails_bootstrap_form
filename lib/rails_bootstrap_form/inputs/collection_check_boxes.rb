@@ -12,8 +12,6 @@ module RailsBootstrapForm
           bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap_options.disabled?
 
-          options[:multiple] = true
-
           inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap_options, options) do |attribute, value, options|
             check_box(attribute, options, value, nil)
           end
