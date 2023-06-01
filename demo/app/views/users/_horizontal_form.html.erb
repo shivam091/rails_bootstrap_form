@@ -12,9 +12,9 @@
       <%= form.date_field :birth_date %>
       <%= form.range_field :excellence %>
       <%= form.url_field :blog_url %>
-      <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id} %>
+      <%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id, bootstrap: {inline: true}} %>
       <%= form.color_field :favorite_color %>
-      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name %>
+      <%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, bootstrap: {inline: true} %>
       <%= form.fields_for :address, include_id: false do |address_form| %>
         <%= address_form.text_area :street %>
         <%= address_form.text_field :state %>

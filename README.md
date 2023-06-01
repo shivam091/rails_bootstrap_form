@@ -836,7 +836,6 @@ Our `fields_for` helper accepts the same arguments as the [default Rails helper]
   <%= form.check_box :terms, required: true %>
   <%= form.primary "Register" %>
 <% end %>
-
 ```
 
 This generates the following HTML:
@@ -1412,7 +1411,7 @@ an argument and takes care of rendering labels, check boxes, and wrapper for you
 ![collection_check_boxes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/c92f5921-e572-4384-812e-31308e018f66)
 
 ```erb
-<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap: {layout: :horizontal}, onchange: "this.form.submit();"}, {} %>
+<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
 ```
 
 This generates the following HTML:
@@ -1477,7 +1476,7 @@ an argument and takes care of rendering labels, radio button, and wrapper for yo
 ![collection_radio_buttons](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/798a8b0c-915a-40b1-9874-dd74f50d3695)
 
 ```erb
-<%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id, bootstrap: {layout: :horizontal}}, {} %>
+<%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id, bootstrap: {layout: :horizontal, inline: true}}, {} %>
 ```
 
 This generates the following HTML:
