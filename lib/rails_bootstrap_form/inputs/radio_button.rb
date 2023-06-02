@@ -22,7 +22,7 @@ module RailsBootstrapForm
           radio_button_html = tag.div(**radio_button_wrapper_options(bootstrap_options)) do
             concat(radio_button_field)
             concat(radio_button_label)
-            concat(radio_button_help_text) unless bootstrap_options.inline?
+            concat(radio_button_help_text)
             concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
           end
 

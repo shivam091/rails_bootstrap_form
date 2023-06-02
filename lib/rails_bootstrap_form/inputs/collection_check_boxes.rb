@@ -12,20 +12,8 @@ module RailsBootstrapForm
           bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap_options.disabled?
 
-          options[:multiple] = true
-
-          inputs = ActiveSupport::SafeBuffer.new
-
-          collection.each do |object|
-            input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
-            input_options = {
-              bootstrap: {
-                label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
-                inline: true
-              }
-            }.deep_merge!(options)
-
-            inputs << check_box(attribute, input_options, input_value, nil)
+          inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap_options, options) do |attribute, value, options|
+            check_box(attribute, options, value, nil)
           end
 
           if options.delete(:include_hidden) { true }

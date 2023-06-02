@@ -8,6 +8,16 @@ require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::Inputs::TextField do
   describe "#text_field" do
+    it "renders default Rails helper when bootstrap is disabled" do
+      expected = <<~HTML
+        <input type="text" name="user[name]" id="user_name" />
+      HTML
+
+      actual = @vertical_builder.text_field :name, bootstrap: {disabled: true}
+
+      expect(actual).to match_html(expected)
+    end
+
     it "renders text field correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
@@ -193,6 +203,19 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       HTML
 
       actual = @vertical_builder.text_field :name, bootstrap: {wrapper: {data: {controller: "hello"}}}
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "appends wrapper[:class] to existing wrapper classes" do
+      expected = <<~HTML
+        <div class="mb-3 custom-class">
+          <label class="form-label required" for="user_name">Name</label>
+          <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
+        </div>
+      HTML
+
+      actual = @vertical_builder.text_field :name, bootstrap: {wrapper: {class: "custom-class", }}
 
       expect(actual).to match_html(expected)
     end

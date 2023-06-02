@@ -12,22 +12,8 @@ module RailsBootstrapForm
           bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap_options.disabled?
 
-          inputs = ActiveSupport::SafeBuffer.new
-
-          collection.each do |object|
-            input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
-            input_options = {
-              bootstrap: {
-                label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
-                inline: true
-              }
-            }.deep_merge!(options)
-
-            if (checked = input_options[:checked])
-              input_options[:checked] = collection_input_checked?(checked, object, object.send(value_method))
-            end
-
-            inputs << radio_button(attribute, input_value, input_options)
+          inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap_options, options) do |attribute, value, options|
+            radio_button(attribute, value, options)
           end
 
           field_wrapper_builder(attribute, bootstrap_options, options, html_options) do

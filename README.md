@@ -836,7 +836,6 @@ Our `fields_for` helper accepts the same arguments as the [default Rails helper]
   <%= form.check_box :terms, required: true %>
   <%= form.primary "Register" %>
 <% end %>
-
 ```
 
 This generates the following HTML:
@@ -1412,7 +1411,7 @@ an argument and takes care of rendering labels, check boxes, and wrapper for you
 ![collection_check_boxes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/c92f5921-e572-4384-812e-31308e018f66)
 
 ```erb
-<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap: {layout: :horizontal}, onchange: "this.form.submit();"}, {} %>
+<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
 ```
 
 This generates the following HTML:
@@ -1477,7 +1476,7 @@ an argument and takes care of rendering labels, radio button, and wrapper for yo
 ![collection_radio_buttons](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/798a8b0c-915a-40b1-9874-dd74f50d3695)
 
 ```erb
-<%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id, bootstrap: {layout: :horizontal}}, {} %>
+<%= form.collection_radio_buttons :fruit_id, ::Fruit.all, :id, :name, {checked: form.object.fruit_id, bootstrap: {layout: :horizontal, inline: true}}, {} %>
 ```
 
 This generates the following HTML:
@@ -1856,6 +1855,30 @@ This generates the following HTML:
   </div>
   <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
 </form>
+```
+
+Inline errors are also supported if the field is wrapped inside of input group and has floating label:
+
+![floating_inline_errors](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/89deb618-3f06-463b-91fb-60c50794387c)
+
+```erb
+<%= form.text_field :expected_ctc, bootstrap: {floating: true, prepend: "$", append: "0.0"} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <div class="input-group has-validation">
+    <span class="input-group-text">$</span>
+    <div class="form-floating is-invalid">
+      <input class="form-control is-invalid" aria-required="true" required="required" placeholder="Expected CTC" type="text" value="" name="user[expected_ctc]" id="user_expected_ctc">
+      <label class="form-label required is-invalid" for="user_expected_ctc">Expected CTC</label>
+    </div>
+    <span class="input-group-text">0.0</span>
+    <div class="invalid-feedback">can't be blank</div>
+  </div>
+</div>
 ```
 
 ## Required Fields

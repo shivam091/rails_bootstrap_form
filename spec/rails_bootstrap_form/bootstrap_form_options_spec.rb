@@ -12,6 +12,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
     let(:options) { described_class.new }
 
     it "sets default values of bootstrap form options" do
+      expect(options.disabled).to be_falsy
       expect(options.layout).to eq("vertical")
       expect(options.field_class).to eq("form-control")
       expect(options.additional_field_class).to be_nil
@@ -41,6 +42,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
   describe "#set_bootstrap_form_options" do
     let(:options) do
       options = described_class.new(
+        disabled: true,
         layout: "horizontal",
         field_class: "form-select",
         additional_field_class: "custom-class",
@@ -68,6 +70,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
     end
 
     it "sets custom values of bootstrap form options" do
+      expect(options.disabled).to be_truthy
       expect(options.layout).to eq("horizontal")
       expect(options.field_class).to eq("form-select")
       expect(options.additional_field_class).to eq("custom-class")
@@ -101,6 +104,13 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
 
       scoped_options = options.scoped(layout: :horizontal)
       expect(scoped_options.layout_horizontal?).to be_truthy
+    end
+  end
+
+  describe "#disabled?" do
+    it "checks whether disabled option is false" do
+      options = described_class.new
+      expect(options.disabled?).to be_falsy
     end
   end
 
