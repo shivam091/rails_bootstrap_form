@@ -32,7 +32,7 @@ module RailsBootstrapForm
           wrapper_options = bootstrap_options.wrapper
 
           {}.tap do |option|
-            option[:class] = radio_button_wrapper_class(bootstrap_options)
+            option[:class] = radio_button_wrapper_classes(bootstrap_options)
             option.merge!(wrapper_options.except(:class)) if wrapper_options.is_a?(Hash)
           end
         end
@@ -58,7 +58,7 @@ module RailsBootstrapForm
           classes.flatten.compact
         end
 
-        def radio_button_wrapper_class(bootstrap_options)
+        def radio_button_wrapper_classes(bootstrap_options)
           classes = Array("form-check")
           classes << "form-check-inline" if bootstrap_options.inline?
           if (bootstrap_options.layout_vertical? && !bootstrap_options.inline?)
@@ -75,7 +75,7 @@ module RailsBootstrapForm
         end
 
         private :radio_button_label, :radio_button_classes, :radio_button_label_class,
-                :radio_button_wrapper_class, :radio_button_container_classes
+                :radio_button_wrapper_classes, :radio_button_container_classes
       end
     end
   end

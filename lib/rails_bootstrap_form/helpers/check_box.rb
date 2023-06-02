@@ -31,7 +31,7 @@ module RailsBootstrapForm
           wrapper_options = bootstrap_options.wrapper
 
           {}.tap do |option|
-            option[:class] = check_box_wrapper_class(bootstrap_options)
+            option[:class] = check_box_wrapper_classes(bootstrap_options)
             option.merge!(wrapper_options.except(:class)) if wrapper_options.is_a?(Hash)
           end
         end
@@ -61,7 +61,7 @@ module RailsBootstrapForm
           classes.flatten.compact
         end
 
-        def check_box_wrapper_class(bootstrap_options)
+        def check_box_wrapper_classes(bootstrap_options)
           classes = Array("form-check")
           classes << "form-switch" if bootstrap_options.switch?
           classes << "form-check-inline" if bootstrap_options.inline?
@@ -79,7 +79,7 @@ module RailsBootstrapForm
         end
 
         private :check_box_label, :check_box_classes, :check_box_label_class,
-                :check_box_wrapper_class, :check_box_container_classes
+                :check_box_wrapper_classes, :check_box_container_classes
       end
     end
   end
