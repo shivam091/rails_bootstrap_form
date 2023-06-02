@@ -4,6 +4,17 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.9.1](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.0...v0.9.1) - 2023-06-
+
+### What's new
+
+- Allow user to configure `options[:multiple]` for `collection_check_boxes`.
+- Added option `inline` to control inline rendering of `collection_check_boxes` and `collection_radio_buttons`.
+
+### What's changed
+
+- `wrapper[:class]` will now be appended to existing field wrapper CSS classes ([#29](https://github.com/shivam091/rails_bootstrap_form/issues/29))
+
 ## [0.9.0](https://github.com/shivam091/rails_bootstrap_form/compare/v0.8.3...v0.9.0) - 2023-05-31
 
 ### What's new

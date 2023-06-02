@@ -1857,6 +1857,30 @@ This generates the following HTML:
 </form>
 ```
 
+Inline errors are also supported if the field is wrapped inside of input group and has floating label:
+
+![floating_inline_errors](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/89deb618-3f06-463b-91fb-60c50794387c)
+
+```erb
+<%= form.text_field :expected_ctc, bootstrap: {floating: true, prepend: "$", append: "0.0"} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <div class="input-group has-validation">
+    <span class="input-group-text">$</span>
+    <div class="form-floating is-invalid">
+      <input class="form-control is-invalid" aria-required="true" required="required" placeholder="Expected CTC" type="text" value="" name="user[expected_ctc]" id="user_expected_ctc">
+      <label class="form-label required is-invalid" for="user_expected_ctc">Expected CTC</label>
+    </div>
+    <span class="input-group-text">0.0</span>
+    <div class="invalid-feedback">can't be blank</div>
+  </div>
+</div>
+```
+
 ## Required Fields
 
 A label that is associated with a mandatory field is automatically annotated with a `required` CSS class. `rails_bootstrap_form` provides styling for required fields.
