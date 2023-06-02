@@ -48,19 +48,23 @@ module RailsBootstrapForm
     end
 
     def field_wrapper_options(bootstrap_options)
+      wrapper_options = bootstrap_options.wrapper
+
       {}.tap do |option|
         option[:class] = field_wrapper_classes(bootstrap_options)
-      end.merge(bootstrap_options.wrapper)
+        option.merge!(wrapper_options.except(:class)) if wrapper_options.is_a?(Hash)
+      end
     end
 
     def field_wrapper_classes(bootstrap_options)
       classes = []
       classes << "row" if bootstrap_options.layout_horizontal?
-      classes << form_wrapper_default_class(bootstrap_options)
+      classes << field_wrapper_default_class(bootstrap_options)
+      classes << bootstrap_options.wrapper[:class]
       classes.flatten.compact
     end
 
-    def form_wrapper_default_class(bootstrap_options)
+    def field_wrapper_default_class(bootstrap_options)
       bootstrap_options.layout_inline? ? "col-12" : "mb-3"
     end
 
@@ -99,7 +103,7 @@ module RailsBootstrapForm
       (bootstrap_options.floating? && !bootstrap_options.layout_horizontal?) || bootstrap_options.layout_inline?
     end
 
-    private :field_wrapper, :field_wrapper_classes, :form_wrapper_default_class,
+    private :field_wrapper, :field_wrapper_classes, :field_wrapper_default_class,
             :field_css_options, :floating_label_classes
   end
 end

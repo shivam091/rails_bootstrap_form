@@ -28,9 +28,12 @@ module RailsBootstrapForm
         end
 
         def check_box_wrapper_options(bootstrap_options)
+          wrapper_options = bootstrap_options.wrapper
+
           {}.tap do |option|
             option[:class] = check_box_wrapper_class(bootstrap_options)
-          end.merge(bootstrap_options.wrapper)
+            option.merge!(wrapper_options.except(:class)) if wrapper_options.is_a?(Hash)
+          end
         end
 
         def check_box_label_text(attribute, options, bootstrap_options, &block)
@@ -65,6 +68,7 @@ module RailsBootstrapForm
           if (bootstrap_options.layout_vertical? && !bootstrap_options.inline?)
             classes << "mb-3"
           end
+          classes << bootstrap_options.wrapper[:class]
           classes.flatten.compact
         end
 
