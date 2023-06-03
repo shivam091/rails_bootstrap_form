@@ -18,10 +18,11 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
           <label class="form-label required" for="user_password">Password</label>
           <input class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password" />
         </div>
-        <div class="form-check mb-3">
-          <input name="user[remember_me]" type="hidden" value="0" autocomplete="off" />
-          <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
-          <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
+            <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+          </div>
         </div>
         <input type="submit" name="commit" value="Login" class="btn btn-primary" data-disable-with="Login" />
       </form>
@@ -55,7 +56,6 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
         <div class="row mb-3">
           <div class="col-sm-10 offset-sm-2">
             <div class="form-check">
-              <input name="user[remember_me]" type="hidden" value="0" autocomplete="off" />
               <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
               <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
             </div>
@@ -88,7 +88,6 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
         </div>
         <div class="col-12">
           <div class="form-check">
-            <input name="user[remember_me]" type="hidden" value="0" autocomplete="off" />
             <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" />
             <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
           </div>
