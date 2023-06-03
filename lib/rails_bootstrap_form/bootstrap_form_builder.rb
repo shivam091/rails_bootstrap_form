@@ -6,6 +6,7 @@ module RailsBootstrapForm
   class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
     alias_method :check_box_without_bootstrap, :check_box
+    alias_method :radio_button_without_bootstrap, :radio_button
 
     include RailsBootstrapForm::FieldWrapperBuilder
     include RailsBootstrapForm::Helpers
