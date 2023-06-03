@@ -18,12 +18,16 @@ module RailsBootstrapForm
             concat(generate_error(attribute)) if is_invalid?(attribute)
           end
 
-          tag.div(**field_wrapper_options(bootstrap)) do
-            if bootstrap.layout_horizontal?
-              tag.div(class: radio_button_container_classes(bootstrap)) { radio_button_html }
-            else
-              radio_button_html
+          if bootstrap.wrapper
+            tag.div(**field_wrapper_options(bootstrap)) do
+              if bootstrap.layout_horizontal?
+                tag.div(class: radio_button_container_classes(bootstrap)) { radio_button_html }
+              else
+                radio_button_html
+              end
             end
+          else
+            radio_button_html
           end
         end
       end

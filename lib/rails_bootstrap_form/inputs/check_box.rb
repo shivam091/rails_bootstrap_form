@@ -18,12 +18,16 @@ module RailsBootstrapForm
             concat(generate_error(attribute)) if is_invalid?(attribute)
           end
 
-          tag.div(**field_wrapper_options(bootstrap)) do
-            if bootstrap.layout_horizontal?
-              tag.div(class: check_box_container_classes(bootstrap)) { check_box_html }
-            else
-              check_box_html
+          if bootstrap.wrapper
+            tag.div(**field_wrapper_options(bootstrap)) do
+              if bootstrap.layout_horizontal?
+                tag.div(class: check_box_container_classes(bootstrap)) { check_box_html }
+              else
+                check_box_html
+              end
             end
+          else
+            check_box_html
           end
         end
       end

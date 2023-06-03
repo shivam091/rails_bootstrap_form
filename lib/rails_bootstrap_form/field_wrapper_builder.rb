@@ -13,37 +13,38 @@ module RailsBootstrapForm
     def field_wrapper(attribute, bootstrap, options, &block)
       label = draw_label(attribute, options, bootstrap)
       help_text = help_text(attribute, bootstrap)
+      wrapper_content = ActiveSupport::SafeBuffer.new
 
       if bootstrap.layout_horizontal?
-        tag.div(**field_wrapper_options(bootstrap)) do
-          concat(label)
-          concat(tag.div(class: bootstrap.field_col_wrapper_class) do
-            concat(input_group_wrapper(attribute, bootstrap) do
-              capture(&block)
-            end)
-            concat(help_text)
-          end)
+        wrapper_content << label
+        wrapper_content << tag.div(class: bootstrap.field_col_wrapper_class) do
+          input_group_wrapper(attribute, bootstrap) do
+            capture(&block)
+          end + help_text
         end
       else
         if bootstrap.floating?
-          tag.div(**field_wrapper_options(bootstrap)) do
-            concat(input_group_wrapper(attribute, bootstrap) do
-              tag.div(class: floating_label_classes(attribute)) do
-                concat(capture(&block))
-                concat(label)
-              end
-            end)
-            concat(help_text)
+          wrapper_content << input_group_wrapper(attribute, bootstrap) do
+            tag.div(class: floating_label_classes(attribute)) do
+              capture(&block) + label
+            end
           end
+          wrapper_content << help_text
         else
-          tag.div(**field_wrapper_options(bootstrap)) do
-            concat(label)
-            concat(input_group_wrapper(attribute, bootstrap) do
-              capture(&block)
-            end)
-            concat(help_text)
+          wrapper_content << label
+          wrapper_content << input_group_wrapper(attribute, bootstrap) do
+            capture(&block)
           end
+          wrapper_content << help_text
         end
+      end
+
+      if bootstrap.wrapper
+        tag.div(**field_wrapper_options(bootstrap)) do
+          wrapper_content
+        end
+      else
+        wrapper_content
       end
     end
 
@@ -60,7 +61,7 @@ module RailsBootstrapForm
       classes = []
       classes << "row" if bootstrap.layout_horizontal?
       classes << field_wrapper_default_class(bootstrap)
-      classes << bootstrap.wrapper[:class]
+      classes << bootstrap.wrapper[:class] if bootstrap.wrapper.is_a?(Hash)
       classes.flatten.compact
     end
 
