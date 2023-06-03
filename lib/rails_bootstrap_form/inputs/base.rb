@@ -17,7 +17,8 @@ module RailsBootstrapForm
               bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
                 inline: bootstrap.inline?
-              }
+              },
+              required: false
             }.deep_merge!(options)
 
             if (checked = input_options[:checked])
