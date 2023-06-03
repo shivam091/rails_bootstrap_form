@@ -13,7 +13,13 @@ module RailsBootstrapForm
           return super if bootstrap.disabled?
 
           inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap, options) do |attribute, value, options|
-            check_box(attribute, options, value, nil)
+            bootstrap_opts = bootstrap_form_options.scoped(options.delete(:bootstrap))
+
+            check_box_html = tag.div(class: check_box_wrapper_classes(bootstrap_opts)) do
+              bootstrap_check_box(attribute, value, options, bootstrap_opts)
+            end
+
+            check_box_html
           end
 
           if options.delete(:include_hidden) { true }

@@ -4,7 +4,21 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
-## [0.9.1](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.0...v0.9.1) - 2023-06-
+## [0.9.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.1...v0.9.2) - 2023-06-03
+
+### What's new
+
+- Added support to disable wrapper by passing option `wrapper: false`.
+
+### What's fixed
+
+- Changes to not showing required `asterisk` in `collection_check_boxes` and `collection_radio_buttons` helper ([#34](https://github.com/shivam091/rails_bootstrap_form/issues/34)).
+
+### What's changed
+
+- Wrappers of `check_box`, `collection_check_boxes`, `radio_button`, and `collection_radio_buttons` helpers.
+
+## [0.9.1](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.0...v0.9.1) - 2023-06-02
 
 ### What's new
 

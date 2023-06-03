@@ -194,6 +194,17 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
+    it "does not render the text field in wrapper" do
+      expected = <<~HTML
+        <label class="form-label required" for="user_name">Name</label>
+        <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
+      HTML
+
+      actual = @vertical_builder.text_field :name, bootstrap: {wrapper: false}
+
+      expect(actual).to match_html(expected)
+    end
+
     it "adds additional wrapper options" do
       expected = <<~HTML
         <div class="mb-3" data-controller="hello">

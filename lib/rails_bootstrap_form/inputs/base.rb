@@ -12,19 +12,20 @@ module RailsBootstrapForm
           inputs = ActiveSupport::SafeBuffer.new
 
           collection.each do |object|
+            value = object.send(value_method)
             input_options = {
               bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
-                help_text: false,
                 inline: bootstrap.inline?
-              }
+              },
+              required: false
             }.deep_merge!(options)
 
             if (checked = input_options[:checked])
-              input_options[:checked] = collection_input_checked?(checked, object, object.send(value_method))
+              input_options[:checked] = collection_input_checked?(checked, object, value)
             end
 
-            input_value = value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
+            input_value = value_method.respond_to?(:call) ? value_method.call(object) : value
 
             inputs << yield(attribute, input_value, input_options)
           end

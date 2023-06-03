@@ -27,15 +27,6 @@ module RailsBootstrapForm
           end
         end
 
-        def check_box_wrapper_options(bootstrap)
-          wrapper_options = bootstrap.wrapper
-
-          {}.tap do |option|
-            option[:class] = check_box_wrapper_classes(bootstrap)
-            option.merge!(wrapper_options.except(:class)) if wrapper_options.is_a?(Hash)
-          end
-        end
-
         def check_box_label_text(attribute, options, bootstrap, &block)
           block ? capture(&block) : label_text(attribute, bootstrap)
         end
@@ -55,7 +46,7 @@ module RailsBootstrapForm
 
         def check_box_label_class(attribute, bootstrap, options)
           classes = Array("form-check-label") << bootstrap.additional_label_class
-          classes << "required" if is_field_required?(attribute, options) && !bootstrap.inline?
+          classes << "required" if is_field_required?(attribute, options)
           classes << "is-invalid" if is_invalid?(attribute)
           classes << bootstrap.hide_class if bootstrap.hide_label?
           classes.flatten.compact
@@ -65,10 +56,6 @@ module RailsBootstrapForm
           classes = Array("form-check")
           classes << "form-switch" if bootstrap.switch?
           classes << "form-check-inline" if bootstrap.inline?
-          if (bootstrap.layout_vertical? && !bootstrap.inline?)
-            classes << "mb-3"
-          end
-          classes << bootstrap.wrapper[:class]
           classes.flatten.compact
         end
 
@@ -78,8 +65,17 @@ module RailsBootstrapForm
           classes.flatten.compact
         end
 
+        def bootstrap_check_box(attribute, value, options, bootstrap)
+          options[:class] = check_box_classes(attribute, options)
+          check_box_field = check_box_without_bootstrap(attribute, options, value, nil)
+          check_box_label = check_box_label(attribute, value, options, bootstrap)
+
+          check_box_field + check_box_label
+        end
+
         private :check_box_label, :check_box_classes, :check_box_label_class,
-                :check_box_wrapper_classes, :check_box_container_classes
+                :check_box_wrapper_classes, :check_box_container_classes,
+                :bootstrap_check_box
       end
     end
   end
