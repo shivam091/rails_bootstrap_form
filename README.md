@@ -103,10 +103,12 @@ This generates the following HTML:
     <label class="form-label required" for="user_password">Password</label>
     <input class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password">
   </div>
-  <div class="form-check mb-3">
-    <input name="user[remember_me]" type="hidden" value="0" autocomplete="off">
-    <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
-    <label class="form-check-label" for="user_remember_me">Remember me</label>
+  <div class="mb-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+      <label class="form-check-label" for="user_terms">I accept terms and conditions</label>
+      <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+    </div>
   </div>
   <input type="submit" name="commit" value="Log In" class="btn btn-primary" data-disable-with="Log In">
 </form>
@@ -139,10 +141,12 @@ This generates the following HTML:
     <label class="form-label required" for="user_password">Password</label>
     <input class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password">
   </div>
-  <div class="form-check mb-3">
-    <input name="user[remember_me]" type="hidden" value="0" autocomplete="off">
-    <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
-    <label class="form-check-label" for="user_remember_me">Remember me</label>
+  <div class="mb-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+      <label class="form-check-label" for="user_terms">I accept terms and conditions</label>
+      <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+    </div>
   </div>
   <input type="submit" name="commit" value="Log In" class="btn btn-primary" data-disable-with="Log In">
 </form>
@@ -171,7 +175,7 @@ Here's a list of all possible options you can pass via `bootstrap` option that c
 | `floating` | An option to control whether the field should have a floating label. | `false` |
 | `static_field_class` | A CSS class that will be applied to all static fields. | `form-control-plaintext` |
 | `switch` | An option to control whether the check box should look like Bootstrap switches. | `false` |
-| `wrapper` | An option to control the HTML attributes and options that will be added to a field wrapper. | `{}` |
+| `wrapper` | An option to control the HTML attributes and options that will be added to a field wrapper. You can set it false if you don't the field to be rendered in a wrapper. | `{}` |
 | `size` | An option to control the size of input groups, buttons, labels, and fields. It can be `sm` or `lg`. | `nil` |
 | `inline` | An option to group checkboxes and radio buttons on the same horizontal row. | `false` |
 | `label_col_class` | A CSS class that will be applied to all labels when layout is `horizontal`. | `col-form-label` |
@@ -189,7 +193,7 @@ Here's an example of a form where one field uses different layout:
   <%= form.text_field :name %>
   <%= form.email_field :email %>
   <%= form.password_field :password, bootstrap: {layout: :horizontal} %>
-  <%= form.check_box :terms, required: true %>
+  <%= form.check_box :terms %>
   <%= form.primary "Register" %>
 <% end %>
 ```
@@ -212,11 +216,12 @@ This generates the following HTML:
       <input class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password">
     </div>
   </div>
-  <div class="form-check mb-3">
-    <input name="user[terms]" type="hidden" value="0" autocomplete="off">
-    <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
-    <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
-    <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+  <div class="mb-3">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+      <label class="form-check-label" for="user_terms">I accept terms and conditions</label>
+      <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+    </div>
   </div>
   <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
 </form>
@@ -228,6 +233,23 @@ You can completely disable bootstrap and use default form builder by passing `di
 
 ```erb
 <%= form.text_field :username, bootstrap: {disabled: true} %>
+```
+
+### Disabling wrapper
+
+In some cases, you may need to disable the default wrapper. You can do this by passing 'wrapper: false':
+
+![wrapper_false](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/1693cf0f-7a30-494d-9fb5-394f4fb2c676)
+
+```erb
+<%= form.text_field :name, bootstrap: {wrapper: false} %>
+```
+
+This generates the following HTML:
+
+```html
+<label class="form-label required" for="user_name">Name</label>
+<input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
 ```
 
 ## Supported Form Helpers
@@ -677,10 +699,11 @@ This helper will render check box and label for you.
 This generates the following HTML:
 
 ```html
-<div class="form-check mb-3">
-  <input name="user[remember_me]" type="hidden" value="0" autocomplete="off">
-  <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
-  <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+<div class="mb-3">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+    <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+  </div>
 </div>
 ```
 
@@ -695,10 +718,11 @@ You can set `switch` option to `true` if you want check box to look like switche
 This generates the following HTML:
 
 ```html
-<div class="form-check form-switch mb-3">
-  <input name="user[remember_me]" type="hidden" value="0" autocomplete="off">
-  <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
-  <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+<div class="mb-3">
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+    <label class="form-check-label" for="user_remember_me">Keep me signed in</label>
+  </div>
 </div>
 ```
 
@@ -713,11 +737,12 @@ This helper also renders help text if `help_text` option is set or information o
 This generates the following HTML:
 
 ```html
-<div class="form-check mb-3">
-  <input name="user[terms]" type="hidden" value="0" autocomplete="off">
-  <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
-  <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
-  <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+<div class="mb-3">
+  <div class="form-check">
+    <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+    <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
+    <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+  </div>
 </div>
 ```
 
@@ -872,11 +897,12 @@ This generates the following HTML:
       </select>
     </div>
   </div>
-  <div class="form-check mb-3">
-    <input name="user[terms]" type="hidden" value="0" autocomplete="off">
-    <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
-    <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
-    <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+  <div class="mb-3">
+    <div class="form-check">
+      <input required="required" class="form-check-input" type="checkbox" value="1" name="user[terms]" id="user_terms">
+      <label class="form-check-label required" for="user_terms">I accept terms and conditions</label>
+      <div class="form-text text-muted">You must first accept terms and conditions in order to continue</div>
+    </div>
   </div>
   <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
 </form>
@@ -1065,9 +1091,11 @@ This helper will render check box and label for you.
 This generates the following HTML:
 
 ```html
-<div class="form-check mb-3">
-  <input class="form-check-input" type="radio" value="male" name="user[gender]" id="user_gender_male">
-  <label class="form-check-label" for="user_gender_male">Male</label>
+<div class="mb-3">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" value="male" name="user[gender]" id="user_gender_male">
+    <label class="form-check-label" for="user_gender_male">Male</label>
+  </div>
 </div>
 ```
 
@@ -1082,10 +1110,12 @@ This helper also renders help text if `help_text` option is set or information o
 This generates the following HTML:
 
 ```html
-<div class="form-check mb-3">
-  <input class="form-check-input" type="radio" value="male" name="user[gender]" id="user_gender_male">
-  <label class="form-check-label" for="user_gender_male">Male</label>
-  <div class="form-text text-muted">Please select your gender</div>
+<div class="mb-3">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" value="male" name="user[gender]" id="user_gender_male">
+    <label class="form-check-label" for="user_gender_male">Male</label>
+    <div class="form-text text-muted">Please select your gender</div>
+  </div>
 </div>
 ```
 
@@ -1971,7 +2001,7 @@ bootstrap: {label_text: "<span></span>".html_safe}
 
 ## Contributing
 
-I welcome contributions. If you wish to contribute in `rails_bootstrap_form`, please review the [Contributing]() document first.
+I welcome contributions. If you wish to contribute in `rails_bootstrap_form`, please review the [Contributing](/CONTRIBUTING.md) document first.
 
 ## License
 
