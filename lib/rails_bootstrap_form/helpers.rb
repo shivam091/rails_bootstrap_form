@@ -33,8 +33,8 @@ module RailsBootstrapForm
         "rails-bootstrap-forms-#{field_tag_name.to_s.tr("_", "-")}"
       end
 
-      def is_size_valid?(bootstrap_options)
-        bootstrap_options.size && %i(sm lg).include?(bootstrap_options.size)
+      def is_size_valid?(bootstrap)
+        bootstrap.size && %i(sm lg).include?(bootstrap.size)
       end
 
       def field_offset_class(label_col_wrapper_class)

@@ -11,10 +11,10 @@ module RailsBootstrapForm
         def rich_text_area(attribute, options = {})
           options[:class] = ["trix-content", options[:class]].compact.join(" ")
 
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
-          return super if bootstrap_options.disabled?
+          bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          return super if bootstrap.disabled?
 
-          field_wrapper_builder(attribute, bootstrap_options, options) do
+          field_wrapper_builder(attribute, bootstrap, options) do
             super(attribute, options)
           end
         end

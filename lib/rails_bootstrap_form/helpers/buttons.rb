@@ -10,15 +10,15 @@ module RailsBootstrapForm
       def self.included(base_class)
         def render_button(value = nil, options = {}, &block)
           value, options = nil, value if value.is_a?(Hash)
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
 
-          button_html = if (bootstrap_options.render_as_button? || block)
+          button_html = if (bootstrap.render_as_button? || block)
             button(value, options, &block)
           else
             submit(value, options)
           end
 
-          if bootstrap_options.layout_inline?
+          if bootstrap.layout_inline?
             tag.div(class: "col-12") { button_html }
           else
             button_html

@@ -8,7 +8,7 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       included do
-        def inputs_collection(attribute, collection, value_method, text_method, bootstrap_options, options = {})
+        def inputs_collection(attribute, collection, value_method, text_method, bootstrap, options = {})
           inputs = ActiveSupport::SafeBuffer.new
 
           collection.each do |object|
@@ -16,7 +16,7 @@ module RailsBootstrapForm
               bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
                 help_text: false,
-                inline: bootstrap_options.inline?
+                inline: bootstrap.inline?
               }
             }.deep_merge!(options)
 
@@ -36,10 +36,10 @@ module RailsBootstrapForm
       class_methods do
         def bootstrap_field(field_name)
           define_method(field_name) do |attribute, options = {}|
-            bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
-            return super(attribute, options) if bootstrap_options.disabled?
+            bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
+            return super(attribute, options) if bootstrap.disabled?
 
-            field_wrapper_builder(attribute, bootstrap_options, options) do
+            field_wrapper_builder(attribute, bootstrap, options) do
               super(attribute, options)
             end
           end
@@ -49,10 +49,10 @@ module RailsBootstrapForm
           define_method(field_name) do |attribute, options = {}, html_options = {}|
             options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
 
-            bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
-            return super(attribute, options, html_options) if bootstrap_options.disabled?
+            bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
+            return super(attribute, options, html_options) if bootstrap.disabled?
 
-            field_wrapper_builder(attribute, bootstrap_options, options, html_options) do
+            field_wrapper_builder(attribute, bootstrap, options, html_options) do
               tag.fieldset(class: control_specific_class(field_name)) do
                 super(attribute, options, html_options)
               end

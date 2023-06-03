@@ -9,30 +9,30 @@ module RailsBootstrapForm
 
       included do
         def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
-          return super if bootstrap_options.disabled?
+          bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          return super if bootstrap.disabled?
 
           options[:class] = check_box_classes(attribute, options)
 
           check_box_field = super(attribute, options, checked_value, unchecked_value)
-          check_box_help_text = help_text(attribute, bootstrap_options)
+          check_box_help_text = help_text(attribute, bootstrap)
 
-          check_box_label = check_box_label(attribute, checked_value, options, bootstrap_options, &block)
+          check_box_label = check_box_label(attribute, checked_value, options, bootstrap, &block)
 
-          check_box_html = tag.div(**check_box_wrapper_options(bootstrap_options)) do
+          check_box_html = tag.div(**check_box_wrapper_options(bootstrap)) do
             concat(check_box_field)
             concat(check_box_label)
             concat(check_box_help_text)
-            concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap_options.inline?)
+            concat(generate_error(attribute)) if (is_invalid?(attribute) && !bootstrap.inline?)
           end
 
-          if (bootstrap_options.layout_horizontal? && !bootstrap_options.inline?)
-            tag.div(class: field_wrapper_classes(bootstrap_options)) do
-              tag.div(class: check_box_container_classes(bootstrap_options)) do
+          if (bootstrap.layout_horizontal? && !bootstrap.inline?)
+            tag.div(class: field_wrapper_classes(bootstrap)) do
+              tag.div(class: check_box_container_classes(bootstrap)) do
                 check_box_html
               end
             end
-          elsif bootstrap_options.layout_inline?
+          elsif bootstrap.layout_inline?
             tag.div(class: "col-12") { check_box_html }
           else
             check_box_html

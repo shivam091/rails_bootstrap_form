@@ -8,10 +8,10 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       def self.included(base_class)
-        def help_text(attribute, bootstrap_options)
-          return if bootstrap_options.help_text == false
+        def help_text(attribute, bootstrap)
+          return if bootstrap.help_text == false
 
-          help_text = (bootstrap_options.help_text || scoped_help_text(attribute))
+          help_text = (bootstrap.help_text || scoped_help_text(attribute))
 
           tag.div(help_text, class: "form-text text-muted") if help_text.present?
         end

@@ -8,42 +8,42 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       def self.included(base_class)
-        def draw_label(attribute, options, bootstrap_options)
-          unless bootstrap_options.skip_label? && !bootstrap_options.floating?
+        def draw_label(attribute, options, bootstrap)
+          unless bootstrap.skip_label? && !bootstrap.floating?
             label_options = {
-              class: label_classes(attribute, options, bootstrap_options)
+              class: label_classes(attribute, options, bootstrap)
             }
             label_options[:for] = options[:id] if options[:id].present?
-            label_text = label_text(attribute, bootstrap_options)
+            label_text = label_text(attribute, bootstrap)
 
             label(attribute, label_text, label_options)
           end
         end
 
-        def label_classes(attribute, options, bootstrap_options)
+        def label_classes(attribute, options, bootstrap)
           classes = []
-          classes << label_layout_classes(bootstrap_options)
-          classes << bootstrap_options.additional_label_class
-          classes << bootstrap_options.hide_class if hide_class_required?(bootstrap_options)
+          classes << label_layout_classes(bootstrap)
+          classes << bootstrap.additional_label_class
+          classes << bootstrap.hide_class if hide_class_required?(bootstrap)
           classes << "required" if is_field_required?(attribute, options)
           classes << "is-invalid" if is_invalid?(attribute)
           classes.flatten.compact
         end
 
-        def label_layout_classes(bootstrap_options)
-          if bootstrap_options.layout_horizontal?
-            [bootstrap_options.label_col_class, bootstrap_options.label_col_wrapper_class]
+        def label_layout_classes(bootstrap)
+          if bootstrap.layout_horizontal?
+            [bootstrap.label_col_class, bootstrap.label_col_wrapper_class]
           else
-            bootstrap_options.label_class
+            bootstrap.label_class
           end
         end
 
-        def label_text(attribute, bootstrap_options)
-          bootstrap_options.label_text || object&.class.try(:human_attribute_name, attribute)
+        def label_text(attribute, bootstrap)
+          bootstrap.label_text || object&.class.try(:human_attribute_name, attribute)
         end
 
-        def hide_class_required?(bootstrap_options)
-          bootstrap_options.hide_label? || (bootstrap_options.layout_inline? && !bootstrap_options.floating?)
+        def hide_class_required?(bootstrap)
+          bootstrap.hide_label? || (bootstrap.layout_inline? && !bootstrap.floating?)
         end
 
         private :draw_label, :label_classes, :label_text, :label_layout_classes,

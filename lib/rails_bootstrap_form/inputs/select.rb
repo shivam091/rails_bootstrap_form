@@ -11,10 +11,10 @@ module RailsBootstrapForm
         def select(attribute, choices = nil, options = {}, html_options = {}, &block)
           options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
 
-          bootstrap_options = bootstrap_form_options.scoped(options.delete(:bootstrap))
-          return super if bootstrap_options.disabled?
+          bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          return super if bootstrap.disabled?
 
-          field_wrapper_builder(attribute, bootstrap_options, options, html_options) do
+          field_wrapper_builder(attribute, bootstrap, options, html_options) do
             super(attribute, choices, options, html_options, &block)
           end
         end
