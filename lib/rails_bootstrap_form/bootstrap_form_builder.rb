@@ -5,6 +5,8 @@
 module RailsBootstrapForm
   class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
+    alias_method :check_box_without_bootstrap, :check_box
+
     include RailsBootstrapForm::FieldWrapperBuilder
     include RailsBootstrapForm::Helpers
     include RailsBootstrapForm::InputGroupBuilder
