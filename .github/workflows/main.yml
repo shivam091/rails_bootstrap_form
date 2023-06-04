@@ -44,3 +44,5 @@ jobs:
         bundle exec rake db:migrate
     - name: Run test cases
       run: bundle exec rake
+    - name: Rubocop
+      run: bundle exec rubocop --autocorrect

@@ -8,7 +8,7 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       included do
-        def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0", &block)
+        def check_box(attribute, options = {}, checked_value = "1", unchecked_value = "0")
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?
 
