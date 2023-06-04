@@ -50,7 +50,7 @@ module RailsBootstrapForm
 
         def bootstrap_select_group(tag_name)
           define_method(tag_name) do |attribute, options = {}, html_options = {}|
-            options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
+            options = {bootstrap: {field_class: "form-select", floating: false}}.deep_merge!(options)
 
             bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
             return super(attribute, options, html_options) if bootstrap.disabled?

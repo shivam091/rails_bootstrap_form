@@ -10,6 +10,7 @@ module RailsBootstrapForm
       included do
         def collection_check_boxes(attribute, collection, value_method, text_method, options = {}, html_options = {})
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
+          bootstrap.floating = false
           return super if bootstrap.disabled?
 
           inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap, options) do |attribute, value, options|

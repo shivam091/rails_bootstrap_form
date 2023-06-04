@@ -1850,6 +1850,8 @@ This generates the following HTML:
 </form>
 ```
 
+***Floating labels gets disabled by `rails_bootstrap_form` automatically for unsupported helpers.***
+
 ## Validation and Errors
 
 By default, `rails_bootstrap_form` generations in-line errors which appear below the field.
