@@ -15,7 +15,7 @@ module RailsBootstrapForm
           inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap, options) do |attribute, value, options|
             bootstrap_opts = bootstrap_form_options.scoped(options.delete(:bootstrap))
 
-            tag.div(class: check_box_wrapper_classes(bootstrap_opts)) do
+            tag.div(class: choice_wrapper_classes(bootstrap_opts)) do
               bootstrap_check_box(attribute, value, options, bootstrap_opts)
             end
           end
