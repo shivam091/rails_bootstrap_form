@@ -4,6 +4,16 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.9.3](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.2...v0.9.3) - 2023-06-04
+
+### What's changed
+
+- Disabled floating labels for unsupported helpers
+
+### What's fixed
+
+- `id` of check box field when used in collection and don't has multiple select. (`collection_check_boxes` with `multiple: false`)
+
 ## [0.9.2](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.1...v0.9.2) - 2023-06-03
 
 ### What's new
