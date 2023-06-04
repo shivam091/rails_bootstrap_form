@@ -37,8 +37,8 @@ module RailsBootstrapForm
       end
 
       class_methods do
-        def bootstrap_field(field_name)
-          define_method(field_name) do |attribute, options = {}|
+        def bootstrap_field(tag_name)
+          define_method(tag_name) do |attribute, options = {}|
             bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
             return super(attribute, options) if bootstrap.disabled?
 
@@ -48,15 +48,15 @@ module RailsBootstrapForm
           end
         end
 
-        def bootstrap_select_group(field_name)
-          define_method(field_name) do |attribute, options = {}, html_options = {}|
+        def bootstrap_select_group(tag_name)
+          define_method(tag_name) do |attribute, options = {}, html_options = {}|
             options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
 
             bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
             return super(attribute, options, html_options) if bootstrap.disabled?
 
             field_wrapper_builder(attribute, bootstrap, options, html_options) do
-              tag.fieldset(class: control_specific_class(field_name)) do
+              tag.fieldset(class: control_specific_class(tag_name)) do
                 super(attribute, options, html_options)
               end
             end
