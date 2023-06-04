@@ -11,22 +11,21 @@ module RailsBootstrapForm
     autoload :Labels
     autoload :RequiredField
     autoload :Errors
-    autoload :CheckBox
-    autoload :RadioButton
     autoload :Buttons
+    autoload :Choice
 
     include HelpText
     include Labels
     include RequiredField
     include Errors
-    include CheckBox
-    include RadioButton
     include Buttons
+    include Choice
 
     def self.included(base_class)
-      def collection_input_checked?(checked, obj, input_value)
-        checked == input_value || Array(checked).try(:include?, input_value) ||
-          checked == obj || Array(checked).try(:include?, obj)
+      def sanitized_tag_name(attribute, value)
+        # label's `for` attribute needs to match checkbox/radio button tag's id, IE sanitized value, IE
+        # https://github.com/rails/rails/blob/5-0-stable/actionview/lib/action_view/helpers/tags/base.rb#L123-L125
+        "#{@object_name}_#{attribute}_#{value.to_s.gsub(/\s/, "_").gsub(/[^-[[:word:]]]/, "").mb_chars.downcase}"
       end
 
       def control_specific_class(field_tag_name)
@@ -52,8 +51,8 @@ module RailsBootstrapForm
         options.delete(:class) if options[:class].blank?
       end
 
-      private :collection_input_checked?, :control_specific_class, :is_size_valid?,
-              :add_css_class!, :remove_css_class!
+      private :control_specific_class, :is_size_valid?, :add_css_class!,
+              :remove_css_class!
     end
   end
 end

@@ -12,7 +12,7 @@ module RailsBootstrapForm
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?
 
-          radio_button_html = tag.div(class: radio_button_wrapper_classes(bootstrap)) do
+          radio_button_html = tag.div(class: choice_wrapper_classes(bootstrap)) do
             concat(bootstrap_radio_button(attribute, value, options, bootstrap))
             concat(help_text(attribute, bootstrap))
             concat(generate_error(attribute)) if is_invalid?(attribute)
@@ -21,7 +21,7 @@ module RailsBootstrapForm
           if bootstrap.wrapper
             tag.div(**field_wrapper_options(bootstrap)) do
               if bootstrap.layout_horizontal?
-                tag.div(class: radio_button_container_classes(bootstrap)) { radio_button_html }
+                tag.div(class: choice_container_classes(bootstrap)) { radio_button_html }
               else
                 radio_button_html
               end

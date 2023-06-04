@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       included do
         def range_field(attribute, options = {})
-          options = {bootstrap: {field_class: "form-range"}}.deep_merge!(options)
+          options = {bootstrap: {field_class: "form-range", floating: false}}.deep_merge!(options)
 
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?

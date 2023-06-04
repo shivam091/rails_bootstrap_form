@@ -688,7 +688,7 @@ Here's an example of how you pass the arguments for each form helper:
 ### check_box
 
 Our `check_box` helper accepts the same arguments as the [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-check_box).
-This helper will render check box and label for you.
+except it don't accept a `block` as an argument and renders check box and label for you.
 
 ![check_box](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/5836650c-d536-4f4e-b768-75bca9dd7901)
 
@@ -1435,7 +1435,7 @@ This generates the following HTML:
 
 ### collection_check_boxes
 
-This helper provides a way to create collection of check boxes. This helper accepts same arguments as [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_check_boxes) except it don't accept a block as
+This helper provides a way to create collection of check boxes. This helper accepts same arguments as [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_check_boxes) except it don't accept a `block` as
 an argument and takes care of rendering labels, check boxes, and wrapper for you.
 
 ![collection_check_boxes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/c92f5921-e572-4384-812e-31308e018f66)
@@ -1500,7 +1500,7 @@ This generates the following HTML:
 
 ### collection_radio_buttons
 
-This helper provides a way to create collection of radio buttons. This helper accepts same arguments as [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_radio_buttons) except it don't accept a block as
+This helper provides a way to create collection of radio buttons. This helper accepts same arguments as [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_radio_buttons) except it don't accept a `block` as
 an argument and takes care of rendering labels, radio button, and wrapper for you.
 
 ![collection_radio_buttons](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/798a8b0c-915a-40b1-9874-dd74f50d3695)
@@ -1849,6 +1849,8 @@ This generates the following HTML:
   <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
 </form>
 ```
+
+_Floating labels gets disabled by `rails_bootstrap_form` automatically for unsupported helpers._
 
 ## Validation and Errors
 
