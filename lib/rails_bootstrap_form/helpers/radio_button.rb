@@ -16,23 +16,10 @@ module RailsBootstrapForm
             }
             label_options[:for] = options[:id] if options[:id].present?
 
-            label_name = if options[:multiple]
-              radio_button_value(attribute, checked_value)
-            else
-              attribute
-            end
-
             label_text = label_text(attribute, bootstrap)
 
-            label(label_name, label_text, label_options)
+            label(attribute, label_text, label_options)
           end
-        end
-
-        def radio_button_value(attribute, value)
-          # label's `for` attribute needs to match checkbox tag's id,
-          # IE sanitized value, IE
-          # https://github.com/rails/rails/blob/5-0-stable/actionview/lib/action_view/helpers/tags/base.rb#L123-L125
-          "#{attribute}_#{value.to_s.gsub(/\s/, "_").gsub(/[^-[[:word:]]]/, "").mb_chars.downcase}"
         end
 
         def radio_button_classes(attribute, options)

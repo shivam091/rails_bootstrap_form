@@ -13,12 +13,14 @@ module RailsBootstrapForm
 
           collection.each do |object|
             value = object.send(value_method)
+
             input_options = {
               bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
                 inline: bootstrap.inline?
               },
-              required: false
+              required: false,
+              id: sanitized_tag_name(attribute, value)
             }.deep_merge!(options)
 
             if (checked = input_options[:checked])
