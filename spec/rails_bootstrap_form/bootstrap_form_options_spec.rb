@@ -15,7 +15,6 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.disabled).to be_falsy
       expect(options.layout).to eq("vertical")
       expect(options.field_class).to eq("form-control")
-      expect(options.additional_field_class).to be_nil
       expect(options.help_text).to be_nil
       expect(options.label_text).to be_nil
       expect(options.skip_label).to be_falsy
@@ -45,7 +44,6 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
         disabled: true,
         layout: "horizontal",
         field_class: "form-select",
-        additional_field_class: "custom-class",
         help_text: "This is help text",
         label_text: "Test label",
         skip_label: false,
@@ -73,7 +71,6 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
       expect(options.disabled).to be_truthy
       expect(options.layout).to eq("horizontal")
       expect(options.field_class).to eq("form-select")
-      expect(options.additional_field_class).to eq("custom-class")
       expect(options.help_text).to eq("This is help text")
       expect(options.label_text).to eq("Test label")
       expect(options.skip_label).to be_falsy
