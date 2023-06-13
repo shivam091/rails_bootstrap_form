@@ -27,7 +27,7 @@ RSpec.describe RailsBootstrapForm::Generators::InstallGenerator, type: :generato
         <<~STRING
           RailsBootstrapForm.configure do |config|
             # to make forms non-compliant with W3C.
-            config.default_form_attributes = {role: "form", novalidate: true}
+            config.default_form_attributes = {novalidate: true}
           end
         STRING
       )

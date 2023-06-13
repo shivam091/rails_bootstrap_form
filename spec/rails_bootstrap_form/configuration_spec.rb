@@ -14,9 +14,9 @@ RSpec.describe RailsBootstrapForm::Configuration do
   end
 
   it "allows to set default_form_attributes with custom value" do
-    config.default_form_attributes = {role: "form"}
+    config.default_form_attributes = {novalidate: true}
 
-    expect(config.default_form_attributes).to eq({role: "form"})
+    expect(config.default_form_attributes).to eq({novalidate: true})
   end
 
   it "allows to set default_form_attributes with nil" do
