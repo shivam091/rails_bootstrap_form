@@ -10,15 +10,17 @@ module RailsBootstrapForm
       def self.included(base_class)
         [:check_box, :radio_button].each do |tag_name|
           define_method("#{tag_name}_label") do |attribute, value, options, bootstrap|
-            label_options = {
-              class: choice_label_classes(attribute, bootstrap, options)
-            }
-            label_options[:value] = value if tag_name.eql?(:radio_button)
-            label_options[:for] = options[:id] if options[:id].present?
+            unless bootstrap.skip_label?
+              label_options = {
+                class: choice_label_classes(attribute, bootstrap, options)
+              }
+              label_options[:value] = value if tag_name.eql?(:radio_button)
+              label_options[:for] = options[:id] if options[:id].present?
 
-            label_text = label_text(attribute, bootstrap)
+              label_text = label_text(attribute, bootstrap)
 
-            label(attribute, label_text, label_options)
+              label(attribute, label_text, label_options)
+            end
           end
         end
 
