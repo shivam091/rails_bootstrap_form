@@ -18,7 +18,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders text field correctly in vertical layout" do
+    it "wraps text field correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -31,7 +31,20 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders text field correctly in horizontal layout" do
+    it "wraps text field correctly in inline layout" do
+      expected = <<~HTML
+        <div class="col-12">
+          <label class="form-label visually-hidden required" for="user_name">Name</label>
+          <input class="form-control" aria-required="true" required="required" placeholder="Name" type="text" name="user[name]" id="user_name" />
+        </div>
+      HTML
+
+      actual = @vertical_builder.text_field :name, bootstrap: {layout: :inline}
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "wraps text field correctly in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
@@ -109,7 +122,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {additional_field_class: "custom-class"}
+      actual = @vertical_builder.text_field :name, class: "custom-class"
 
       expect(actual).to match_html(expected)
     end
@@ -153,7 +166,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "adds help text to the field" do
+    it "sets user specified help text to the field" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -167,7 +180,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "displays help text from locale file" do
+    it "sets help text from locale file" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_email">Email address</label>
@@ -181,7 +194,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "sets customize label text" do
+    it "customizes label text" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Full name</label>
@@ -194,7 +207,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "does not render the text field in wrapper" do
+    it "does not render the text field in a wrapper" do
       expected = <<~HTML
         <label class="form-label required" for="user_name">Name</label>
         <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
