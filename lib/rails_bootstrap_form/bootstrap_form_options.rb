@@ -28,6 +28,10 @@ module RailsBootstrapForm
     # The default value is `form-control`.
     attr_accessor :field_class
 
+    # An additional CSS class that will be added along with the existing
+    # css classes of field helpers. The default value is nil.
+    attr_accessor :additional_field_class
+
     # Describes help text for the HTML field. Help text is automatically read
     # from translation file. If you want to customize it, you can pass string.
     # You can also set it false if you do not want help text displayed.
@@ -171,6 +175,7 @@ module RailsBootstrapForm
       @layout = "vertical"
 
       @field_class = "form-control"
+      @additional_field_class = nil
 
       @help_text = nil
 
