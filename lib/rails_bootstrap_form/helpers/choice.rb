@@ -26,7 +26,7 @@ module RailsBootstrapForm
 
         [:check_box, :radio_button].each do |tag_name|
           define_method("bootstrap_#{tag_name}") do |attribute, value, options, bootstrap|
-            options[:class] = choice_classes(attribute, options)
+            options[:class] = choice_classes(attribute, bootstrap, options)
 
             if tag_name.eql?(:check_box)
               choice_field = check_box_without_bootstrap(attribute, options, value, nil)
@@ -40,8 +40,9 @@ module RailsBootstrapForm
           end
         end
 
-        def choice_classes(attribute, options)
+        def choice_classes(attribute, bootstrap, options)
           classes = Array("form-check-input") << options[:class]
+          classes << bootstrap.additional_field_class
           classes << "is-invalid" if is_invalid?(attribute)
           classes.flatten.compact
         end
