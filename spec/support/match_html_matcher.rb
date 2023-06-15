@@ -12,7 +12,7 @@ RSpec::Matchers.define :match_html do |expected_html, **options|
     actual_doc = Nokogiri::HTML5.fragment(actual_html)
 
     expected_doc = sort_attributes(expected_doc)
-    expected_doc = sort_attributes(actual_doc)
+    actual_doc = sort_attributes(actual_doc)
 
     # Options are documented here: https://github.com/vkononov/compare-xml
     default_options = {
