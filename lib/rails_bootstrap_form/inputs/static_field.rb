@@ -17,7 +17,7 @@ module RailsBootstrapForm
             disabled: true,
             bootstrap: {
               field_class: bootstrap_form_options.static_field_class
-            }
+            }.reverse_merge!(options.delete(:bootstrap))
           )
 
           static_options[:value] = object.send(attribute) unless options.key?(:value)
