@@ -55,6 +55,7 @@ RSpec.configure do |config|
   config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
   config.include Rails.application.routes.url_helpers
   config.include ActionDispatch::Routing::PolymorphicRoutes
+  config.include TestHelpers
 
   config.before(:each) do
     @user = ::User.new
