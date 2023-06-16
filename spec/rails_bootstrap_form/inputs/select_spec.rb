@@ -25,7 +25,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "renders select field correctly in vertical layout" do
+    it "renders correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="address_country_id">Country</label>
@@ -41,7 +41,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "renders select field correctly in inline layout" do
+    it "renders correctly in inline layout" do
       expected = <<~HTML
         <div class="col-12">
           <label class="form-label visually-hidden required" for="address_country_id">Country</label>
@@ -57,7 +57,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "renders select field correctly in horizontal layout" do
+    it "renders correctly in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="address_country_id">Country</label>
@@ -74,7 +74,6 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
 
       expect(actual).to match_html(expected)
     end
-
 
     it "can have a floating label" do
       expected = <<~HTML
@@ -94,7 +93,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "sets selected option of select field" do
+    it "sets selected option" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-floating">
@@ -130,7 +129,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "skips label of the select field" do
+    it "skips label" do
       expected = <<~HTML
         <div class="mb-3">
           <select class="form-select" aria-required="true" required="required" name="address[country_id]" id="address_country_id">
@@ -145,7 +144,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "hides label of the select field" do
+    it "hides label" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label visually-hidden required" for="address_country_id">Country</label>
@@ -161,7 +160,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional css class to the select field" do
+    it "adds additional css class" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="address_country_id">Country</label>
@@ -193,7 +192,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "sets user specified help text to the select field" do
+    it "sets user specified help text" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="address_country_id">Country</label>
@@ -226,7 +225,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "does not render the select field in a wrapper" do
+    it "does not render in a wrapper" do
       expected = <<~HTML
         <label class="form-label required" for="address_country_id">Country</label>
         <select class="form-select" aria-required="true" required="required" name="address[country_id]" id="address_country_id">

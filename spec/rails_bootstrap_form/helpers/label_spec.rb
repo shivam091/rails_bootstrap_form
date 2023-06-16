@@ -62,7 +62,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional CSS class to a label" do
+    it "adds additional CSS class" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label custom-label required" for="user_name">Name</label>

@@ -21,7 +21,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders text field correctly in vertical layout" do
+    it "renders correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -34,7 +34,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders text field correctly in inline layout" do
+    it "renders correctly in inline layout" do
       expected = <<~HTML
         <div class="col-12">
           <label class="form-label visually-hidden required" for="user_name">Name</label>
@@ -47,7 +47,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders text field correctly in horizontal layout" do
+    it "renders correctly in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
@@ -92,7 +92,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "skips label of the text field" do
+    it "skips label" do
       expected = <<~HTML
         <div class="mb-3">
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -104,7 +104,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "hides label of the text field" do
+    it "hides label" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label visually-hidden required" for="user_name">Name</label>
@@ -117,7 +117,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional css class to the text field" do
+    it "adds additional css class" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -143,7 +143,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional css class to a label of the text field" do
+    it "adds additional css class to a label" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label custom-class required" for="user_name">Name</label>
@@ -156,7 +156,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "changes css class of the text field" do
+    it "changes css class" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -182,7 +182,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "sets user specified help text to the text field" do
+    it "sets user specified help text" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -223,7 +223,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "does not render the text field in a wrapper" do
+    it "does not render in a wrapper" do
       expected = <<~HTML
         <label class="form-label required" for="user_name">Name</label>
         <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
@@ -330,7 +330,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "changes size of the text field" do
+    it "changes size" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>

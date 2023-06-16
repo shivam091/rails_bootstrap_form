@@ -21,7 +21,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "renders radio button correctly in vertical layout" do
+    it "renders correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-check">
@@ -36,7 +36,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "renders radio button correctly in inline layout" do
+    it "renders correctly in inline layout" do
       expected = <<~HTML
         <div class="col-12">
           <div class="form-check">
@@ -51,7 +51,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "renders radio button correctly in horizontal layout" do
+    it "renders correctly in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <div class="col-sm-10 offset-sm-2">
@@ -68,7 +68,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "does not render the radio button in a wrapper" do
+    it "does not render in a wrapper" do
       expected = <<~HTML
         <div class="form-check">
           <input class="form-check-input" type="radio" value="male" name="user[gender]" id="user_gender_male" />
@@ -81,7 +81,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "skips label of the radio button" do
+    it "skips label" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-check">
@@ -95,7 +95,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "hides label of the radio button" do
+    it "hides label" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-check">
@@ -125,7 +125,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "sets user specified help text to the field" do
+    it "sets user specified help text" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-check">
@@ -157,7 +157,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional css class to the field using HTML class attribute" do
+    it "adds additional css class using HTML class attribute" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-check">
@@ -172,7 +172,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional css class to the field using additional_field_class option" do
+    it "adds additional css class using additional_field_class option" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-check">
@@ -247,7 +247,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       expect(actual).to match_html(expected)
     end
 
-    it "renders radio buttons as Bootstrap switches" do
+    it "renders as Bootstrap switches" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-check form-switch">

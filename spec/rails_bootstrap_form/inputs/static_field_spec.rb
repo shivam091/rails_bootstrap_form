@@ -11,7 +11,7 @@ RSpec.describe RailsBootstrapForm::Inputs::StaticField do
   let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, {}) }
 
   describe "#static_field" do
-    it "renders static field correctly in vertical layout" do
+    it "renders correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_email">Email address</label>
@@ -24,7 +24,7 @@ RSpec.describe RailsBootstrapForm::Inputs::StaticField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders static field correctly in inline layout" do
+    it "renders correctly in inline layout" do
       expected = <<~HTML
         <div class="col-12">
           <label class="form-label visually-hidden required" for="user_email">Email address</label>
@@ -37,7 +37,7 @@ RSpec.describe RailsBootstrapForm::Inputs::StaticField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders static field correctly in horizontal layout" do
+    it "renders correctly in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_email">Email address</label>
