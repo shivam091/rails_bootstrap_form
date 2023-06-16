@@ -4,7 +4,7 @@
 [![Gem Version](https://badge.fury.io/rb/rails_bootstrap_form.svg)](https://badge.fury.io/rb/rails_bootstrap_form)
 
 **rails_bootstrap_form** is a Rails form builder that makes it super easy to integrate [Bootstrap 5](https://getbootstrap.com/) forms into your Rails application.
-`rails_bootstrap_forms`'s form helpers generate the form field and its label along with all the Bootstrap mark-up required for proper Bootstrap display.
+`rails_bootstrap_form`'s form helpers generate the form field and its label along with all the Bootstrap mark-up required for proper Bootstrap display.
 
 ## Minimum Requirements
 
@@ -28,7 +28,7 @@ for setting up `application.scss` and `application.js`.
 Add the `rails_bootstrap_form` gem to your `Gemfile`:
 
 ```ruby
-gem "rails_bootstrap_form", "~> 0.8.2"
+gem "rails_bootstrap_form", "~> 0.9.4"
 ```
 
 Then:
@@ -64,7 +64,7 @@ Example:
 # config/initializers/rails_bootstrap_form.rb
 RailsBootstrapForm.configure do |config|
   # to make forms non-compliant with W3C.
-  config.default_form_attributes = {role: "form", novalidate: true}
+  config.default_form_attributes = {novalidate: true}
 end
 ```
 
@@ -72,7 +72,7 @@ The current configuration options are:
 
 | Option | Default value | Description |
 |---------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `default_form_attributes` | | Set this option to `{role: "form"}` to make forms non-compliant with W3C, but generate the `role="form"` attribute. |
+| `default_form_attributes` | | Set this option to `{novalidate: true}` to instruct `rails_bootstrap_form` to skip all HTML 5 validation. |
 
 ## Usage
 
@@ -161,7 +161,6 @@ Here's a list of all possible options you can pass via `bootstrap` option that c
 | `disabled` | An option to disable **rails_bootstrap_form** helpers. Default rails form builder element is rendered when set to `true` | `false` |
 | `layout` | Controls layout of form and field helpers. It can be `vertical` `horizontal`, or `inline`. | `vertical` |
 | `field_class` | A CSS class that will be applied to all form fields. | `form-control` |
-| `additional_field_class` | An additional CSS class that will be added along with the existing css classes of field helpers. | `nil` |
 | `help_text` | Describes help text for the HTML field. Help text is automatically read from translation file. If you want to customize it, you can pass a string. You can also set it `false` if you do not want help text displayed. | `nil` |
 | `label_text` | An option to customize automatically generated label text. | `nil` |
 | `skip_label` | An option to control whether the label is to be displayed or not. | `false` |
@@ -183,7 +182,7 @@ Here's a list of all possible options you can pass via `bootstrap` option that c
 | `field_col_wrapper_class` | A CSS class for field column when layout is `horizontal`. | `col-sm-10` |
 | `render_as_button` | An option to render submit button using `<button type="submit">` instead of `<input type="submit">`. | `false` |
 
-Options applied on the form level will apply to all field helpers. Options applied on field helpers will override form-level options.
+Options defined on the form level will apply to all field helpers. Options defined on field helpers takes precedence over form-level options.
 Here's an example of a form where one field uses different layout:
 
 ![bootstrap_option_override](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/9d312870-033f-4bc4-922b-1b65df202352)
@@ -237,7 +236,7 @@ You can completely disable bootstrap and use default form builder by passing `di
 
 ### Disabling wrapper
 
-In some cases, you may need to disable the default wrapper. You can do this by passing 'wrapper: false':
+In some cases, you may need to disable the default wrapper. You can do this by passing `wrapper: false` option:
 
 ![wrapper_false](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/1693cf0f-7a30-494d-9fb5-394f4fb2c676)
 
@@ -250,6 +249,53 @@ This generates the following HTML:
 ```html
 <label class="form-label required" for="user_name">Name</label>
 <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
+```
+
+### Add additional CSS class
+
+You can use `additional_field_class` option at form or field level to add extra CSS classes to the fields.
+
+```erb
+<%= form.text_field :name, autocomplete: "new-name", bootstrap: {additional_field_class: "custom-class"} %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_name">Name</label>
+  <input autocomplete="new-name" class="form-control custom-class" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
+</div>
+```
+
+You can also use HTML `class` attribute to add additional CSS class to the single field:
+
+```erb
+<%= form.text_field :name, autocomplete: "new-name", class: "custom-class" %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_name">Name</label>
+  <input autocomplete="new-name" class="form-control custom-class" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
+</div>
+```
+
+Here `additional_field_class` option takes precedance over HTML `class` attribute:
+
+```erb
+<%= form.text_field :name, autocomplete: "new-name", bootstrap: {additional_field_class: "custom-class"}, class: "html-class" %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label required" for="user_name">Name</label>
+  <input autocomplete="new-name" class="form-control custom-class" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
+</div>
 ```
 
 ## Supported Form Helpers
@@ -274,7 +320,7 @@ url_field                    week_field                   weekday_select
 
 ### Vertical Layout
 
-This layout is default layout for the form in which labels are above the fields and labels and fields take 100% of the width.
+This layout is default layout for the form in which labels are above the fields. In this layout, labels and fields take 100% of the width.
 
 Here's an example of how it looks like:
 
@@ -308,7 +354,7 @@ This generates the following HTML:
 
 If you want to align label and field side by side, you can use horizontal layout for the form.
 You can optionally override `label_col_wrapper_class` and `field_col_wrapper_class` (they default to `col-sm-2` and `col-sm-10`) at either form level
-or field helpers if want to customize space between label and field.
+or field level if want to customize space between label and field.
 
 Here's an example of how it looks like by default:
 
@@ -341,7 +387,7 @@ This generates the following HTML:
 </form>
 ```
 
-The `label_col_wrapper_class` and `field_col_wrapper_class` css classes can also be changed per control:
+The `label_col_wrapper_class` and `field_col_wrapper_class` css classes can also be customized per control:
 
 ![horizontal_form_custom_classes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/ae5492f0-4a10-4f63-ae4d-9675bfb93226)
 
@@ -454,7 +500,7 @@ This generates the following HTML:
 </div>
 ```
 
-To hide a label, you can set `hide_label` option to `true`. This adds the `visually-hidden` class, which keeps your labels accessible
+To hide a label, you can set `hide_label: true` option. This adds the `visually-hidden` class, which keeps your labels accessible
 to those using screen readers.
 
 ![hide_label](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/512a16b9-6829-40a2-bf07-f087970c9dac)
@@ -472,7 +518,7 @@ This generates the following HTML:
 </div>
 ```
 
-To skip a label, you can set `skip_label` option to `true`. This will not render label in a field wrapper.
+To skip a label, you can set `skip_label: true` option. This will not render label in a field wrapper.
 
 ![skip_label](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/251e28ac-b98b-4e6a-8d55-8c0cb061e65a)
 
@@ -552,7 +598,7 @@ This generates the following HTML:
 </div>
 ```
 
-You can also disable help text by setting `help_text` option to `false`:
+You can also disable help text by setting `help_text: false` option:
 
 ![help_text_false](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/be1a229a-cffd-447d-b846-9b9588b1b25e)
 
@@ -707,7 +753,7 @@ This generates the following HTML:
 </div>
 ```
 
-You can set `switch` option to `true` if you want check box to look like switches.
+You can set `switch: true` option if you want check box to look like switches.
 
 ![check_box_switch](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/20c493ce-7f2c-4ac9-a854-e1520cae6a54)
 
@@ -845,7 +891,7 @@ This generates the following HTML:
 
 Our `fields_for` helper accepts the same arguments as the [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-fields_for).
 
-`rails_bootstrap_form` allows us to set `bootstrap` option just like `bootstrap_form_for` and `bootstrap_form_with`. By setting this option on fields_for, it applies to all the fields defined for that form:
+`rails_bootstrap_form` allows us to set `bootstrap` option just like `bootstrap_form_for` and `bootstrap_form_with`. By setting this option on `fields_for`, it applies to all the fields defined for that nested form:
 
 ![fields_for](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/f515302f-a92a-4b5c-a444-af91cbb00dff)
 
@@ -1441,7 +1487,7 @@ an argument and takes care of rendering labels, check boxes, and wrapper for you
 ![collection_check_boxes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/c92f5921-e572-4384-812e-31308e018f66)
 
 ```erb
-<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
+<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {multiple: true, bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
 ```
 
 This generates the following HTML:
@@ -1710,7 +1756,7 @@ This generates the following HTML:
 ## Submit Buttons
 
 `rails_bootstrap_form` allows to easily create submit button for the form. `rails_bootstrap_form` supports three color variants for submit buttons: `secondary`, `primary`, and `danger`. Submit buttons are supported in `vertical`, `horizontal`, and `inline` layout.
-Submit buttons in inline form are wrapped inside `div.col-12` to properly render on small width devices.
+Submit buttons in inline form are wrapped inside `div.col-12` to properly align on small width devices.
 
 ![button_helpers](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/f41a013b-b8c9-4689-a079-b8b102084cf0)
 
@@ -1743,7 +1789,7 @@ This generates the following HTML:
 <input type="submit" name="commit" value="Register" class="register-button btn btn-primary" data-disable-with="Register">
 ```
 
-To render submit helper as a button helper, you can set `render_as_button` option to `true` or pass a block.
+To render submit helper as a button helper, you can set `render_as_button: true` option or pass a block.
 
 ![render_as_button](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/dffd72d8-3acf-4029-be04-3bf7776e8d9c)
 
@@ -1785,6 +1831,8 @@ This generates the following HTML:
   <input readonly="readonly" disabled="disabled" value="test@example.com" class="form-control-plaintext" aria-required="true" required="required" type="text" name="user[email]" id="user_email">
 </div>
 ```
+
+_`static_field` supports all the bootstrap options which are supported by `text_field`._
 
 ## Floating Labels
 
@@ -1850,7 +1898,7 @@ This generates the following HTML:
 </form>
 ```
 
-_Floating labels gets disabled by `rails_bootstrap_form` automatically for unsupported helpers._
+_`rails_bootstrap_form` automatically disables floating labels for unsupported helpers._
 
 ## Validation and Errors
 
@@ -1912,6 +1960,9 @@ This generates the following HTML:
   </div>
 </div>
 ```
+
+The `has-validation` CSS class is added to an input group when the field has errors.
+The `is-invalid` CSS class is added to floating label container when field with floating label has errors.
 
 ## Required Fields
 
