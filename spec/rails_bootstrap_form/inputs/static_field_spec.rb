@@ -7,10 +7,11 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::Inputs::StaticField do
-  before { @user.email = "steve@example.com" }
+  let(:user) { ::User.new(email: "steve@example.com") }
+  let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, {}) }
 
   describe "#static_field" do
-    it "wraps static field correctly in vertical layout" do
+    it "renders static field correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_email">Email address</label>
@@ -18,12 +19,12 @@ RSpec.describe RailsBootstrapForm::Inputs::StaticField do
         </div>
       HTML
 
-      actual = @vertical_builder.static_field :email, bootstrap: {help_text: false}
+      actual = form_builder.static_field :email, bootstrap: {help_text: false}
 
       expect(actual).to match_html(expected)
     end
 
-    it "wraps static field correctly in inline layout" do
+    it "renders static field correctly in inline layout" do
       expected = <<~HTML
         <div class="col-12">
           <label class="form-label visually-hidden required" for="user_email">Email address</label>
@@ -31,12 +32,12 @@ RSpec.describe RailsBootstrapForm::Inputs::StaticField do
         </div>
       HTML
 
-      actual = @inline_builder.static_field :email, bootstrap: {help_text: false}
+      actual = form_builder.static_field :email, bootstrap: {help_text: false, layout: :inline}
 
       expect(actual).to match_html(expected)
     end
 
-    it "wraps static field correctly in horizontal layout" do
+    it "renders static field correctly in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_email">Email address</label>
@@ -46,12 +47,12 @@ RSpec.describe RailsBootstrapForm::Inputs::StaticField do
         </div>
       HTML
 
-      actual = @horizontal_builder.static_field :email, bootstrap: {help_text: false}
+      actual = form_builder.static_field :email, bootstrap: {help_text: false, layout: :horizontal}
 
       expect(actual).to match_html(expected)
     end
 
-    it "sets other value" do
+    it "sets value from HTML option" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_email">Email address</label>
@@ -59,7 +60,7 @@ RSpec.describe RailsBootstrapForm::Inputs::StaticField do
         </div>
       HTML
 
-      actual = @vertical_builder.static_field :email, value: "abc", bootstrap: {help_text: false}
+      actual = form_builder.static_field :email, value: "abc", bootstrap: {help_text: false}
 
       expect(actual).to match_html(expected)
     end

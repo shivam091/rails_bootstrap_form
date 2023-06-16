@@ -7,7 +7,6 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
-
   describe "#set_defaults" do
     let(:options) { described_class.new }
 

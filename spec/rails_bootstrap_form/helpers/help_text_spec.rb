@@ -7,6 +7,9 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::Helpers::HelpText do
+  let(:user) { ::User.new }
+  let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, {}) }
+
   describe "#help_text" do
     it "sets help text from locale file" do
       expected = <<~HTML
@@ -17,7 +20,7 @@ RSpec.describe RailsBootstrapForm::Helpers::HelpText do
         </div>
       HTML
 
-      actual = @vertical_builder.email_field :email
+      actual = form_builder.email_field :email
 
       expect(actual).to match_html(expected)
     end
@@ -31,7 +34,7 @@ RSpec.describe RailsBootstrapForm::Helpers::HelpText do
         </div>
       HTML
 
-      actual = @vertical_builder.email_field :email, bootstrap: {help_text: "Please use valid email."}
+      actual = form_builder.email_field :email, bootstrap: {help_text: "Please use valid email."}
 
       expect(actual).to match_html(expected)
     end
@@ -44,7 +47,7 @@ RSpec.describe RailsBootstrapForm::Helpers::HelpText do
         </div>
       HTML
 
-      actual = @vertical_builder.email_field :email, bootstrap: {help_text: false}
+      actual = form_builder.email_field :email, bootstrap: {help_text: false}
 
       expect(actual).to match_html(expected)
     end

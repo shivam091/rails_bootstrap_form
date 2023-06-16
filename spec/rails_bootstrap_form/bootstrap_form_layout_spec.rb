@@ -7,6 +7,8 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
+  let(:user) { User.new }
+
   it "checks markup of vertical form" do
     expected = <<~HTML
       <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
@@ -28,7 +30,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       </form>
     HTML
 
-    actual = bootstrap_form_with(model: @user, url: "/test") do |form|
+    actual = bootstrap_form_with(model: user, url: "/test") do |form|
       concat(form.text_field(:username))
       concat(form.password_field(:password))
       concat(form.check_box(:remember_me))
@@ -65,7 +67,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       </form>
     HTML
 
-    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
+    actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
       concat(form.text_field(:username))
       concat(form.password_field(:password))
       concat(form.check_box(:remember_me))
@@ -98,7 +100,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       </form>
     HTML
 
-    actual = bootstrap_form_with(model: @user, url: "/test", bootstrap: {layout: :inline}) do |form|
+    actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :inline}) do |form|
       concat(form.text_field(:username))
       concat(form.password_field(:password))
       concat(form.check_box(:remember_me))

@@ -7,6 +7,9 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::InputGroupBuilder do
+  let(:user) { ::User.new }
+  let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, {}) }
+
   describe "#input_group_wrapper" do
     it "prepends and appends single addon to the field" do
       expected = <<~HTML
@@ -20,7 +23,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00"}
+      actual = form_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00"}
 
       expect(actual).to match_html(expected)
     end
@@ -39,7 +42,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: ["Net", "₹"], append: [".00", "per day"]}
+      actual = form_builder.number_field :expected_ctc, bootstrap: {prepend: ["Net", "₹"], append: [".00", "per day"]}
 
       expect(actual).to match_html(expected)
     end
@@ -55,7 +58,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {append: @vertical_builder.secondary("Search")}
+      actual = form_builder.number_field :expected_ctc, bootstrap: {append: form_builder.secondary("Search")}
 
       expect(actual).to match_html(expected)
     end
@@ -72,7 +75,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00", additional_input_group_class: "custom-class"}
+      actual = form_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00", additional_input_group_class: "custom-class"}
 
       expect(actual).to match_html(expected)
     end
@@ -89,7 +92,7 @@ RSpec.describe RailsBootstrapForm::InputGroupBuilder do
         </div>
       HTML
 
-      actual = @vertical_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00", size: :sm}
+      actual = form_builder.number_field :expected_ctc, bootstrap: {prepend: "₹", append: ".00", size: :sm}
 
       expect(actual).to match_html(expected)
     end

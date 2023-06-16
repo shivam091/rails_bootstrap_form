@@ -7,13 +7,16 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::Helpers::Buttons do
+  let(:user) { ::User.new }
+  let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, {}) }
+
   describe "#render_button" do
     it "renders submit button correctly in vertical layout" do
       expected = <<~HTML
         <input type="submit" name="commit" value="Search" class="btn btn-secondary" data-disable-with="Search">
       HTML
 
-      actual = @vertical_builder.secondary "Search"
+      actual = form_builder.secondary "Search"
 
       expect(actual).to match_html(expected)
     end
@@ -23,7 +26,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Buttons do
         <input type="submit" name="commit" value="Search" class="btn btn-secondary" data-disable-with="Search">
       HTML
 
-      actual = @horizontal_builder.secondary "Search"
+      actual = form_builder.secondary "Search", bootstrap: {layout: :horizontal}
 
       expect(actual).to match_html(expected)
     end
@@ -35,7 +38,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Buttons do
         </div>
       HTML
 
-      actual = @inline_builder.secondary "Search"
+      actual = form_builder.secondary "Search", bootstrap: {layout: :inline}
 
       expect(actual).to match_html(expected)
     end
@@ -45,7 +48,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Buttons do
         <button name="button" type="submit" class="btn btn-primary">Register</button>
       HTML
 
-      actual = @vertical_builder.primary "Register", bootstrap: {render_as_button: true}
+      actual = form_builder.primary "Register", bootstrap: {render_as_button: true}
 
       expect(actual).to match_html(expected)
     end
@@ -55,7 +58,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Buttons do
         <button name="button" type="submit" class="btn btn-danger">Delete</button>
       HTML
 
-      actual = @vertical_builder.danger do
+      actual = form_builder.danger do
         "Delete"
       end
 
@@ -67,7 +70,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Buttons do
         <input type="submit" name="commit" value="Delete" class="custom-button btn btn-danger" data-disable-with="Delete">
       HTML
 
-      actual = @vertical_builder.danger "Delete", class: "custom-button"
+      actual = form_builder.danger "Delete", class: "custom-button"
 
       expect(actual).to match_html(expected)
     end
