@@ -15,4 +15,8 @@ module TestHelpers
       node
     end
   end
+
+  def blank_option
+    '<option value="" label=" "></option>'
+  end
 end
