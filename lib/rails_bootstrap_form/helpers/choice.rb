@@ -41,8 +41,7 @@ module RailsBootstrapForm
         end
 
         def choice_classes(attribute, bootstrap, options)
-          classes = Array("form-check-input") << options[:class]
-          classes << bootstrap.additional_field_class
+          classes = Array("form-check-input") << [bootstrap.additional_field_class || options[:class]]
           classes << "is-invalid" if is_invalid?(attribute)
           classes.flatten.compact
         end
