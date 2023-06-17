@@ -234,6 +234,12 @@ You can completely disable bootstrap and use default form builder by passing `di
 <%= form.text_field :username, bootstrap: {disabled: true} %>
 ```
 
+This generates the following HTML:
+
+```html
+<input type="text" name="user[username]" id="user_username">
+```
+
 ### Disabling wrapper
 
 In some cases, you may need to disable the default wrapper. You can do this by passing `wrapper: false` option:
@@ -1544,6 +1550,8 @@ This generates the following HTML:
 </div>
 ```
 
+_If form layout is inline, `collection_check_boxes` always render `inline` check boxes._
+
 ### collection_radio_buttons
 
 This helper provides a way to create collection of radio buttons. This helper accepts same arguments as [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_radio_buttons) except it don't accept a `block` as
@@ -1583,6 +1591,8 @@ This generates the following HTML:
   </div>
 </div>
 ```
+
+_If form layout is inline, `collection_check_boxes` always render `inline` check boxes._
 
 ## Date Helpers
 
