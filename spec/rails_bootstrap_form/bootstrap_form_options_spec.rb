@@ -7,7 +7,6 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
-
   describe "#set_defaults" do
     let(:options) { described_class.new }
 
@@ -114,14 +113,14 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
     end
   end
 
-  describe "#vertical?" do
+  describe "#layout_vertical?" do
     it "checks whether form has vertical layout" do
       options = described_class.new
       expect(options.layout_vertical?).to be_truthy
     end
   end
 
-  describe "#horizontal?" do
+  describe "#layout_horizontal?" do
     it "checks whether form has horizontal layout" do
       options = described_class.new
       expect(options.layout_horizontal?).to be_falsy
@@ -131,7 +130,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
     end
   end
 
-  describe "#inline?" do
+  describe "#layout_inline?" do
     it "checks whether form has inline layout" do
       options = described_class.new
       expect(options.layout_inline?).to be_falsy

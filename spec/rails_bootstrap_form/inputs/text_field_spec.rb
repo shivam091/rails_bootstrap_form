@@ -7,18 +7,21 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::Inputs::TextField do
+  let(:user) { ::User.new }
+  let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, {}) }
+
   describe "#text_field" do
     it "renders default Rails helper when bootstrap is disabled" do
       expected = <<~HTML
         <input type="text" name="user[name]" id="user_name" />
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {disabled: true}
+      actual = form_builder.text_field :name, bootstrap: {disabled: true}
 
       expect(actual).to match_html(expected)
     end
 
-    it "renders text field correctly in vertical layout" do
+    it "renders correctly in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -26,12 +29,25 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name
+      actual = form_builder.text_field :name
 
       expect(actual).to match_html(expected)
     end
 
-    it "renders text field correctly in horizontal layout" do
+    it "renders correctly in inline layout" do
+      expected = <<~HTML
+        <div class="col-12">
+          <label class="form-label visually-hidden required" for="user_name">Name</label>
+          <input class="form-control" aria-required="true" required="required" placeholder="Name" type="text" name="user[name]" id="user_name" />
+        </div>
+      HTML
+
+      actual = form_builder.text_field :name, bootstrap: {layout: :inline}
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders correctly in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
@@ -41,12 +57,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @horizontal_builder.text_field :name
+      actual = form_builder.text_field :name, bootstrap: {layout: :horizontal}
 
       expect(actual).to match_html(expected)
     end
 
-    it "supports floating labels in vertical layout" do
+    it "can have a floating label in vertical layout" do
       expected = <<~HTML
         <div class="mb-3">
           <div class="form-floating">
@@ -56,12 +72,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {floating: true}
+      actual = form_builder.text_field :name, bootstrap: {floating: true}
 
       expect(actual).to match_html(expected)
     end
 
-    it "does not support floating labels for horizontal layout" do
+    it "cannot have a floating label in horizontal layout" do
       expected = <<~HTML
         <div class="row mb-3">
           <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
@@ -71,24 +87,24 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @horizontal_builder.text_field :name, bootstrap: {floating: true}
+      actual = form_builder.text_field :name, bootstrap: {floating: true, layout: :horizontal}
 
       expect(actual).to match_html(expected)
     end
 
-    it "skips label of the field" do
+    it "skips label" do
       expected = <<~HTML
         <div class="mb-3">
           <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {skip_label: true}
+      actual = form_builder.text_field :name, bootstrap: {skip_label: true}
 
       expect(actual).to match_html(expected)
     end
 
-    it "hides label of the field" do
+    it "hides label" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label visually-hidden required" for="user_name">Name</label>
@@ -96,12 +112,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {hide_label: true}
+      actual = form_builder.text_field :name, bootstrap: {hide_label: true}
 
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional css class to the field" do
+    it "adds additional css class" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -109,12 +125,25 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {additional_field_class: "custom-class"}
+      actual = form_builder.text_field :name, class: "custom-class"
 
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional css class to a label of the field" do
+    it "additional_field_class takes precedance over HTML class" do
+      expected = <<~HTML
+        <div class="mb-3">
+          <label class="form-label required" for="user_name">Name</label>
+          <input class="form-control custom-text-field" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
+        </div>
+      HTML
+
+      actual = form_builder.text_field :name, bootstrap: {additional_field_class: "custom-text-field"}, class: "html-class"
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "adds additional css class to a label" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label custom-class required" for="user_name">Name</label>
@@ -122,12 +151,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {additional_label_class: "custom-class"}
+      actual = form_builder.text_field :name, bootstrap: {additional_label_class: "custom-class"}
 
       expect(actual).to match_html(expected)
     end
 
-    it "changes css class of the field" do
+    it "changes css class" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -135,7 +164,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {field_class: "custom-form-control"}
+      actual = form_builder.text_field :name, bootstrap: {field_class: "custom-form-control"}
 
       expect(actual).to match_html(expected)
     end
@@ -148,12 +177,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {label_class: "custom-form-label"}
+      actual = form_builder.text_field :name, bootstrap: {label_class: "custom-form-label"}
 
       expect(actual).to match_html(expected)
     end
 
-    it "adds help text to the field" do
+    it "sets user specified help text" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -162,12 +191,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {help_text: "Please provide your full name"}
+      actual = form_builder.text_field :name, bootstrap: {help_text: "Please provide your full name"}
 
       expect(actual).to match_html(expected)
     end
 
-    it "displays help text from locale file" do
+    it "sets help text from locale file" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_email">Email address</label>
@@ -176,12 +205,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :email
+      actual = form_builder.text_field :email
 
       expect(actual).to match_html(expected)
     end
 
-    it "sets customize label text" do
+    it "customizes label text" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Full name</label>
@@ -189,18 +218,18 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {label_text: "Full name"}
+      actual = form_builder.text_field :name, bootstrap: {label_text: "Full name"}
 
       expect(actual).to match_html(expected)
     end
 
-    it "does not render the text field in wrapper" do
+    it "does not render in a wrapper" do
       expected = <<~HTML
         <label class="form-label required" for="user_name">Name</label>
         <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {wrapper: false}
+      actual = form_builder.text_field :name, bootstrap: {wrapper: false}
 
       expect(actual).to match_html(expected)
     end
@@ -213,7 +242,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {wrapper: {data: {controller: "hello"}}}
+      actual = form_builder.text_field :name, bootstrap: {wrapper: {data: {controller: "hello"}}}
 
       expect(actual).to match_html(expected)
     end
@@ -226,7 +255,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {wrapper: {class: "custom-class", }}
+      actual = form_builder.text_field :name, bootstrap: {wrapper: {class: "custom-class", }}
 
       expect(actual).to match_html(expected)
     end
@@ -243,7 +272,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {prepend: "<strong>$</strong>", append: "0.0"}
+      actual = form_builder.text_field :name, bootstrap: {prepend: "<strong>$</strong>", append: "0.0"}
 
       expect(actual).to match_html(expected)
     end
@@ -259,7 +288,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {append: (button_tag("Go", type: :submit, class: "btn btn-secondary"))}
+      actual = form_builder.text_field :name, bootstrap: {append: (button_tag("Go", type: :submit, class: "btn btn-secondary"))}
 
       expect(actual).to match_html(expected)
     end
@@ -277,7 +306,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {prepend: ["$", "Rs"], append: "0.0"}
+      actual = form_builder.text_field :name, bootstrap: {prepend: ["$", "Rs"], append: "0.0"}
 
       expect(actual).to match_html(expected)
     end
@@ -296,12 +325,12 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {prepend: "$", append: "0.0", floating: true}
+      actual = form_builder.text_field :name, bootstrap: {prepend: "$", append: "0.0", floating: true}
 
       expect(actual).to match_html(expected)
     end
 
-    it "changes size of the field" do
+    it "changes size" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label required" for="user_name">Name</label>
@@ -309,7 +338,27 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {size: :sm}
+      actual = form_builder.text_field :name, bootstrap: {size: :sm}
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly" do
+      user.errors.add(:name, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="mb-3">
+            <label class="form-label required is-invalid" for="user_name">Name</label>
+            <input class="form-control is-invalid" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
+            <div class="invalid-feedback">can't be blank</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test") do |form|
+        concat(form.text_field(:name))
+      end
 
       expect(actual).to match_html(expected)
     end

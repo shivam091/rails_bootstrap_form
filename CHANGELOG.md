@@ -4,6 +4,24 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.9.4](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.3...v0.9.4) - 2023-06-17
+
+### What's new
+
+- Added specs for field helpers.
+
+### What's changed
+
+- Change to take `additional_field_class` precedence over HTML `class` ([#42](https://github.com/shivam091/rails_bootstrap_form/issues/42))
+- Change to `collection_check_boxes` and `collection_radio buttons` to render inline `check boxes` and
+  `radio buttons`, respectively when form layout is inline. ([#43](https://github.com/shivam091/rails_bootstrap_form/issues/43))
+
+### What's fixed
+
+- Fixed bug causing `skip_label` option not to work in `radio_button` and `check_box` ([#37](https://github.com/shivam091/rails_bootstrap_form/issues/37))
+- Fixed bug causing `additional_field_class` to apply on `radio_button` and `check_box` ([#40](https://github.com/shivam091/rails_bootstrap_form/issues/40))
+- Fixed bug causing `bootstrap` options to not set on `static_field` ([#41](https://github.com/shivam091/rails_bootstrap_form/issues/41))
+
 ## [0.9.3](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.2...v0.9.3) - 2023-06-04
 
 ### What's changed

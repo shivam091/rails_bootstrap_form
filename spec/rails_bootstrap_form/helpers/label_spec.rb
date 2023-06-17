@@ -7,6 +7,9 @@
 require "spec_helper"
 
 RSpec.describe RailsBootstrapForm::Helpers::Labels do
+  let(:user) { ::User.new }
+  let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:user, user, self, {}) }
+
   describe "#draw_label" do
     it "takes label text from locale file" do
       expected = <<~HTML
@@ -16,7 +19,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name
+      actual = form_builder.text_field :name
 
       expect(actual).to match_html(expected)
     end
@@ -29,7 +32,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {label_text: "Full name"}
+      actual = form_builder.text_field :name, bootstrap: {label_text: "Full name"}
 
       expect(actual).to match_html(expected)
     end
@@ -42,7 +45,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {hide_label: true}
+      actual = form_builder.text_field :name, bootstrap: {hide_label: true}
 
       expect(actual).to match_html(expected)
     end
@@ -54,12 +57,12 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {skip_label: true}
+      actual = form_builder.text_field :name, bootstrap: {skip_label: true}
 
       expect(actual).to match_html(expected)
     end
 
-    it "adds additional CSS class to a label" do
+    it "adds additional CSS class" do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label custom-label required" for="user_name">Name</label>
@@ -67,7 +70,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @vertical_builder.text_field :name, bootstrap: {additional_label_class: "custom-label"}
+      actual = form_builder.text_field :name, bootstrap: {additional_label_class: "custom-label"}
 
       expect(actual).to match_html(expected)
     end
@@ -82,7 +85,7 @@ RSpec.describe RailsBootstrapForm::Helpers::Labels do
         </div>
       HTML
 
-      actual = @horizontal_builder.text_field :name
+      actual = form_builder.text_field :name, bootstrap: {layout: :horizontal}
 
       expect(actual).to match_html(expected)
     end

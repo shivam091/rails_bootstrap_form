@@ -10,21 +10,23 @@ module RailsBootstrapForm
       def self.included(base_class)
         [:check_box, :radio_button].each do |tag_name|
           define_method("#{tag_name}_label") do |attribute, value, options, bootstrap|
-            label_options = {
-              class: choice_label_classes(attribute, bootstrap, options)
-            }
-            label_options[:value] = value if tag_name.eql?(:radio_button)
-            label_options[:for] = options[:id] if options[:id].present?
+            unless bootstrap.skip_label?
+              label_options = {
+                class: choice_label_classes(attribute, bootstrap, options)
+              }
+              label_options[:value] = value if tag_name.eql?(:radio_button)
+              label_options[:for] = options[:id] if options[:id].present?
 
-            label_text = label_text(attribute, bootstrap)
+              label_text = label_text(attribute, bootstrap)
 
-            label(attribute, label_text, label_options)
+              label(attribute, label_text, label_options)
+            end
           end
         end
 
         [:check_box, :radio_button].each do |tag_name|
           define_method("bootstrap_#{tag_name}") do |attribute, value, options, bootstrap|
-            options[:class] = choice_classes(attribute, options)
+            options[:class] = choice_classes(attribute, bootstrap, options)
 
             if tag_name.eql?(:check_box)
               choice_field = check_box_without_bootstrap(attribute, options, value, nil)
@@ -38,8 +40,8 @@ module RailsBootstrapForm
           end
         end
 
-        def choice_classes(attribute, options)
-          classes = Array("form-check-input") << options[:class]
+        def choice_classes(attribute, bootstrap, options)
+          classes = Array("form-check-input") << [bootstrap.additional_field_class || options[:class]]
           classes << "is-invalid" if is_invalid?(attribute)
           classes.flatten.compact
         end

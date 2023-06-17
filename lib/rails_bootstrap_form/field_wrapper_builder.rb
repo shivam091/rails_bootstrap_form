@@ -72,11 +72,7 @@ module RailsBootstrapForm
     def field_css_options(attribute, bootstrap, options, html_options)
       css_options = (html_options || options)
 
-      field_classes = Array(options[:class])
-      field_classes << [
-        bootstrap.field_class,
-        bootstrap.additional_field_class
-      ]
+      field_classes = Array(bootstrap.field_class) << [bootstrap.additional_field_class || options[:class]]
       field_classes << "is-invalid" if is_invalid?(attribute)
       if is_size_valid?(bootstrap)
         field_classes << "#{bootstrap.field_class}-#{bootstrap.size}"

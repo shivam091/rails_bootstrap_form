@@ -5,7 +5,10 @@
 ENV["RAILS_ENV"] ||= "test"
 
 require_relative "../demo/config/environment"
-require "simplecov"
+
+require "./spec/support/simplecov_env"
+require 'active_support/testing/time_helpers'
+SimpleCovEnv.start!
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -17,13 +20,6 @@ end
 
 def test_directory_path
   spec_root / "test"
-end
-
-SimpleCov.start "rails" do
-  add_filter "spec/"
-  add_filter ".github/"
-  add_filter "lib/generators/templates/"
-  add_filter "lib/rails_bootstrap_form/version"
 end
 
 RSpec.configure do |config|
@@ -48,23 +44,21 @@ RSpec.configure do |config|
   # Print the 10 slowest examples and example groups at the
   # end of the spec run, to help surface which specs are running
   # particularly slow.
-  config.profile_examples = 10
+  # config.profile_examples = 10
 
-  config.include ActionView::Helpers::FormHelper
-  config.include ActionView::Context if defined?(ActionView::Context)
-  config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
   config.include Rails.application.routes.url_helpers
+  config.include ActionView::Helpers::FormHelper
+  config.include ActionView::Helpers::FormOptionsHelper
+  config.include ActionView::Helpers::DateHelper
+  config.include ActionView::Context if defined?(ActionView::Context)
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include ActionDispatch::Routing::PolymorphicRoutes
-
-  config.before(:each) do
-    @user = ::User.new
-    @vertical_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, {})
-    @horizontal_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap: {layout: :horizontal})
-    @inline_builder = RailsBootstrapForm::BootstrapFormBuilder.new(:user, @user, self, bootstrap: {layout: :inline})
-  end
+  config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
+  config.include TestHelpers
 
   config.before(:suite) do
     FileUtils.mkdir_p(test_directory_path)
+    Rails.application.load_seed
   end
 
   config.after(:suite) do
