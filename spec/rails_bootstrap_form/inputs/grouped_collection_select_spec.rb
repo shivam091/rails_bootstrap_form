@@ -11,7 +11,7 @@ RSpec.describe RailsBootstrapForm::Inputs::GroupedCollectionSelect do
   let(:form_builder) { RailsBootstrapForm::BootstrapFormBuilder.new(:address, address, self, {}) }
   let(:city_options) { option_groups_from_collection_for_select(::Country.includes(:cities), :cities, :name, :id, :name) }
 
-  describe "#collection_select" do
+  describe "#grouped_collection_select" do
     it "renders default Rails helper when bootstrap is disabled" do
       expected = <<~HTML
         <select name="address[city]" id="address_city">
