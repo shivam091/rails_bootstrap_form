@@ -342,5 +342,25 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
 
       expect(actual).to match_html(expected)
     end
+
+    it "renders errors correctly" do
+      user.errors.add(:name, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="mb-3">
+            <label class="form-label required is-invalid" for="user_name">Name</label>
+            <input class="form-control is-invalid" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
+            <div class="invalid-feedback">can't be blank</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test") do |form|
+        concat(form.text_field(:name))
+      end
+
+      expect(actual).to match_html(expected)
+    end
   end
 end
