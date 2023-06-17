@@ -63,19 +63,19 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionRadioButtons do
         <div class="col-12">
           <label class="form-label visually-hidden required" for="user_fruit_id">Favorite fruit</label>
           <div class="rails-bootstrap-forms-collection-radio-buttons">
-            <div class="form-check">
+            <div class="form-check form-check-inline">
               <input id="user_fruit_id_1" class="form-check-input" type="radio" value="1" name="user[fruit_id]" />
               <label class="form-check-label" for="user_fruit_id_1">Mango</label>
             </div>
-            <div class="form-check">
+            <div class="form-check form-check-inline">
               <input id="user_fruit_id_2" class="form-check-input" type="radio" value="2" name="user[fruit_id]" />
               <label class="form-check-label" for="user_fruit_id_2">Apple</label>
             </div>
-            <div class="form-check">
+            <div class="form-check form-check-inline">
               <input id="user_fruit_id_3" class="form-check-input" type="radio" value="3" name="user[fruit_id]" />
               <label class="form-check-label" for="user_fruit_id_3">Orange</label>
             </div>
-            <div class="form-check">
+            <div class="form-check form-check-inline">
               <input id="user_fruit_id_4" class="form-check-input" type="radio" value="4" name="user[fruit_id]" />
               <label class="form-check-label" for="user_fruit_id_4">Watermelon</label>
             </div>

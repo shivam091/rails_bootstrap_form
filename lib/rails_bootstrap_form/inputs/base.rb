@@ -17,7 +17,7 @@ module RailsBootstrapForm
             input_options = {
               bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
-                inline: bootstrap.inline?
+                inline: (bootstrap.inline? || bootstrap.layout_inline?) 
               },
               required: false,
               id: sanitized_tag_name(attribute, value)
