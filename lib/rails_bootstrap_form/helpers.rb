@@ -45,14 +45,13 @@ module RailsBootstrapForm
         options[:class] = the_class if the_class.present?
       end
 
-      def remove_css_class!(options, css_class)
-        the_class = options[:class].to_s.split(" ")
-        options[:class] = (the_class - [css_class]).compact.join(" ")
-        options.delete(:class) if options[:class].blank?
-      end
+      # def remove_css_class!(options, css_class)
+      #   the_class = options[:class].to_s.split(" ")
+      #   options[:class] = (the_class - [css_class]).compact.join(" ")
+      #   options.delete(:class) if options[:class].blank?
+      # end
 
-      private :control_specific_class, :is_size_valid?, :add_css_class!,
-              :remove_css_class!
+      private :control_specific_class, :is_size_valid?, :add_css_class!
     end
   end
 end
