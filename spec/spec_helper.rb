@@ -7,6 +7,7 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../demo/config/environment"
 
 require "./spec/support/simplecov_env"
+require 'active_support/testing/time_helpers'
 SimpleCovEnv.start!
 
 # Requires supporting files with custom matchers and macros, etc,
@@ -43,14 +44,16 @@ RSpec.configure do |config|
   # Print the 10 slowest examples and example groups at the
   # end of the spec run, to help surface which specs are running
   # particularly slow.
-  config.profile_examples = 10
+  # config.profile_examples = 10
 
+  config.include Rails.application.routes.url_helpers
   config.include ActionView::Helpers::FormHelper
   config.include ActionView::Helpers::FormOptionsHelper
+  config.include ActionView::Helpers::DateHelper
   config.include ActionView::Context if defined?(ActionView::Context)
-  config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
-  config.include Rails.application.routes.url_helpers
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include ActionDispatch::Routing::PolymorphicRoutes
+  config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
   config.include TestHelpers
 
   config.before(:suite) do

@@ -19,4 +19,12 @@ module TestHelpers
   def blank_option
     '<option value="" label=" "></option>'
   end
+
+  def options_range(start: 1, stop: 31, selected: nil, months: false)
+    (start..stop).map do |n|
+      attr = n == selected ? 'selected="selected"' : ""
+      label = months ? Date::MONTHNAMES[n] : n
+      "<option #{attr} value=\"#{n}\">#{label}</option>"
+    end.join("\n")
+  end
 end
