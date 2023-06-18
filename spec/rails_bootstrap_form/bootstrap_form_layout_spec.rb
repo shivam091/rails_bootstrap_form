@@ -109,4 +109,88 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
     expect(actual).to match_html(expected)
   end
+
+  it "checks markup of nested attributes when bootstrap options are set on parent form" do
+    expected = <<~HTML
+      <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <div class="row mb-3">
+          <label class="col-form-label col-sm-2" for="user_username">Username</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="user[username]" id="user_username" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-sm-2 required" for="user_password">Password</label>
+          <div class="col-sm-10">
+            <input class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-sm-2 required" for="user_address_attributes_street">Street</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" aria-required="true" required="required" name="user[address_attributes][street]" id="user_address_attributes_street"></textarea>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-sm-2" for="user_address_attributes_state">State</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="user[address_attributes][state]" id="user_address_attributes_state" />
+          </div>
+        </div>
+        <input type="submit" name="commit" value="Login" class="btn btn-primary" data-disable-with="Login" />
+      </form>
+    HTML
+
+    actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
+      concat(form.text_field(:username))
+      concat(form.password_field(:password))
+      concat(form.fields_for(:address, include_id: false) do |address_form|
+        concat(address_form.text_area(:street))
+        concat(address_form.text_field(:state))
+      end)
+      concat(form.primary("Login"))
+    end
+
+    expect(actual).to match_html(expected)
+  end
+
+  it "checks markup of nested attributes when bootstrap options are set on fields_for" do
+    expected = <<~HTML
+      <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <div class="row mb-3">
+          <label class="col-form-label col-sm-2" for="user_username">Username</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="user[username]" id="user_username" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-form-label col-sm-2 required" for="user_password">Password</label>
+          <div class="col-sm-10">
+            <input class="form-control" aria-required="true" required="required" type="password" name="user[password]" id="user_password" />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label required" for="user_address_attributes_street">Street</label>
+          <textarea class="form-control" aria-required="true" required="required" name="user[address_attributes][street]" id="user_address_attributes_street"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="user_address_attributes_state">State</label>
+          <input class="form-control" type="text" name="user[address_attributes][state]" id="user_address_attributes_state" />
+        </div>
+        <input type="submit" name="commit" value="Login" class="btn btn-primary" data-disable-with="Login" />
+      </form>
+    HTML
+
+    actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
+      concat(form.text_field(:username))
+      concat(form.password_field(:password))
+      concat(form.fields_for(:address, include_id: false, bootstrap: {layout: :vertical}) do |address_form|
+        concat(address_form.text_area(:street))
+        concat(address_form.text_field(:state))
+      end)
+      concat(form.primary("Login"))
+    end
+
+    expect(actual).to match_html(expected)
+  end
 end
