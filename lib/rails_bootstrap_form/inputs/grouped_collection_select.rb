@@ -9,10 +9,10 @@ module RailsBootstrapForm
 
       included do
         def grouped_collection_select(attribute, collection, group_method, group_label_method, option_key_method, option_value_method, options = {}, html_options = {})
-          options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
-
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?
+
+          bootstrap.set_field_class!("form-select")
 
           field_wrapper_builder(attribute, bootstrap, options, html_options) do
             super(attribute, collection, group_method, group_label_method, option_key_method, option_value_method, options, html_options)

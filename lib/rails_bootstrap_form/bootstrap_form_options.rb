@@ -169,6 +169,14 @@ module RailsBootstrapForm
       define_method("#{method}?") { self.send(method) }
     end
 
+    def disable_floating_labels!
+      self.floating = false
+    end
+
+    def set_field_class!(css_class)
+      self.field_class ||= css_class
+    end
+
     def set_defaults
       @disabled = false
 

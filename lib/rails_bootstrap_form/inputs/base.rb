@@ -17,7 +17,7 @@ module RailsBootstrapForm
             input_options = {
               bootstrap: {
                 label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
-                inline: (bootstrap.inline? || bootstrap.layout_inline?) 
+                inline: (bootstrap.inline? || bootstrap.layout_inline?)
               },
               required: false,
               id: sanitized_tag_name(attribute, value)
@@ -42,6 +42,8 @@ module RailsBootstrapForm
             bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
             return super(attribute, options) if bootstrap.disabled?
 
+            bootstrap.set_field_class!("form-control")
+
             field_wrapper_builder(attribute, bootstrap, options) do
               super(attribute, options)
             end
@@ -50,10 +52,11 @@ module RailsBootstrapForm
 
         def bootstrap_select_group(tag_name)
           define_method(tag_name) do |attribute, options = {}, html_options = {}|
-            options = {bootstrap: {field_class: "form-select", floating: false}}.deep_merge!(options)
-
             bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
             return super(attribute, options, html_options) if bootstrap.disabled?
+
+            bootstrap.set_field_class!("form-select")
+            bootstrap.disable_floating_labels!
 
             field_wrapper_builder(attribute, bootstrap, options, html_options) do
               tag.fieldset(class: control_specific_class(tag_name)) do

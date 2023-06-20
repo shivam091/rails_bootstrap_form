@@ -9,7 +9,7 @@ module RailsBootstrapForm
 
       included do
         def rich_text_area(attribute, options = {})
-          options[:class] = ["trix-content", options[:class]].compact.join(" ")
+          add_css_class!(options, "trix-content")
 
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?
