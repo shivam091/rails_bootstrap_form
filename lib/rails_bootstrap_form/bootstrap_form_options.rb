@@ -25,7 +25,7 @@ module RailsBootstrapForm
     attr_accessor :layout
 
     # A CSS class that will be applied to all form fields.
-    # The default value is `form-control`.
+    # The default value is `nil`.
     attr_accessor :field_class
 
     # An additional CSS class that will be added along with the existing
@@ -174,7 +174,7 @@ module RailsBootstrapForm
 
       @layout = "vertical"
 
-      @field_class = "form-control"
+      @field_class = nil
       @additional_field_class = nil
 
       @help_text = nil

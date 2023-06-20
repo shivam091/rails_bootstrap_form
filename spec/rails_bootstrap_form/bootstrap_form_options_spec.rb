@@ -13,7 +13,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormOptions do
     it "sets default values of bootstrap form options" do
       expect(options.disabled).to be_falsy
       expect(options.layout).to eq("vertical")
-      expect(options.field_class).to eq("form-control")
+      expect(options.field_class).to be_nil
       expect(options.additional_field_class).to be_nil
       expect(options.help_text).to be_nil
       expect(options.label_text).to be_nil
