@@ -8,21 +8,19 @@ module RailsBootstrapForm
       extend ActiveSupport::Concern
 
       included do
-        def static_field(*args)
-          options = args.extract_options!
-          attribute = args.first
-
-          static_options = options.merge(
-            readonly: true,
-            disabled: true,
-            bootstrap: {
+        def static_field(attribute, options = {})
+          options.tap do |option|
+            option[:readonly] = true
+            option[:disabled] = true
+            option[:bootstrap] = {
+              floating: false,
               field_class: bootstrap_form_options.static_field_class
-            }.reverse_merge!(options.delete(:bootstrap))
-          )
+            }.reverse_merge!(options.fetch(:bootstrap, {}))
+          end
 
-          static_options[:value] = object.send(attribute) unless options.key?(:value)
+          options[:value] = object.send(attribute) unless options.key?(:value)
 
-          text_field(attribute, static_options)
+          text_field(attribute, options)
         end
       end
     end

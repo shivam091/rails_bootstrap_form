@@ -9,15 +9,11 @@ module RailsBootstrapForm
 
       included do
         def color_field(attribute, options = {})
-          options = {
-            bootstrap: {
-              field_class: "form-control form-control-color",
-              floating: false
-            }
-          }.deep_merge!(options)
-
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?
+
+          bootstrap.set_field_class!("form-control form-control-color")
+          bootstrap.disable_floating_labels!
 
           field_wrapper_builder(attribute, bootstrap, options) do
             super(attribute, options)

@@ -28,7 +28,7 @@ for setting up `application.scss` and `application.js`.
 Add the `rails_bootstrap_form` gem to your `Gemfile`:
 
 ```ruby
-gem "rails_bootstrap_form", "~> 0.9.4"
+gem "rails_bootstrap_form", "~> 0.9.5"
 ```
 
 Then:
@@ -154,13 +154,13 @@ This generates the following HTML:
 
 ## Bootstrap Configuration Options
 
-Here's a list of all possible options you can pass via `bootstrap` option that can be attached to the `bootstrap_form_for` or `bootstrap_form_with` or any field helpers inside of it:
+Here's a list of all possible options you can pass via `bootstrap` option that can be attached to the `bootstrap_form_for`, `bootstrap_form_with`, `fields_for`, or any field helpers inside of it:
 
 | Option | Description | Default value |
 | ------ | ------------- | ----------- |
 | `disabled` | An option to disable **rails_bootstrap_form** helpers. Default rails form builder element is rendered when set to `true` | `false` |
 | `layout` | Controls layout of form and field helpers. It can be `vertical` `horizontal`, or `inline`. | `vertical` |
-| `field_class` | A CSS class that will be applied to all form fields. | `form-control` |
+| `field_class` | A CSS class that will be applied to all form fields. | `nil` |
 | `help_text` | Describes help text for the HTML field. Help text is automatically read from translation file. If you want to customize it, you can pass a string. You can also set it `false` if you do not want help text displayed. | `nil` |
 | `label_text` | An option to customize automatically generated label text. | `nil` |
 | `skip_label` | An option to control whether the label is to be displayed or not. | `false` |
@@ -322,7 +322,7 @@ time_field                   time_select                  time_zone_select
 url_field                    week_field                   weekday_select
 ```
 
-## Supported form layouts
+## Supported Form Layouts
 
 ### Vertical Layout
 
@@ -1029,6 +1029,8 @@ This generates the following HTML:
   <input type="submit" name="commit" value="Register" class="btn btn-primary" data-disable-with="Register">
 </form>
 ```
+
+Options specified at the field level take precedence over those specified at the fields_for level, which take precedence over those specified at the form level.
 
 ### file_field
 

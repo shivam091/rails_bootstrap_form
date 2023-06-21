@@ -9,10 +9,10 @@ module RailsBootstrapForm
 
       included do
         def weekday_select(attribute, options = {}, html_options = {}, &block)
-          options = {bootstrap: {field_class: "form-select"}}.deep_merge!(options)
-
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?
+
+          bootstrap.set_field_class!("form-select")
 
           field_wrapper_builder(attribute, bootstrap, options, html_options) do
             super(attribute, options, html_options, &block)

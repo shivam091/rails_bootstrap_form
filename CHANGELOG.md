@@ -4,6 +4,18 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.9.4](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.4...v0.9.5) - 2023-06-21
+
+### What's changed
+
+- Changed default value of `field_class` option to `nil`.
+
+### What's fixed
+
+- Fixed static field options to accept bootstrap options ([#45](https://github.com/shivam091/rails_bootstrap_form/issues/45))
+- Changes to allow overriding of field_class at form and field level ([#44](https://github.com/shivam091/rails_bootstrap_form/issues/44))
+- Fixed bug causing class attribute in select list to not get added to field ([#46](https://github.com/shivam091/rails_bootstrap_form/issues/46))
+
 ## [0.9.4](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.3...v0.9.4) - 2023-06-17
 
 ### What's new
