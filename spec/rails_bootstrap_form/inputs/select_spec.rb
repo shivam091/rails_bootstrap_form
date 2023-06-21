@@ -171,7 +171,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
         </div>
       HTML
 
-      actual = form_builder.select :country_id, country_options, class: "custom-class"
+      actual = form_builder.select :country_id, country_options, {}, {class: "custom-class"}
 
       expect(actual).to match_html(expected)
     end
@@ -187,7 +187,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
         </div>
       HTML
 
-      actual = form_builder.select :country_id, country_options, bootstrap: {additional_field_class: "custom-select"}, class: "html-class"
+      actual = form_builder.select :country_id, country_options, {bootstrap: {additional_field_class: "custom-select"}}, {class: "html-class"}
 
       expect(actual).to match_html(expected)
     end
