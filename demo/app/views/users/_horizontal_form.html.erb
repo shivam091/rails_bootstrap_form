@@ -20,6 +20,7 @@
       <%= form.time_select :interview_time %>
       <%= form.datetime_select :interview_datetime %>
       <%= form.weekday_select :weekly_off %>
+      <%= form.rich_text_area :life_story %>
       <%= form.fields_for :address, include_id: false do |address_form| %>
         <%= address_form.text_area :street %>
         <%= address_form.text_field :state %>

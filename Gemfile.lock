@@ -98,6 +98,9 @@ GEM
       activesupport (>= 5.0)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.2.1)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     loofah (2.21.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -213,6 +216,7 @@ DEPENDENCIES
   byebug
   compare-xml
   generator_spec
+  importmap-rails (~> 1.2)
   nokogiri
   pg (~> 1.1)
   puma

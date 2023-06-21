@@ -60,6 +60,7 @@ class UsersController < ApplicationController
       :interview_datetime,
       :weekly_off,
       :gender,
+      :life_story,
       skill_ids: [],
       address_attributes: [
         :street,
