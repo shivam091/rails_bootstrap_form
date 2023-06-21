@@ -11,7 +11,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionRadioButtons do
   describe "#collection_radio_buttons" do
     it "renders default Rails helper when bootstrap is disabled" do
       expected = <<~HTML
-        <input type="hidden" name="user[fruit_id]" value="" autocomplete="off" />
+        <input type="hidden" name="user[fruit_id]" value="" #{autocomplete_attr} />
         <input type="radio" value="1" name="user[fruit_id]" id="user_fruit_id_1" />
         <label for="user_fruit_id_1">Mango</label>
         <input type="radio" value="2" name="user[fruit_id]" id="user_fruit_id_2" />

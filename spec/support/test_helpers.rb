@@ -20,6 +20,10 @@ module TestHelpers
     '<option value="" label=" "></option>'
   end
 
+  def autocomplete_attr
+    'autocomplete="off"'
+  end
+
   def options_range(start: 1, stop: 31, selected: nil, months: false)
     (start..stop).map do |n|
       attr = n == selected ? 'selected="selected"' : ""

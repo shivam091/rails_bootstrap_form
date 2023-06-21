@@ -13,7 +13,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RichTextArea do
   describe "#rich_text_area" do
     it "renders default Rails helper when bootstrap is disabled" do
       expected = <<~HTML
-        <input type="hidden" name="user[life_story]" id="user_life_story_trix_input_user" autocomplete="off" />
+        <input type="hidden" name="user[life_story]" id="user_life_story_trix_input_user" #{autocomplete_attr} />
         <trix-editor
           id="user_life_story"
           input="user_life_story_trix_input_user"
@@ -32,7 +32,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RichTextArea do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label" for="user_life_story">Life story</label>
-          <input type="hidden" name="user[life_story]" id="user_life_story_trix_input_user" autocomplete="off" />
+          <input type="hidden" name="user[life_story]" id="user_life_story_trix_input_user" #{autocomplete_attr} />
           <trix-editor
             class="trix-content form-control"
             id="user_life_story"
@@ -53,7 +53,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RichTextArea do
         <div class="row mb-3">
           <label class="col-form-label col-sm-2" for="user_life_story">Life story</label>
           <div class="col-sm-10">
-            <input type="hidden" name="user[life_story]" id="user_life_story_trix_input_user" autocomplete="off" />
+            <input type="hidden" name="user[life_story]" id="user_life_story_trix_input_user" #{autocomplete_attr} />
             <trix-editor
               class="trix-content form-control"
               id="user_life_story"
