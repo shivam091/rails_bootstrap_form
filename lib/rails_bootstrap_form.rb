@@ -5,6 +5,7 @@
 require "action_view"
 require "action_pack"
 require "rails_bootstrap_form/action_view_extensions/bootstrap_form_helper"
+require "#{Gem::Specification.find_by_name('actiontext').gem_dir}/app/helpers/action_text/tag_helper"
 
 module RailsBootstrapForm
   extend ActiveSupport::Autoload

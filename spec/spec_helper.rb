@@ -51,8 +51,10 @@ RSpec.configure do |config|
   config.include ActionView::Helpers::FormOptionsHelper
   config.include ActionView::Helpers::DateHelper
   config.include ActionView::Context if defined?(ActionView::Context)
-  config.include ActiveSupport::Testing::TimeHelpers
   config.include ActionDispatch::Routing::PolymorphicRoutes
+  config.include ActiveSupport::Testing::TimeHelpers
+  config.include ActionText::Engine.helpers
+  config.include ActionText::TagHelper
   config.include RailsBootstrapForm::ActionViewExtensions::BootstrapFormHelper
   config.include TestHelpers
 

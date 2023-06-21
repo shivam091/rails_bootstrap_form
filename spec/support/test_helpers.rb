@@ -27,4 +27,16 @@ module TestHelpers
       "<option #{attr} value=\"#{n}\">#{label}</option>"
     end.join("\n")
   end
+
+  def data_blob_url_template
+    "http://#{Rails.application.routes.default_url_options[:host]}/rails/active_storage/blobs/redirect/:signed_id/:filename"
+  end
+
+  def data_direct_upload_url
+    "http://#{Rails.application.routes.default_url_options[:host]}/rails/active_storage/direct_uploads"
+  end
+
+  def main_app
+     Rails.application.class.routes.url_helpers
+  end
 end
