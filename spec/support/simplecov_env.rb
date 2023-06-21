@@ -12,7 +12,7 @@ module SimpleCovEnv
     configure_filters
     write_coverage_percentage
 
-    SimpleCov.start "rails" do
+    SimpleCov.start do
       groups.clear
     end
     configure_profile
