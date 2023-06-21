@@ -13,11 +13,11 @@ module RailsBootstrapForm
             has_association_error?(attribute)
         end
 
-        def input_with_error(attribute, &block)
-          input = capture(&block)
-          input << generate_error(attribute)
-          input
-        end
+        # def input_with_error(attribute, &block)
+        #   input = capture(&block)
+        #   input << generate_error(attribute)
+        #   input
+        # end
 
         def generate_error(attribute)
           if is_invalid?(attribute)
@@ -58,9 +58,8 @@ module RailsBootstrapForm
           (association.foreign_key == attribute.to_s)
         end
 
-        private :is_invalid?, :input_with_error, :generate_error,
-                :has_association_error?, :error_messages,
-                :is_belongs_to_association?, :is_association_same?
+        private :is_invalid?, :generate_error, :has_association_error?,
+                :error_messages, :is_belongs_to_association?, :is_association_same?
       end
     end
   end

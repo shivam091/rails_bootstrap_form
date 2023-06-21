@@ -373,8 +373,8 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
           <div class="mb-3">
             <label class="form-label required is-invalid" for="address_country_id">Country</label>
             <select class="form-select is-invalid" aria-required="true" required="required" name="address[country_id]" id="address_country_id">
-            #{blank_option}
-            #{country_options}
+              #{blank_option}
+              #{country_options}
             </select>
             <div class="invalid-feedback">must exist</div>
           </div>

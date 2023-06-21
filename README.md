@@ -176,7 +176,7 @@ Here's a list of all possible options you can pass via `bootstrap` option that c
 | `switch` | An option to control whether the check box should look like Bootstrap switches. | `false` |
 | `wrapper` | An option to control the HTML attributes and options that will be added to a field wrapper. You can set it false if you don't the field to be rendered in a wrapper. | `{}` |
 | `size` | An option to control the size of input groups, buttons, labels, and fields. It can be `sm` or `lg`. | `nil` |
-| `inline` | An option to group checkboxes and radio buttons on the same horizontal row. | `false` |
+| `inline` | An option to group checkboxes and radio buttons on the same horizontal row. If form layout is `inline`, this option doesn't get considered. | `false` |
 | `label_col_class` | A CSS class that will be applied to all labels when layout is `horizontal`. | `col-form-label` |
 | `label_col_wrapper_class` | A CSS class for label column when layout is `horizontal`. | `col-sm-2` |
 | `field_col_wrapper_class` | A CSS class for field column when layout is `horizontal`. | `col-sm-10` |
