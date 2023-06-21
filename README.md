@@ -1548,12 +1548,12 @@ This generates the following HTML:
 ### collection_check_boxes
 
 This helper provides a way to create collection of check boxes. This helper accepts same arguments as [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_check_boxes) except it don't accept a `block` as
-an argument and takes care of rendering labels, check boxes, and wrapper for you.
+an argument and takes care of rendering labels, check boxes, and wrapper for you. `collection_check_boxes` are rendered by default for multiple option selections, but you can turn them into single selections by passing `options[:multiple] = false`.
 
 ![collection_check_boxes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/c92f5921-e572-4384-812e-31308e018f66)
 
 ```erb
-<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {multiple: true, bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
+<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
 ```
 
 This generates the following HTML:

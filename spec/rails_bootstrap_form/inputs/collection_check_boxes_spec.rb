@@ -90,7 +90,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name
 
       expect(actual).to match_html(expected)
     end
@@ -146,7 +146,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true, bootstrap: {layout: :inline}
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, bootstrap: {layout: :inline}
 
       expect(actual).to match_html(expected)
     end
@@ -204,7 +204,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true, bootstrap: {layout: :horizontal}
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, bootstrap: {layout: :horizontal}
 
       expect(actual).to match_html(expected)
     end
@@ -260,7 +260,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true, bootstrap: {inline: true}
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, bootstrap: {inline: true}
 
       expect(actual).to match_html(expected)
     end
