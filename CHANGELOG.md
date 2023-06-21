@@ -4,7 +4,13 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
-## [0.9.4](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.4...v0.9.5) - 2023-06-21
+## [0.9.6](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.5...v0.9.6) - 2023-06-21
+
+### What's new
+
+- Integrated `importmap` and `actiontext` in demo application for demonstrating implementation of `rich_text_area`.
+
+## [0.9.5](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.4...v0.9.5) - 2023-06-21
 
 ### What's changed
 
