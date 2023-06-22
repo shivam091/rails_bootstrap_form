@@ -13,7 +13,7 @@ RSpec.describe RailsBootstrapForm::Inputs::DatetimeField do
   describe "#datetime_field" do
     it "renders default Rails helper when bootstrap is disabled" do
       expected = <<~HTML
-        <input type="datetime" name="user[interview_datetime]" id="user_interview_datetime" />
+        <input type="datetime-local" name="user[interview_datetime]" id="user_interview_datetime" />
       HTML
 
       actual = form_builder.datetime_field :interview_datetime, bootstrap: {disabled: true}
@@ -25,7 +25,7 @@ RSpec.describe RailsBootstrapForm::Inputs::DatetimeField do
       expected = <<~HTML
         <div class="mb-3">
           <label class="form-label" for="user_interview_datetime">Interview date & time</label>
-          <input class="form-control" type="datetime" name="user[interview_datetime]" id="user_interview_datetime" />
+          <input class="form-control" type="datetime-local" name="user[interview_datetime]" id="user_interview_datetime" />
         </div>
       HTML
 
@@ -38,7 +38,7 @@ RSpec.describe RailsBootstrapForm::Inputs::DatetimeField do
       expected = <<~HTML
         <div class="col-12">
           <label class="form-label visually-hidden" for="user_interview_datetime">Interview date & time</label>
-          <input class="form-control" placeholder="Interview date & time" type="datetime" name="user[interview_datetime]" id="user_interview_datetime" />
+          <input class="form-control" placeholder="Interview date & time" type="datetime-local" name="user[interview_datetime]" id="user_interview_datetime" />
         </div>
       HTML
 
@@ -52,7 +52,7 @@ RSpec.describe RailsBootstrapForm::Inputs::DatetimeField do
         <div class="row mb-3">
           <label class="col-form-label col-sm-2" for="user_interview_datetime">Interview date & time</label>
           <div class="col-sm-10">
-            <input class="form-control" type="datetime" name="user[interview_datetime]" id="user_interview_datetime" />
+            <input class="form-control" type="datetime-local" name="user[interview_datetime]" id="user_interview_datetime" />
           </div>
         </div>
       HTML
