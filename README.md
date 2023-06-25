@@ -28,7 +28,7 @@ for setting up `application.scss` and `application.js`.
 Add the `rails_bootstrap_form` gem to your `Gemfile`:
 
 ```ruby
-gem "rails_bootstrap_form", "~> 0.9.5"
+gem "rails_bootstrap_form", "~> 0.9.6"
 ```
 
 Then:
