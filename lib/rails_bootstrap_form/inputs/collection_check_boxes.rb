@@ -14,6 +14,8 @@ module RailsBootstrapForm
 
           bootstrap.disable_floating_labels!
 
+          options[:multiple] = options.delete(:multiple) { true }
+
           inputs = inputs_collection(attribute, collection, value_method, text_method, bootstrap, options) do |attribute, value, options|
             bootstrap_opts = bootstrap_form_options.scoped(options.delete(:bootstrap))
 

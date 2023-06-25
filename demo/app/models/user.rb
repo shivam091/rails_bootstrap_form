@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   attr_accessor :remember_me
 
+  has_rich_text :life_story
+
+  has_one_attached :avatar, dependent: :purge_later
+
   validates :name, presence: true, length: {in: 2..50}
   validates :terms, acceptance: true
   validates :email,

@@ -12,6 +12,9 @@ gem "sprockets-rails"
 # Use Sass to process CSS
 gem "sassc-rails"
 
+# Use importmap to include JavaScript modules
+gem "importmap-rails", "~> 1.2"
+
 # Add bootstrap support
 gem "bootstrap", "~> 5.3.0.alpha3"
 

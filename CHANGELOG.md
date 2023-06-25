@@ -4,7 +4,16 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
-## [0.9.4](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.4...v0.9.5) - 2023-06-21
+## [0.9.6](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.5...v0.9.6) - 2023-06-25
+
+### What's new
+
+- Integrated `importmap` and `actiontext` in demo application for demonstrating implementation of `rich_text_area`.
+- Added spec examples for `date_field`, `datetime_field`, `datetime_local_field`, `datetime_select`, `email_field`,
+  `file_field`, `hidden_field`, `month_field`, `number_field`, `password_field`, `phone_field`, `search_field`,
+  `telephone_field`, `text_area`, `time_field`, `time_select`, `url_field`, and `week_field` helpers.
+
+## [0.9.5](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.4...v0.9.5) - 2023-06-21
 
 ### What's changed
 

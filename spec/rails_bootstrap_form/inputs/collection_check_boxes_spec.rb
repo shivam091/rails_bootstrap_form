@@ -11,7 +11,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
   describe "#collection_check_boxes" do
     it "renders default Rails helper when bootstrap is disabled" do
       expected = <<~HTML
-        <input type="hidden" name="user[skill_ids][]" value="" autocomplete="off" />
+        <input type="hidden" name="user[skill_ids][]" value="" #{autocomplete_attr} />
         <input type="checkbox" value="1" name="user[skill_ids][]" id="user_skill_ids_1" />
         <label for="user_skill_ids_1">Communication</label>
         <input type="checkbox" value="2" name="user[skill_ids][]" id="user_skill_ids_2" />
@@ -44,7 +44,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         <div class="mb-3">
           <label class="form-label required" for="user_skill_ids">Skills</label>
           <div class="rails-bootstrap-forms-collection-check-boxes">
-            <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
+            <input value="" multiple="multiple" #{autocomplete_attr} type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
             <div class="form-check">
               <input id="user_skill_ids_1" class="form-check-input" type="checkbox" value="1" name="user[skill_ids][]" />
               <label class="form-check-label" for="user_skill_ids_1">Communication</label>
@@ -90,7 +90,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name
 
       expect(actual).to match_html(expected)
     end
@@ -100,7 +100,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         <div class="col-12">
           <label class="form-label visually-hidden required" for="user_skill_ids">Skills</label>
           <div class="rails-bootstrap-forms-collection-check-boxes">
-            <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
+            <input value="" multiple="multiple" #{autocomplete_attr} type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
             <div class="form-check form-check-inline">
               <input id="user_skill_ids_1" class="form-check-input" type="checkbox" value="1" name="user[skill_ids][]" />
               <label class="form-check-label" for="user_skill_ids_1">Communication</label>
@@ -146,7 +146,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true, bootstrap: {layout: :inline}
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, bootstrap: {layout: :inline}
 
       expect(actual).to match_html(expected)
     end
@@ -157,7 +157,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
           <label class="col-form-label col-sm-2 required" for="user_skill_ids">Skills</label>
           <div class="col-sm-10">
             <div class="rails-bootstrap-forms-collection-check-boxes">
-              <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
+              <input value="" multiple="multiple" #{autocomplete_attr} type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
               <div class="form-check">
                 <input id="user_skill_ids_1" class="form-check-input" type="checkbox" value="1" name="user[skill_ids][]" />
                 <label class="form-check-label" for="user_skill_ids_1">Communication</label>
@@ -204,7 +204,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true, bootstrap: {layout: :horizontal}
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, bootstrap: {layout: :horizontal}
 
       expect(actual).to match_html(expected)
     end
@@ -214,7 +214,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         <div class="mb-3">
           <label class="form-label required" for="user_skill_ids">Skills</label>
           <div class="rails-bootstrap-forms-collection-check-boxes">
-            <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
+            <input value="" multiple="multiple" #{autocomplete_attr} type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
             <div class="form-check form-check-inline">
               <input id="user_skill_ids_1" class="form-check-input" type="checkbox" value="1" name="user[skill_ids][]" />
               <label class="form-check-label" for="user_skill_ids_1">Communication</label>
@@ -260,7 +260,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         </div>
       HTML
 
-      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, multiple: true, bootstrap: {inline: true}
+      actual = form_builder.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, bootstrap: {inline: true}
 
       expect(actual).to match_html(expected)
     end
@@ -325,7 +325,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
         <div class="mb-3">
           <label class="form-label required" for="user_skill_ids">Skills</label>
           <div class="rails-bootstrap-forms-collection-check-boxes">
-            <input value="" autocomplete="off" type="hidden" name="user[skill_ids]" id="user_skill_ids" />
+            <input value="" #{autocomplete_attr} type="hidden" name="user[skill_ids]" id="user_skill_ids" />
             <div class="form-check">
               <input id="user_skill_ids_1" class="form-check-input" type="checkbox" value="1" name="user[skill_ids]" />
               <label class="form-check-label" for="user_skill_ids_1">Communication</label>

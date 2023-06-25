@@ -3,7 +3,7 @@
 # -*- warn_indent: true -*-
 
 class Address < ApplicationRecord
-  validates :street, :city, :country_id, presence: true
+  validates :street, :city, presence: true
 
   belongs_to :user
   belongs_to :country

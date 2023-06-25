@@ -35,6 +35,8 @@
           interview_datetime: "Interview date & time",
           weekly_off: "Week off",
           gender: "Gender",
+          bio: "Life story",
+          avatar: "Avatar",
         },
         user_skill: {
           user_id: "User",

@@ -28,7 +28,7 @@ for setting up `application.scss` and `application.js`.
 Add the `rails_bootstrap_form` gem to your `Gemfile`:
 
 ```ruby
-gem "rails_bootstrap_form", "~> 0.9.5"
+gem "rails_bootstrap_form", "~> 0.9.6"
 ```
 
 Then:
@@ -176,7 +176,7 @@ Here's a list of all possible options you can pass via `bootstrap` option that c
 | `switch` | An option to control whether the check box should look like Bootstrap switches. | `false` |
 | `wrapper` | An option to control the HTML attributes and options that will be added to a field wrapper. You can set it false if you don't the field to be rendered in a wrapper. | `{}` |
 | `size` | An option to control the size of input groups, buttons, labels, and fields. It can be `sm` or `lg`. | `nil` |
-| `inline` | An option to group checkboxes and radio buttons on the same horizontal row. | `false` |
+| `inline` | An option to group checkboxes and radio buttons on the same horizontal row. If form layout is `inline`, this option doesn't get considered. | `false` |
 | `label_col_class` | A CSS class that will be applied to all labels when layout is `horizontal`. | `col-form-label` |
 | `label_col_wrapper_class` | A CSS class for label column when layout is `horizontal`. | `col-sm-2` |
 | `field_col_wrapper_class` | A CSS class for field column when layout is `horizontal`. | `col-sm-10` |
@@ -1192,6 +1192,64 @@ This generates the following HTML:
 </div>
 ```
 
+### rich_text_area
+
+Our `rich_text_area` helper accepts the same arguments as the [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-rich_text_area). This editor is also known as `Trix Editor`.
+
+![rich_text_area](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/e845ee05-79f2-4352-899e-f93decc9b16b)
+
+```erb
+<%= form.rich_text_area :life_story %>
+```
+
+This generates the following HTML:
+
+```html
+<div class="mb-3">
+  <label class="form-label" for="user_life_story">Life story</label>
+  <input type="hidden" name="user[life_story]" id="user_life_story_trix_input_user" autocomplete="off">
+  <trix-toolbar id="trix-toolbar-1">
+    <div class="trix-button-row">
+      <span class="trix-button-group trix-button-group--text-tools" data-trix-button-group="text-tools">
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-bold" data-trix-attribute="bold" data-trix-key="b" title="Bold" tabindex="-1">Bold</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-italic" data-trix-attribute="italic" data-trix-key="i" title="Italic" tabindex="-1">Italic</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-strike" data-trix-attribute="strike" title="Strikethrough" tabindex="-1">Strikethrough</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-link" data-trix-attribute="href" data-trix-action="link" data-trix-key="k" title="Link" tabindex="-1">Link</button>
+      </span>
+      <span class="trix-button-group trix-button-group--block-tools" data-trix-button-group="block-tools">
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-1" data-trix-attribute="heading1" title="Heading" tabindex="-1">Heading</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-quote" data-trix-attribute="quote" title="Quote" tabindex="-1">Quote</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-code" data-trix-attribute="code" title="Code" tabindex="-1">Code</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-bullet-list" data-trix-attribute="bullet" title="Bullets" tabindex="-1">Bullets</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-number-list" data-trix-attribute="number" title="Numbers" tabindex="-1">Numbers</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-decrease-nesting-level" data-trix-action="decreaseNestingLevel" title="Decrease Level" tabindex="-1">Decrease Level</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-increase-nesting-level" data-trix-action="increaseNestingLevel" title="Increase Level" tabindex="-1">Increase Level</button>
+      </span>
+      <span class="trix-button-group trix-button-group--file-tools" data-trix-button-group="file-tools">
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-attach" data-trix-action="attachFiles" title="Attach Files" tabindex="-1">Attach Files</button>
+      </span>
+      <span class="trix-button-group-spacer"></span>
+      <span class="trix-button-group trix-button-group--history-tools" data-trix-button-group="history-tools">
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-undo" data-trix-action="undo" data-trix-key="z" title="Undo" tabindex="-1">Undo</button>
+        <button type="button" class="trix-button trix-button--icon trix-button--icon-redo" data-trix-action="redo" data-trix-key="shift+z" title="Redo" tabindex="-1">Redo</button>
+      </span>
+    </div>
+    <div class="trix-dialogs" data-trix-dialogs="">
+      <div class="trix-dialog trix-dialog--link" data-trix-dialog="href" data-trix-dialog-attribute="href">
+        <div class="trix-dialog__link-fields">
+          <input type="url" name="href" class="trix-input trix-input--dialog" placeholder="Enter a URL…" aria-label="URL" required="" data-trix-input="" disabled="disabled">
+          <div class="trix-button-group">
+            <input type="button" class="trix-button trix-button--dialog" value="Link" data-trix-method="setAttribute">
+            <input type="button" class="trix-button trix-button--dialog" value="Unlink" data-trix-method="removeAttribute">
+          </div>
+        </div>
+      </div>
+    </div>
+  </trix-toolbar>
+  <trix-editor class="trix-content form-control" id="user_life_story" input="user_life_story_trix_input_user" data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename" contenteditable="" role="textbox" aria-label="Life story Life story" trix-id="1" toolbar="trix-toolbar-1"></trix-editor>
+</div>
+```
+
 ### search_field
 
 Our `search_field` helper accepts the same arguments as the [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html#method-i-search_field).
@@ -1490,12 +1548,12 @@ This generates the following HTML:
 ### collection_check_boxes
 
 This helper provides a way to create collection of check boxes. This helper accepts same arguments as [default Rails helper](https://api.rubyonrails.org/classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_check_boxes) except it don't accept a `block` as
-an argument and takes care of rendering labels, check boxes, and wrapper for you.
+an argument and takes care of rendering labels, check boxes, and wrapper for you. `collection_check_boxes` are rendered by default for multiple option selections, but you can turn them into single selections by passing `options[:multiple] = false`.
 
 ![collection_check_boxes](https://github.com/shivam091/rails_bootstrap_form/assets/7858927/c92f5921-e572-4384-812e-31308e018f66)
 
 ```erb
-<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {multiple: true, bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
+<%= form.collection_check_boxes :skill_ids, ::Skill.all, :id, :name, {bootstrap: {layout: :horizontal, inline: true}, onchange: "this.form.submit();"}, {} %>
 ```
 
 This generates the following HTML:
