@@ -343,7 +343,7 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       expect(actual).to match_html(expected)
     end
 
-    it "renders errors correctly" do
+    it "renders errors correctly in vertical layout" do
       user.errors.add(:name, :blank)
 
       expected = <<~HTML
@@ -357,6 +357,48 @@ RSpec.describe RailsBootstrapForm::Inputs::TextField do
       HTML
 
       actual = bootstrap_form_with(model: user, url: "/test") do |form|
+        concat(form.text_field(:name))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in inline layout" do
+      user.errors.add(:name, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+          <div class="col-12">
+            <label class="form-label visually-hidden required is-invalid" for="user_name">Name</label>
+            <input class="form-control is-invalid" aria-required="true" required="required" placeholder="Name" type="text" name="user[name]" id="user_name" />
+            <div class="invalid-feedback">can't be blank</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :inline}) do |form|
+        concat(form.text_field(:name))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in horizontal layout" do
+      user.errors.add(:name, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="row mb-3">
+            <label class="col-form-label col-sm-2 required is-invalid" for="user_name">Name</label>
+            <div class="col-sm-10">
+              <input class="form-control is-invalid" aria-required="true" required="required" type="text" name="user[name]" id="user_name" />
+              <div class="invalid-feedback">can't be blank</div>
+            </div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
         concat(form.text_field(:name))
       end
 

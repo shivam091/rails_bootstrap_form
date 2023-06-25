@@ -64,5 +64,70 @@ RSpec.describe RailsBootstrapForm::Inputs::EmailField do
 
       expect(actual).to match_html(expected)
     end
+
+    it "renders errors correctly in vertical layout" do
+      user.errors.add(:email, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="mb-3">
+            <label class="form-label required is-invalid" for="user_email">Email address</label>
+            <input class="form-control is-invalid" aria-required="true" required="required" type="email" name="user[email]" id="user_email" />
+            <div class="invalid-feedback">can't be blank</div>
+            <div class="form-text text-muted">Please use official email address</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test") do |form|
+        concat(form.email_field(:email))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in horizontal layout" do
+      user.errors.add(:email, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="row mb-3">
+            <label class="col-form-label col-sm-2 required is-invalid" for="user_email">Email address</label>
+            <div class="col-sm-10">
+              <input class="form-control is-invalid" aria-required="true" required="required" type="email" name="user[email]" id="user_email" />
+              <div class="invalid-feedback">can't be blank</div>
+              <div class="form-text text-muted">Please use official email address</div>
+            </div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
+        concat(form.email_field(:email))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in inline layout" do
+      user.errors.add(:email, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+          <div class="col-12">
+            <label class="form-label visually-hidden required is-invalid" for="user_email">Email address</label>
+            <input class="form-control is-invalid" aria-required="true" required="required" placeholder="Email address" type="email" name="user[email]" id="user_email" />
+            <div class="invalid-feedback">can't be blank</div>
+            <div class="form-text text-muted">Please use official email address</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :inline}) do |form|
+        concat(form.email_field(:email))
+      end
+
+      expect(actual).to match_html(expected)
+    end
   end
 end
