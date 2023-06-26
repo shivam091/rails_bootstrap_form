@@ -16,7 +16,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
       end
     end
     let(:user) { user_klass.new(email: "steve@example.com") }
-    let(:builder) { described_class.new(:user, user, self, {}) }
+    let(:form_builder) { described_class.new(:user, user, self, {}) }
 
     it "supports anonymous models" do
       expected = <<~HTML
@@ -27,7 +27,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
         </div>
       HTML
 
-      actual = builder.text_field :email
+      actual = form_builder.text_field :email
 
       expect(actual).to match_html(expected)
     end
@@ -36,7 +36,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
   context "when objects without model names are passed to form builder" do
     let(:super_user_klass) { ::SuperUser }
     let(:super_user) { super_user_klass.new(email: "steve@example.com") }
-    let(:builder) { described_class.new(:super_user, super_user, self, {}) }
+    let(:form_builder) { described_class.new(:super_user, super_user, self, {}) }
 
     it "supports objects without model names" do
       I18n.backend.store_translations(:en, activerecord: {
@@ -55,7 +55,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
         </div>
       HTML
 
-      actual = builder.text_field :email
+      actual = form_builder.text_field :email
 
       expect(actual).to match_html(expected)
     end
@@ -63,7 +63,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
   context "when nil objects are passed to form builder" do
     let(:super_user) { nil }
-    let(:builder) { described_class.new(:super_user, super_user, self, {}) }
+    let(:form_builder) { described_class.new(:super_user, super_user, self, {}) }
 
     it "supports nil objects" do
       expected = <<~HTML
@@ -73,7 +73,40 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
         </div>
       HTML
 
-      actual = builder.text_field :email
+      actual = form_builder.text_field :email
+
+      expect(actual).to match_html(expected)
+    end
+  end
+
+  context "when ActiveModel objects are passed to form builder" do
+    let(:admin_user) { AdminUser.new(email: "steve@example.com") }
+    let(:form_builder) { described_class.new(:admin_user, admin_user, self, {}) }
+
+    it "supports ActiveModel objects" do
+      expect(admin_user.valid?).to be_falsy
+
+      I18n.backend.store_translations(:en, activerecord: {
+                                        help_texts: {
+                                          admin_user: {
+                                            password: "A good password should be at least six characters long"
+                                          }
+                                        }
+                                      })
+      expected = <<~HTML
+        <div class="mb-3">
+          <div class="field_with_errors">
+            <label class="form-label required is-invalid" for="admin_user_password">Password</label>
+          </div>
+          <div class="field_with_errors">
+            <input class="form-control is-invalid" aria-required="true" required="required" type="text" name="admin_user[password]" id="admin_user_password" />
+          </div>
+          <div class="invalid-feedback">can't be blank</div>
+          <div class="form-text text-muted">A good password should be at least six characters long</div>
+        </div>
+      HTML
+
+      actual = form_builder.text_field(:password)
 
       expect(actual).to match_html(expected)
     end
