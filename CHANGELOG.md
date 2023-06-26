@@ -4,6 +4,12 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.9.7](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.6...v0.9.7) - 2023-06-26
+
+### What's new
+
+- Added specs for field helpers to ensure validation errors are rendered correctly in each layout.
+
 ## [0.9.6](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.5...v0.9.6) - 2023-06-25
 
 ### What's new

@@ -261,5 +261,73 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
 
       expect(actual).to match_html(expected)
     end
+
+    it "renders errors correctly in vertical layout" do
+      user.errors.add(:gender, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input is-invalid" type="radio" value="male" name="user[gender]" id="user_gender_male" />
+              <label class="form-check-label is-invalid" for="user_gender_male">Gender</label>
+              <div class="invalid-feedback">can't be blank</div>
+            </div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test") do |form|
+        concat(form.radio_button(:gender, "male"))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in inline layout" do
+      user.errors.add(:gender, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input is-invalid" type="radio" value="male" name="user[gender]" id="user_gender_male" />
+              <label class="form-check-label is-invalid" for="user_gender_male">Gender</label>
+              <div class="invalid-feedback">can't be blank</div>
+            </div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test", bootstrap: {layout: :inline}) do |form|
+        concat(form.radio_button(:gender, "male"))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in horizontal layout" do
+      user.errors.add(:gender, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="row mb-3">
+            <div class="col-sm-10 offset-sm-2">
+              <div class="form-check">
+                <input class="form-check-input is-invalid" type="radio" value="male" name="user[gender]" id="user_gender_male" />
+                <label class="form-check-label is-invalid" for="user_gender_male">Gender</label>
+                <div class="invalid-feedback">can't be blank</div>
+              </div>
+            </div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: user, url: "/test") do |form|
+        concat(form.radio_button(:gender, "male", bootstrap: {layout: :horizontal}))
+      end
+
+      expect(actual).to match_html(expected)
+    end
   end
 end

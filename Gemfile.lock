@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_bootstrap_form (0.9.6)
+    rails_bootstrap_form (0.9.7)
       actionpack (~> 7.0)
       activemodel (~> 7.0)
 

@@ -375,5 +375,196 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
 
       expect(actual).to match_html(expected)
     end
+
+    it "renders errors correctly in vertical layout" do
+      user.errors.add(:skill_ids, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/test" accept-charset="UTF-8" method="post">
+          <div class="mb-3">
+            <label class="form-label required is-invalid" for="user_skill_ids">Skills</label>
+            <div class="rails-bootstrap-forms-collection-check-boxes">
+              <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
+              <div class="form-check">
+                <input id="user_skill_ids_1" class="form-check-input is-invalid" type="checkbox" value="1" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_1">Communication</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_2" class="form-check-input is-invalid" type="checkbox" value="2" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_2">Problem Solving</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_3" class="form-check-input is-invalid" type="checkbox" value="3" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_3">Leadership</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_4" class="form-check-input is-invalid" type="checkbox" value="4" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_4">Writing</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_5" class="form-check-input is-invalid" type="checkbox" value="5" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_5">Creativity</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_6" class="form-check-input is-invalid" type="checkbox" value="6" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_6">Time Management</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_7" class="form-check-input is-invalid" type="checkbox" value="7" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_7">Team Work</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_8" class="form-check-input is-invalid" type="checkbox" value="8" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_8">Negotiation</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_9" class="form-check-input is-invalid" type="checkbox" value="9" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_9">Decision Making</label>
+              </div>
+              <div class="form-check">
+                <input id="user_skill_ids_10" class="form-check-input is-invalid" type="checkbox" value="10" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_10">Management</label>
+              </div>
+            </div>
+            <div class="invalid-feedback">can't be blank</div>
+            <div class="form-text text-muted">Select your strong skills</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_for(user, url: "/test") do |form|
+        concat(form.collection_check_boxes(:skill_ids, ::Skill.all, :id, :name))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in inline layout" do
+      user.errors.add(:skill_ids, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" class="new_user row row-cols-lg-auto g-3 align-items-center" id="new_user" action="/test" accept-charset="UTF-8" method="post">
+          <div class="col-12">
+            <label class="form-label visually-hidden required is-invalid" for="user_skill_ids">Skills</label>
+            <div class="rails-bootstrap-forms-collection-check-boxes">
+              <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_1" class="form-check-input is-invalid" type="checkbox" value="1" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_1">Communication</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_2" class="form-check-input is-invalid" type="checkbox" value="2" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_2">Problem Solving</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_3" class="form-check-input is-invalid" type="checkbox" value="3" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_3">Leadership</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_4" class="form-check-input is-invalid" type="checkbox" value="4" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_4">Writing</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_5" class="form-check-input is-invalid" type="checkbox" value="5" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_5">Creativity</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_6" class="form-check-input is-invalid" type="checkbox" value="6" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_6">Time Management</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_7" class="form-check-input is-invalid" type="checkbox" value="7" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_7">Team Work</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_8" class="form-check-input is-invalid" type="checkbox" value="8" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_8">Negotiation</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_9" class="form-check-input is-invalid" type="checkbox" value="9" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_9">Decision Making</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input id="user_skill_ids_10" class="form-check-input is-invalid" type="checkbox" value="10" name="user[skill_ids][]" />
+                <label class="form-check-label is-invalid" for="user_skill_ids_10">Management</label>
+              </div>
+            </div>
+            <div class="invalid-feedback">can't be blank</div>
+            <div class="form-text text-muted">Select your strong skills</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_for(user, url: "/test", bootstrap: {layout: :inline}) do |form|
+        concat(form.collection_check_boxes(:skill_ids, ::Skill.all, :id, :name))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in horizontal layout" do
+      user.errors.add(:skill_ids, :blank)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/test" accept-charset="UTF-8" method="post">
+          <div class="row mb-3">
+            <label class="col-form-label col-sm-2 required is-invalid" for="user_skill_ids">Skills</label>
+            <div class="col-sm-10">
+              <div class="rails-bootstrap-forms-collection-check-boxes">
+                <input value="" multiple="multiple" autocomplete="off" type="hidden" name="user[skill_ids][]" id="user_skill_ids" />
+                <div class="form-check">
+                  <input id="user_skill_ids_1" class="form-check-input is-invalid" type="checkbox" value="1" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_1">Communication</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_2" class="form-check-input is-invalid" type="checkbox" value="2" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_2">Problem Solving</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_3" class="form-check-input is-invalid" type="checkbox" value="3" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_3">Leadership</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_4" class="form-check-input is-invalid" type="checkbox" value="4" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_4">Writing</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_5" class="form-check-input is-invalid" type="checkbox" value="5" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_5">Creativity</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_6" class="form-check-input is-invalid" type="checkbox" value="6" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_6">Time Management</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_7" class="form-check-input is-invalid" type="checkbox" value="7" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_7">Team Work</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_8" class="form-check-input is-invalid" type="checkbox" value="8" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_8">Negotiation</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_9" class="form-check-input is-invalid" type="checkbox" value="9" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_9">Decision Making</label>
+                </div>
+                <div class="form-check">
+                  <input id="user_skill_ids_10" class="form-check-input is-invalid" type="checkbox" value="10" name="user[skill_ids][]" />
+                  <label class="form-check-label is-invalid" for="user_skill_ids_10">Management</label>
+                </div>
+              </div>
+              <div class="invalid-feedback">can't be blank</div>
+              <div class="form-text text-muted">Select your strong skills</div>
+            </div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_for(user, url: "/test", bootstrap: {layout: :horizontal}) do |form|
+        concat(form.collection_check_boxes(:skill_ids, ::Skill.all, :id, :name))
+      end
+
+      expect(actual).to match_html(expected)
+    end
   end
 end

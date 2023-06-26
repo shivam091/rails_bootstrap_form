@@ -365,7 +365,7 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       expect(actual).to match_html(expected)
     end
 
-    it "renders errors correctly" do
+    it "renders errors correctly in vertical layout" do
       address.errors.add(:country_id, :required)
 
       expected = <<~HTML
@@ -382,6 +382,54 @@ RSpec.describe RailsBootstrapForm::Inputs::Select do
       HTML
 
       actual = bootstrap_form_with(model: address, url: "/test") do |form|
+        concat(form.select(:country_id, country_options))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in inline layout" do
+      address.errors.add(:country_id, :required)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+          <div class="col-12">
+            <label class="form-label visually-hidden required is-invalid" for="address_country_id">Country</label>
+            <select class="form-select is-invalid" aria-required="true" required="required" placeholder="Country" name="address[country_id]" id="address_country_id">
+              #{blank_option}
+              #{country_options}
+            </select>
+            <div class="invalid-feedback">must exist</div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: address, url: "/test", bootstrap: {layout: :inline}) do |form|
+        concat(form.select(:country_id, country_options))
+      end
+
+      expect(actual).to match_html(expected)
+    end
+
+    it "renders errors correctly in horizontal layout" do
+      address.errors.add(:country_id, :required)
+
+      expected = <<~HTML
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="row mb-3">
+            <label class="col-form-label col-sm-2 required is-invalid" for="address_country_id">Country</label>
+            <div class="col-sm-10">
+              <select class="form-select is-invalid" aria-required="true" required="required" name="address[country_id]" id="address_country_id">
+                #{blank_option}
+                #{country_options}
+              </select>
+              <div class="invalid-feedback">must exist</div>
+            </div>
+          </div>
+        </form>
+      HTML
+
+      actual = bootstrap_form_with(model: address, url: "/test", bootstrap: {layout: :horizontal}) do |form|
         concat(form.select(:country_id, country_options))
       end
 
