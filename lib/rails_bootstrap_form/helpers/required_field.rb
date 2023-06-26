@@ -48,7 +48,7 @@ module RailsBootstrapForm
         end
 
         def is_required_association?(target, attribute)
-          target.reflections.find do |name, a|
+          target.try(:reflections)&.find do |name, a|
             next unless a.is_a?(ActiveRecord::Reflection::BelongsToReflection)
             next unless a.foreign_key == attribute.to_s
 

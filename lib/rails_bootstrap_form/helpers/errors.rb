@@ -29,7 +29,7 @@ module RailsBootstrapForm
         end
 
         def has_association_error?(attribute)
-          object.class.try(:reflections).try(:any?) do |association_name, association|
+          object.class.try(:reflections)&.any? do |association_name, association|
             next unless is_belongs_to_association?(association)
             next unless is_association_same?(attribute, association)
 
@@ -40,7 +40,7 @@ module RailsBootstrapForm
         def error_messages(attribute)
           messages = object.errors[attribute]
 
-          object.class.try(:reflections).each do |association_name, association|
+          object.class.try(:reflections)&.each do |association_name, association|
             next unless is_belongs_to_association?(association)
             next unless is_association_same?(attribute, association)
 
