@@ -8,18 +8,21 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     env:
       CODECLIMATE_REPO_TOKEN: f7dc26d97d2d636e50bcb811728bdbc9956de60045a2ed68c74c82a0d70ae77a
-
+    strategy:
+      matrix:
+        ruby:
+          - "3.2.2"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
 
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
