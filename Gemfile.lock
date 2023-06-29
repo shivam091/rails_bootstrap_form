@@ -103,6 +103,7 @@ GEM
     importmap-rails (1.2.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    json (2.6.3)
     loofah (2.21.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -192,6 +193,9 @@ GEM
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
+    simplecov-json (0.2.3)
+      json
+      simplecov
     simplecov_json_formatter (0.1.4)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -229,6 +233,7 @@ DEPENDENCIES
   rspec-rails
   sassc-rails
   simplecov
+  simplecov-json
   sprockets-rails
 
 BUNDLED WITH

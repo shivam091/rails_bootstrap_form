@@ -43,6 +43,14 @@ jobs:
       run: |
         bundle exec rake db:create
         bundle exec rake db:migrate
+    # - name: Run tests and coverage
+    #   run: |
+    #     bundle exec rspec && CODECLIMATE_REPO_TOKEN=${{env.CODECLIMATE_REPO_TOKEN}} bundle exec codeclimate-test-reporter
+    # - name: Extract source file information
+    #   run: |
+    #     coverage_report=$(cat coverage_report.json)
+    #     source_files=$(ruby -e 'require "json"; result = JSON.parse(ENV["coverage_report"]); source_files = result["files"].map { |file| { name: file["filename"], coverage: file["covered_percent"].to_i } }; puts source_files.to_json')
+    #     echo "$source_files" > source_files.json
     - name: Setup Code Climate test-reporter
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

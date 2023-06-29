@@ -3,6 +3,7 @@
 # -*- warn_indent: true -*-
 
 require "simplecov"
+require "simplecov-json"
 
 module SimpleCovEnv
   extend self
@@ -38,12 +39,7 @@ module SimpleCovEnv
   end
 
   def configure_formatter
-    SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
-      [
-        SimpleCov::Formatter::SimpleFormatter,
-        SimpleCov::Formatter::HTMLFormatter,
-      ]
-    )
+    SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
   end
 
   def write_coverage_percentage
