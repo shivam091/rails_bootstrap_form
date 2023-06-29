@@ -51,19 +51,21 @@ jobs:
     #     coverage_report=$(cat coverage_report.json)
     #     source_files=$(ruby -e 'require "json"; result = JSON.parse(ENV["coverage_report"]); source_files = result["files"].map { |file| { name: file["filename"], coverage: file["covered_percent"].to_i } }; puts source_files.to_json')
     #     echo "$source_files" > source_files.json
-    - name: Setup Code Climate test-reporter
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
-    - name: Build and test with RSpec
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rspec
-    - name: Publish code coverage
-      run: |
-        export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-        ./cc-test-reporter after-build -r ${{env.CODECLIMATE_REPO_TOKEN}}
+    # - name: Setup Code Climate test-reporter
+    #   run: |
+    #     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    #     chmod +x ./cc-test-reporter
+    #     ./cc-test-reporter before-build
+    # - name: Build and test with RSpec
+    #   run: |
+    #     gem install bundler
+    #     bundle install --jobs 4 --retry 3
+    #     bundle exec rspec
+    # - name: Publish code coverage
+    #   run: |
+    #     export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+    #     ./cc-test-reporter after-build -r ${{env.CODECLIMATE_REPO_TOKEN}}
+    - name: Report Coveralls
+      uses: coverallsapp/github-action@v2
     # - name: Rubocop
     #   run: bundle exec rubocop --autocorrect
