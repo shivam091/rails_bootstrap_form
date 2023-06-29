@@ -13,7 +13,7 @@ module RailsBootstrapForm
     include RailsBootstrapForm::InputGroupBuilder
     include RailsBootstrapForm::Inputs
 
-    delegate :capture, :concat, :tag, to: :@template
+    delegate :capture, :concat, :tag, :button_tag, to: :@template
 
     attr_accessor :bootstrap_form_options
 
