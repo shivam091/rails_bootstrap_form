@@ -12,3 +12,7 @@ gem "rake", "~> 13.0"
 gem "rspec-rails"
 
 gem "rails", RailsBootstrapForm::REQUIRED_RAILS_VERSION
+
+group :test do
+  gem "codeclimate-test-reporter", require: nil
+end
