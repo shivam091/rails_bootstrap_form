@@ -43,9 +43,9 @@ jobs:
       run: |
         bundle exec rake db:create
         bundle exec rake db:migrate
-    # - name: Run tests and coverage
-    #   run: |
-    #     bundle exec rspec && CODECLIMATE_REPO_TOKEN=${{env.CODECLIMATE_REPO_TOKEN}} bundle exec codeclimate-test-reporter
+    - name: Run tests and coverage
+      run: |
+        bundle exec rspec
     # - name: Extract source file information
     #   run: |
     #     coverage_report=$(cat coverage_report.json)
