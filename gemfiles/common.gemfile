@@ -23,6 +23,7 @@ gem "pg", "~> 1.1"
 
 # Library to show coverage of the code.
 gem "simplecov"
+gem "simplecov-cobertura"
 
 group :development do
   gem "puma"

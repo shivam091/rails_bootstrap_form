@@ -3,6 +3,7 @@
 # -*- warn_indent: true -*-
 
 require "simplecov"
+require "simplecov-cobertura"
 
 module SimpleCovEnv
   extend self
@@ -42,6 +43,7 @@ module SimpleCovEnv
       [
         SimpleCov::Formatter::SimpleFormatter,
         SimpleCov::Formatter::HTMLFormatter,
+        SimpleCov::Formatter::CoberturaFormatter
       ]
     )
   end
