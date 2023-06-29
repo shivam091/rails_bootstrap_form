@@ -34,6 +34,10 @@ jobs:
       run: |
         sudo apt-get install -y libvips
         sudo apt-get install -yqq libpq-dev
+    - name: Clean bundle cache
+      run: |
+        bundle clean --force
+        rm -rf vendor/bundle
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -47,5 +51,10 @@ jobs:
       run: |
         bundle exec rspec --format progress
         CODECLIMATE_REPO_TOKEN=${{ env.CODECLIMATE_REPO_TOKEN }} bundle exec codeclimate-test-reporter
+    - name: Extract source file information
+      run: |
+        coverage_report=$(cat coverage_report.json)
+        source_files=$(ruby -e 'require "json"; result = JSON.parse(ENV["coverage_report"]); source_files = result["files"].map { |file| { name: file["filename"], coverage: file["covered_percent"].to_i } }; puts source_files.to_json')
+        echo "$source_files" > source_files.json
     # - name: Rubocop
     #   run: bundle exec rubocop --autocorrect
