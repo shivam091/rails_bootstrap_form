@@ -22,6 +22,7 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      CC_TEST_REPORTER_ID: f7dc26d97d2d636e50bcb811728bdbc9956de60045a2ed68c74c82a0d70ae77a
     name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
@@ -44,5 +45,7 @@ jobs:
         bundle exec rake db:migrate
     - name: Run test cases
       run: bundle exec rspec
+    - name: Publish code coverage
+      uses: paambaati/codeclimate-action@v4.0.0
     # - name: Rubocop
     #   run: bundle exec rubocop --autocorrect
