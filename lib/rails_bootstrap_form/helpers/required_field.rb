@@ -31,11 +31,14 @@ module RailsBootstrapForm
       def is_attribute_required?(attribute)
         return false unless attribute
 
-        target = object.instance_of?(Class) ? object : object.class
+        target = target_object(object)
         return false unless target.respond_to?(:validators_on)
 
-        has_presence_validator?(target_validators(target, attribute)) ||
-          is_required_association?(target, attribute)
+        has_presence_validator?(target_validators(target, attribute)) || is_required_association?(target, attribute)
+      end
+
+      def target_object(object)
+        object.instance_of?(Class) ? object : object.class
       end
 
       def target_validators(target, attribute)
@@ -49,12 +52,16 @@ module RailsBootstrapForm
       end
 
       def is_required_association?(target, attribute)
-        target.try(:reflections)&.find do |name, a|
-          next unless a.is_a?(ActiveRecord::Reflection::BelongsToReflection)
-          next unless a.foreign_key == attribute.to_s
-
-          has_presence_validator?(target_validators(target, name))
+        target.try(:reflections)&.find do |name, reflection|
+          required_association?(reflection, attribute)
         end
+      end
+
+      def required_association?(reflection, attribute)
+        return false unless reflection.is_a?(ActiveRecord::Reflection::BelongsToReflection)
+        return false unless reflection.foreign_key == attribute.to_s
+
+        has_presence_validator?(target_validators(reflection.active_record, reflection.name))
       end
     end
   end

@@ -31,10 +31,7 @@ module RailsBootstrapForm
 
       def has_association_error?(attribute)
         object.class.try(:reflections)&.any? do |association_name, association|
-          next unless is_belongs_to_association?(association)
-          next unless is_association_same?(attribute, association)
-
-          object.errors[association_name].any?
+          has_error_for_association?(attribute, association_name)
         end
       end
 
@@ -57,6 +54,13 @@ module RailsBootstrapForm
 
       def is_association_same?(attribute, association)
         (association.foreign_key == attribute.to_s)
+      end
+
+      def has_error_for_association?(attribute, association_name)
+        return false unless is_belongs_to_association?(object.class.reflections[association_name])
+        return false unless is_association_same?(attribute, object.class.reflections[association_name])
+
+        object.errors[association_name].any?
       end
     end
   end
