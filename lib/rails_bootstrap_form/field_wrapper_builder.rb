@@ -4,6 +4,9 @@
 
 module RailsBootstrapForm
   module FieldWrapperBuilder
+
+    private
+
     def field_wrapper_builder(attribute, bootstrap, options, html_options = nil, &block)
       field_options = field_css_options(attribute, bootstrap, options, html_options.try(:symbolize_keys!))
 
@@ -72,18 +75,11 @@ module RailsBootstrapForm
     def field_css_options(attribute, bootstrap, options, html_options)
       css_options = (html_options || options)
 
-      field_classes = Array(bootstrap.field_class) << [bootstrap.additional_field_class || css_options[:class]]
-      field_classes << "is-invalid" if is_invalid?(attribute)
-      if is_size_valid?(bootstrap)
-        field_classes << "#{bootstrap.field_class}-#{bootstrap.size}"
-      end
+      field_classes = build_field_classes(attribute, bootstrap, css_options)
 
       css_options[:class] = field_classes.flatten.compact
       css_options.merge!(required_field_options(attribute, options))
-
-      if placeholder_required?(bootstrap)
-        css_options[:placeholder] ||= label_text(attribute, bootstrap)
-      end
+      add_placeholder_if_required!(css_options, attribute, bootstrap)
 
       css_options
     end
@@ -96,11 +92,21 @@ module RailsBootstrapForm
       classes
     end
 
+    def build_field_classes(attribute, bootstrap, css_options)
+      field_classes = Array(bootstrap.field_class) <<
+      field_classes << [bootstrap.additional_field_class || css_options[:class]]
+      field_classes << "is-invalid" if is_invalid?(attribute)
+      field_classes << "#{bootstrap.field_class}-#{bootstrap.size}" if is_size_valid?(bootstrap)
+      field_classes
+    end
+
     def placeholder_required?(bootstrap)
       (bootstrap.floating? && !bootstrap.layout_horizontal?) || bootstrap.layout_inline?
     end
 
-    private :field_wrapper, :field_wrapper_classes, :field_wrapper_default_class,
-            :field_css_options, :floating_label_classes
+    def add_placeholder_if_required!(css_options, attribute, bootstrap)
+      css_options[:placeholder] ||= label_text(attribute, bootstrap) if placeholder_required?(bootstrap)
+      css_options
+    end
   end
 end

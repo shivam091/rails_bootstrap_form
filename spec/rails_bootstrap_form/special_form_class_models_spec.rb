@@ -94,19 +94,19 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
                                         }
                                       })
       expected = <<~HTML
-        <div class="mb-3">
-          <div class="field_with_errors">
+        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+          <div class="mb-3">
             <label class="form-label required is-invalid" for="admin_user_password">Password</label>
-          </div>
-          <div class="field_with_errors">
             <input class="form-control is-invalid" aria-required="true" required="required" type="text" name="admin_user[password]" id="admin_user_password" />
+            <div class="invalid-feedback">can't be blank and </div>
+            <div class="form-text text-muted">A good password should be at least six characters long</div>
           </div>
-          <div class="invalid-feedback">can't be blank</div>
-          <div class="form-text text-muted">A good password should be at least six characters long</div>
-        </div>
+        </form>
       HTML
 
-      actual = form_builder.text_field(:password)
+      actual = bootstrap_form_with(model: admin_user, url: "/test") do |form|
+        concat(form.text_field(:password))
+      end
 
       expect(actual).to match_html(expected)
     end

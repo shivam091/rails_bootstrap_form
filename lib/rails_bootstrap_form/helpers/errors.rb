@@ -10,15 +10,9 @@ module RailsBootstrapForm
       private
 
       def is_invalid?(attribute)
-        (attribute && object.respond_to?(:errors) && object.errors[attribute].any?) ||
+        (attribute && object.respond_to?(:errors) && has_attribute_error?(attribute)) ||
           has_association_error?(attribute)
       end
-
-      # def input_with_error(attribute, &block)
-      #   input = capture(&block)
-      #   input << generate_error(attribute)
-      #   input
-      # end
 
       def generate_error(attribute)
         if is_invalid?(attribute)
@@ -29,23 +23,41 @@ module RailsBootstrapForm
         end
       end
 
+      def error_messages(attribute)
+        messages = Array(attribute_error_messages(attribute))
+        messages << associated_error_messages(attribute)
+
+        messages.flatten.to_sentence
+      end
+
+      def has_attribute_error?(attribute)
+        attribute_error_messages(attribute).any?
+      end
+
       def has_association_error?(attribute)
         object.class.try(:reflections)&.any? do |association_name, association|
-          has_error_for_association?(attribute, association_name)
+          has_errors_on_association?(attribute, association_name)
         end
       end
 
-      def error_messages(attribute)
-        messages = object.errors[attribute]
+      def has_errors_on_association?(attribute, association_name)
+        return false unless is_belongs_to_association?(object.class.reflections[association_name])
+        return false unless is_association_same?(attribute, object.class.reflections[association_name])
 
-        object.class.try(:reflections)&.each do |association_name, association|
+        object.errors[association_name].any?
+      end
+
+      def attribute_error_messages(attribute)
+        object.errors[attribute]
+      end
+
+      def associated_error_messages(attribute)
+        object.class.try(:reflections)&.each_with_object([]) do |(association_name, association), messages|
           next unless is_belongs_to_association?(association)
           next unless is_association_same?(attribute, association)
 
           messages << object.errors[association_name]
         end
-
-        messages.flatten.to_sentence
       end
 
       def is_belongs_to_association?(association)
@@ -54,13 +66,6 @@ module RailsBootstrapForm
 
       def is_association_same?(attribute, association)
         (association.foreign_key == attribute.to_s)
-      end
-
-      def has_error_for_association?(attribute, association_name)
-        return false unless is_belongs_to_association?(object.class.reflections[association_name])
-        return false unless is_association_same?(attribute, object.class.reflections[association_name])
-
-        object.errors[association_name].any?
       end
     end
   end
