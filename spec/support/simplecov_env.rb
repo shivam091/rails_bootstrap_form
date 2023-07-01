@@ -9,7 +9,7 @@ module SimpleCovEnv
   extend self
 
   def start!
-    # configure_formatter
+    configure_formatter
     configure_filters
     write_coverage_percentage
 
@@ -43,7 +43,6 @@ module SimpleCovEnv
       [
         SimpleCov::Formatter::SimpleFormatter,
         SimpleCov::Formatter::HTMLFormatter,
-        SimpleCov::Formatter::CoberturaFormatter
       ]
     )
   end
