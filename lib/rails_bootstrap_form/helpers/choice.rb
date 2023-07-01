@@ -41,6 +41,28 @@ module RailsBootstrapForm
         end
       end
 
+      [:check_box, :radio_button].each do |tag_name|
+        define_method("build_#{tag_name}_html") do |attribute, value, bootstrap, options|
+          tag.div(class: choice_wrapper_classes(bootstrap)) do
+            concat(send("bootstrap_#{tag_name}", attribute, value, options, bootstrap))
+            concat(help_text(attribute, bootstrap))
+            concat(generate_error(attribute)) if is_invalid?(attribute)
+          end
+        end
+      end
+
+      [:check_box, :radio_button].each do |tag_name|
+        define_method("build_wrapped_#{tag_name}_html") do |bootstrap, tag_html|
+          tag.div(**field_wrapper_options(bootstrap)) do
+            if bootstrap.layout_horizontal?
+              tag.div(class: choice_container_classes(bootstrap)) { tag_html }
+            else
+              tag_html
+            end
+          end
+        end
+      end
+
       def choice_classes(attribute, bootstrap, options)
         classes = Array("form-check-input") << [bootstrap.additional_field_class || options[:class]]
         classes << "is-invalid" if is_invalid?(attribute)
