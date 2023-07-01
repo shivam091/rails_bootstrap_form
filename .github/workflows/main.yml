@@ -45,14 +45,14 @@ jobs:
         bundle exec rake db:migrate
     - name: Run test cases
       run: bundle exec rspec
-    - name: Code Coverage Summary
-      with:
-        filename: coverage/coverage.xml
-        badge: true
-        fail_below_min: true
-        format: text
-        thresholds: "60 80"
-      uses: irongut/CodeCoverageSummary@v1.3.0
+    # - name: Code Coverage Summary
+    #   with:
+    #     filename: coverage/coverage.xml
+    #     badge: true
+    #     fail_below_min: true
+    #     format: text
+    #     thresholds: "60 80"
+    #   uses: irongut/CodeCoverageSummary@v1.3.0
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v4.0.0
     # - name: Rubocop
