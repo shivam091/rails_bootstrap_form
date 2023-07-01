@@ -12,20 +12,10 @@ module RailsBootstrapForm
           bootstrap = bootstrap_form_options.scoped(options.delete(:bootstrap))
           return super if bootstrap.disabled?
 
-          check_box_html = tag.div(class: choice_wrapper_classes(bootstrap)) do
-            concat(bootstrap_check_box(attribute, checked_value, options, bootstrap))
-            concat(help_text(attribute, bootstrap))
-            concat(generate_error(attribute)) if is_invalid?(attribute)
-          end
+          check_box_html = build_check_box_html(attribute, checked_value, bootstrap, options)
 
           if bootstrap.wrapper
-            tag.div(**field_wrapper_options(bootstrap)) do
-              if bootstrap.layout_horizontal?
-                tag.div(class: choice_container_classes(bootstrap)) { check_box_html }
-              else
-                check_box_html
-              end
-            end
+            build_wrapped_check_box_html(bootstrap, check_box_html)
           else
             check_box_html
           end

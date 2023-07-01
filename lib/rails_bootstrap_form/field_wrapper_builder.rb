@@ -4,6 +4,9 @@
 
 module RailsBootstrapForm
   module FieldWrapperBuilder
+
+    private
+
     def field_wrapper_builder(attribute, bootstrap, options, html_options = nil, &block)
       field_options = field_css_options(attribute, bootstrap, options, html_options.try(:symbolize_keys!))
 
@@ -15,37 +18,17 @@ module RailsBootstrapForm
       help_text = help_text(attribute, bootstrap)
       wrapper_content = ActiveSupport::SafeBuffer.new
 
-      if bootstrap.layout_horizontal?
-        wrapper_content << label
-        wrapper_content << tag.div(class: bootstrap.field_col_wrapper_class) do
-          input_group_wrapper(attribute, bootstrap) do
-            capture(&block)
-          end + help_text
-        end
+      wrapper_content = if bootstrap.layout_horizontal?
+        build_horizontal_layout_content(attribute, bootstrap, label, help_text, &block)
       else
         if bootstrap.floating?
-          wrapper_content << input_group_wrapper(attribute, bootstrap) do
-            tag.div(class: floating_label_classes(attribute)) do
-              capture(&block) + label
-            end
-          end
-          wrapper_content << help_text
+          build_floating_layout_content(attribute, bootstrap, label, help_text, &block)
         else
-          wrapper_content << label
-          wrapper_content << input_group_wrapper(attribute, bootstrap) do
-            capture(&block)
-          end
-          wrapper_content << help_text
+          build_default_layout_content(attribute, bootstrap, label, help_text, &block)
         end
       end
 
-      if bootstrap.wrapper
-        tag.div(**field_wrapper_options(bootstrap)) do
-          wrapper_content
-        end
-      else
-        wrapper_content
-      end
+      build_wrapper_element(bootstrap, wrapper_content)
     end
 
     def field_wrapper_options(bootstrap)
@@ -72,18 +55,11 @@ module RailsBootstrapForm
     def field_css_options(attribute, bootstrap, options, html_options)
       css_options = (html_options || options)
 
-      field_classes = Array(bootstrap.field_class) << [bootstrap.additional_field_class || css_options[:class]]
-      field_classes << "is-invalid" if is_invalid?(attribute)
-      if is_size_valid?(bootstrap)
-        field_classes << "#{bootstrap.field_class}-#{bootstrap.size}"
-      end
+      field_classes = build_field_classes(attribute, bootstrap, css_options)
 
       css_options[:class] = field_classes.flatten.compact
       css_options.merge!(required_field_options(attribute, options))
-
-      if placeholder_required?(bootstrap)
-        css_options[:placeholder] ||= label_text(attribute, bootstrap)
-      end
+      add_placeholder_if_required!(css_options, attribute, bootstrap)
 
       css_options
     end
@@ -96,11 +72,63 @@ module RailsBootstrapForm
       classes
     end
 
+    def build_field_classes(attribute, bootstrap, css_options)
+      field_classes = Array(bootstrap.field_class) <<
+      field_classes << [bootstrap.additional_field_class || css_options[:class]]
+      field_classes << "is-invalid" if is_invalid?(attribute)
+      field_classes << "#{bootstrap.field_class}-#{bootstrap.size}" if is_size_valid?(bootstrap)
+      field_classes
+    end
+
     def placeholder_required?(bootstrap)
       (bootstrap.floating? && !bootstrap.layout_horizontal?) || bootstrap.layout_inline?
     end
 
-    private :field_wrapper, :field_wrapper_classes, :field_wrapper_default_class,
-            :field_css_options, :floating_label_classes
+    def add_placeholder_if_required!(css_options, attribute, bootstrap)
+      css_options[:placeholder] ||= label_text(attribute, bootstrap) if placeholder_required?(bootstrap)
+      css_options
+    end
+
+    def build_horizontal_layout_content(attribute, bootstrap, label, help_text, &block)
+      wrapper_content = ActiveSupport::SafeBuffer.new
+      wrapper_content << label
+      wrapper_content << tag.div(class: bootstrap.field_col_wrapper_class) do
+        input_group_wrapper(attribute, bootstrap) do
+          capture(&block)
+        end + help_text
+      end
+      wrapper_content
+    end
+
+    def build_floating_layout_content(attribute, bootstrap, label, help_text, &block)
+      wrapper_content = ActiveSupport::SafeBuffer.new
+      wrapper_content << input_group_wrapper(attribute, bootstrap) do
+        tag.div(class: floating_label_classes(attribute)) do
+          capture(&block) + label
+        end
+      end
+      wrapper_content << help_text
+      wrapper_content
+    end
+
+    def build_default_layout_content(attribute, bootstrap, label, help_text, &block)
+      wrapper_content = ActiveSupport::SafeBuffer.new
+      wrapper_content << label
+      wrapper_content << input_group_wrapper(attribute, bootstrap) do
+        capture(&block)
+      end
+      wrapper_content << help_text
+      wrapper_content
+    end
+
+    def build_wrapper_element(bootstrap, wrapper_content)
+      if bootstrap.wrapper
+        tag.div(**field_wrapper_options(bootstrap)) do
+          wrapper_content
+        end
+      else
+        wrapper_content
+      end
+    end
   end
 end

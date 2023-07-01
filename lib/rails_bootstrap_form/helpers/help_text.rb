@@ -7,46 +7,43 @@ module RailsBootstrapForm
     module HelpText
       extend ActiveSupport::Concern
 
-      def self.included(base_class)
-        def help_text(attribute, bootstrap)
-          return if bootstrap.help_text == false
+      private
 
-          help_text = (bootstrap.help_text || scoped_help_text(attribute))
+      def help_text(attribute, bootstrap)
+        return if bootstrap.help_text == false
 
-          tag.div(help_text, class: "form-text text-muted") if help_text.present?
+        help_text = (bootstrap.help_text || scoped_help_text(attribute))
+
+        tag.div(help_text, class: "form-text text-muted") if help_text.present?
+      end
+
+      def object_class
+        if !object.class.is_a?(ActiveModel::Naming) &&
+           object.respond_to?(:klass) && object.klass.is_a?(ActiveModel::Naming)
+          object.klass
+        else
+          object.class
         end
+      end
 
-        def object_class
-          if !object.class.is_a?(ActiveModel::Naming) &&
-             object.respond_to?(:klass) && object.klass.is_a?(ActiveModel::Naming)
-            object.klass
-          else
-            object.class
-          end
+      def partial_scope
+        if object_class.respond_to?(:model_name)
+          object_class.model_name.name
+        else
+          object_class.name
         end
+      end
 
-        def partial_scope
-          if object_class.respond_to?(:model_name)
-            object_class.model_name.name
-          else
-            object_class.name
-          end
-        end
+      def scoped_help_text(attribute)
+        translation_scope = "activerecord.help_texts.#{partial_scope.underscore}"
 
-        def scoped_help_text(attribute)
-          translation_scope = "activerecord.help_texts.#{partial_scope.underscore}"
+        help_text = translated_help_text(attribute, translation_scope).presence
 
-          help_text = translated_help_text(attribute, translation_scope).presence
+        help_text
+      end
 
-          help_text
-        end
-
-        def translated_help_text(attribute, scope)
-          ActiveSupport::SafeBuffer.new(I18n.t(attribute, scope: scope, default: ""))
-        end
-
-        private :help_text, :partial_scope, :object_class, :scoped_help_text
-                :translated_help_text
+      def translated_help_text(attribute, scope)
+        ActiveSupport::SafeBuffer.new(I18n.t(attribute, scope: scope, default: ""))
       end
     end
   end

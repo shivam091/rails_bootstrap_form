@@ -4,6 +4,12 @@ You can find recent releases with docs in GitHub:
 
 https://github.com/shivam091/rails_bootstrap_form/releases
 
+## [0.9.8](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.7...v0.9.8) - 2023-07-01
+
+### What's fixed
+
+- Fixed bug causing button helpers not to work with block and options ([#50](https://github.com/shivam091/rails_bootstrap_form/issues/50))
+
 ## [0.9.7](https://github.com/shivam091/rails_bootstrap_form/compare/v0.9.6...v0.9.7) - 2023-06-26
 
 ### What's new

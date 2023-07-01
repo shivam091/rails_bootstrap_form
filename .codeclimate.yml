@@ -37,6 +37,7 @@ exclude_patterns:
 - "db/"
 - "dist/"
 - "features/"
+- "demo/"
 - "**/node_modules/"
 - "script/"
 - "**/spec/"

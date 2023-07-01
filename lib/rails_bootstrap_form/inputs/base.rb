@@ -12,22 +12,8 @@ module RailsBootstrapForm
           inputs = ActiveSupport::SafeBuffer.new
 
           collection.each do |object|
-            value = object.send(value_method)
-
-            input_options = {
-              bootstrap: {
-                label_text: text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method),
-                inline: (bootstrap.inline? || bootstrap.layout_inline?)
-              },
-              required: false,
-              id: sanitized_tag_name(attribute, value)
-            }.deep_merge!(options)
-
-            if (checked = input_options[:checked])
-              input_options[:checked] = collection_input_checked?(checked, object, value)
-            end
-
-            input_value = value_method.respond_to?(:call) ? value_method.call(object) : value
+            input_options = build_input_options(object, attribute, value_method, text_method, bootstrap, options)
+            input_value = resolve_input_value(object, value_method)
 
             inputs << yield(attribute, input_value, input_options)
           end
@@ -65,6 +51,36 @@ module RailsBootstrapForm
             end
           end
         end
+      end
+
+      private
+
+      def build_input_options(object, attribute, value_method, text_method, bootstrap, options)
+        input_options = {
+          bootstrap: {
+            label_text: resolve_label_text(text_method, object),
+            inline: (bootstrap.inline? || bootstrap.layout_inline?)
+          },
+          required: false,
+          id: sanitized_tag_name(attribute, object.send(value_method))
+        }.deep_merge!(options)
+
+        input_options[:checked] = resolve_checked_option(input_options[:checked], object, value_method)
+
+        input_options
+      end
+
+      def resolve_label_text(text_method, object)
+        text_method.respond_to?(:call) ? text_method.call(object) : object.send(text_method)
+      end
+
+      def resolve_input_value(object, value_method)
+        value_method.respond_to?(:call) ? value_method.call(object) : object.send(value_method)
+      end
+
+      def resolve_checked_option(checked_option, object, value_method)
+        return collection_input_checked?(checked_option, object, object.send(value_method)) if checked_option
+        false
       end
     end
   end
