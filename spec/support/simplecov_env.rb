@@ -8,7 +8,6 @@ module SimpleCovEnv
   extend self
 
   def start!
-    configure_formatter
     configure_filters
     write_coverage_percentage
 
@@ -35,15 +34,6 @@ module SimpleCovEnv
       add_group "Inputs", "lib/rails_bootstrap_form/inputs"
       add_group "Helpers", "lib/rails_bootstrap_form/helpers"
     end
-  end
-
-  def configure_formatter
-    SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
-      [
-        SimpleCov::Formatter::SimpleFormatter,
-        SimpleCov::Formatter::HTMLFormatter,
-      ]
-    )
   end
 
   def write_coverage_percentage
