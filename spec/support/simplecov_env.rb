@@ -9,7 +9,7 @@ module SimpleCovEnv
   extend self
 
   def start!
-    configure_formatter
+    # configure_formatter
     configure_filters
     write_coverage_percentage
 
