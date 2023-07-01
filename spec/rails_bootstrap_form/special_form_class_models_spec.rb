@@ -98,7 +98,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
           <div class="mb-3">
             <label class="form-label required is-invalid" for="admin_user_password">Password</label>
             <input class="form-control is-invalid" aria-required="true" required="required" type="text" name="admin_user[password]" id="admin_user_password" />
-            <div class="invalid-feedback">can't be blank and </div>
+            <div class="invalid-feedback">can't be blank</div>
             <div class="form-text text-muted">A good password should be at least six characters long</div>
           </div>
         </form>

@@ -52,12 +52,16 @@ module RailsBootstrapForm
       end
 
       def associated_error_messages(attribute)
-        object.class.try(:reflections)&.each_with_object([]) do |(association_name, association), messages|
+        error_messages = []
+
+        object.class.try(:reflections)&.each do |association_name, association|
           next unless is_belongs_to_association?(association)
           next unless is_association_same?(attribute, association)
 
-          messages << object.errors[association_name]
+          error_messages << object.errors[association_name]
         end
+
+        error_messages
       end
 
       def is_belongs_to_association?(association)
