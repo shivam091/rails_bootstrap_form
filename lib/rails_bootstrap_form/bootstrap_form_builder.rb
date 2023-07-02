@@ -30,6 +30,8 @@ module RailsBootstrapForm
       super(record_name, record_object, fields_options, &block)
     end
 
+    private
+
     def apply_default_form_options(options)
       options[:html] ||= {}
       options[:html].reverse_merge!(RailsBootstrapForm.config.default_form_attributes)
@@ -49,7 +51,5 @@ module RailsBootstrapForm
       fields_options = bootstrap.deep_merge!(fields_options)
       fields_options
     end
-
-    private :apply_default_form_options, :fields_for_options, :apply_default_form_classes
   end
 end

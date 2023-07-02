@@ -380,7 +380,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
       user.errors.add(:skill_ids, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" class="new_user" id="new_user" action="/test" accept-charset="UTF-8" method="post">
           <div class="mb-3">
             <label class="form-label required is-invalid" for="user_skill_ids">Skills</label>
             <div class="rails-bootstrap-forms-collection-check-boxes">
@@ -443,7 +443,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
       user.errors.add(:skill_ids, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" class="new_user row row-cols-lg-auto g-3 align-items-center" id="new_user" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" class="new_user row row-cols-lg-auto g-3 align-items-center" id="new_user" action="/test" accept-charset="UTF-8" method="post">
           <div class="col-12">
             <label class="form-label visually-hidden required is-invalid" for="user_skill_ids">Skills</label>
             <div class="rails-bootstrap-forms-collection-check-boxes">
@@ -506,7 +506,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionCheckBoxes do
       user.errors.add(:skill_ids, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" class="new_user" id="new_user" action="/test" accept-charset="UTF-8" method="post">
           <div class="row mb-3">
             <label class="col-form-label col-sm-2 required is-invalid" for="user_skill_ids">Skills</label>
             <div class="col-sm-10">
