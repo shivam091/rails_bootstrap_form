@@ -11,7 +11,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
   it "checks markup of vertical form" do
     expected = <<~HTML
-      <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+      <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="mb-3">
           <label class="form-label" for="user_username">Username</label>
           <input class="form-control" type="text" name="user[username]" id="user_username" />
@@ -42,7 +42,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
   it "checks markup of horizontal form" do
     expected = <<~HTML
-      <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+      <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="row mb-3">
           <label class="col-form-label col-sm-2" for="user_username">Username</label>
           <div class="col-sm-10">
@@ -79,7 +79,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
   it "checks markup of inline form" do
     expected = <<~HTML
-      <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+      <form novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
         <div class="col-12">
           <label class="form-label visually-hidden" for="user_username">Username</label>
           <input class="form-control" placeholder="Username" type="text" name="user[username]" id="user_username" />
@@ -112,7 +112,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
   it "checks markup of nested attributes when bootstrap options are set on parent form" do
     expected = <<~HTML
-      <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+      <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="row mb-3">
           <label class="col-form-label col-sm-2" for="user_username">Username</label>
           <div class="col-sm-10">
@@ -156,7 +156,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
 
   it "checks markup of nested attributes when bootstrap options are set on fields_for" do
     expected = <<~HTML
-      <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+      <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
         <div class="row mb-3">
           <label class="col-form-label col-sm-2" for="user_username">Username</label>
           <div class="col-sm-10">

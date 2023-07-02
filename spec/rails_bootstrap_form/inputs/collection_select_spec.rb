@@ -98,7 +98,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionSelect do
       user.errors.add(:fruit_id, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="mb-3">
             <label class="form-label required is-invalid" for="user_fruit_id">Favorite fruit</label>
             <select class="form-select is-invalid" aria-required="true" required="required" name="user[fruit_id]" id="user_fruit_id">
@@ -122,7 +122,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionSelect do
       user.errors.add(:fruit_id, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
           <div class="col-12">
             <label class="form-label visually-hidden required is-invalid" for="user_fruit_id">Favorite fruit</label>
             <select class="form-select is-invalid" aria-required="true" required="required" placeholder="Favorite fruit" name="user[fruit_id]" id="user_fruit_id">
@@ -146,7 +146,7 @@ RSpec.describe RailsBootstrapForm::Inputs::CollectionSelect do
       user.errors.add(:fruit_id, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="row mb-3">
             <label class="col-form-label col-sm-2 required is-invalid" for="user_fruit_id">Favorite fruit</label>
             <div class="col-sm-10">

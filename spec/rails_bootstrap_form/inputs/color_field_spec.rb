@@ -66,7 +66,7 @@ RSpec.describe RailsBootstrapForm::Inputs::ColorField do
       user.errors.add(:favorite_color, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="mb-3">
             <label class="form-label required is-invalid" for="user_favorite_color">Favorite color</label>
             <input class="form-control form-control-color is-invalid" aria-required="true" required="required" value="#000000" type="color" name="user[favorite_color]" id="user_favorite_color" />
@@ -86,7 +86,7 @@ RSpec.describe RailsBootstrapForm::Inputs::ColorField do
       user.errors.add(:favorite_color, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="row mb-3">
             <label class="col-form-label col-sm-2 required is-invalid" for="user_favorite_color">Favorite color</label>
             <div class="col-sm-10">
@@ -108,7 +108,7 @@ RSpec.describe RailsBootstrapForm::Inputs::ColorField do
       user.errors.add(:favorite_color, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
           <div class="col-12">
             <label class="form-label visually-hidden required is-invalid" for="user_favorite_color">Favorite color</label>
             <input class="form-control form-control-color is-invalid" aria-required="true" required="required" placeholder="Favorite color" value="#000000" type="color" name="user[favorite_color]" id="user_favorite_color" />

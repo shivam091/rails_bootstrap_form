@@ -94,7 +94,7 @@ RSpec.describe RailsBootstrapForm::BootstrapFormBuilder do
                                         }
                                       })
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="mb-3">
             <label class="form-label required is-invalid" for="admin_user_password">Password</label>
             <input class="form-control is-invalid" aria-required="true" required="required" type="text" name="admin_user[password]" id="admin_user_password" />

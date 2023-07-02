@@ -66,7 +66,7 @@ RSpec.describe RailsBootstrapForm::Inputs::DateField do
       user.errors.add(:interview_date, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="mb-3">
             <label class="form-label is-invalid" for="user_interview_date">Interview date</label>
             <input class="form-control is-invalid" type="date" name="user[interview_date]" id="user_interview_date" />
@@ -86,7 +86,7 @@ RSpec.describe RailsBootstrapForm::Inputs::DateField do
       user.errors.add(:interview_date, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
           <div class="col-12">
             <label class="form-label visually-hidden is-invalid" for="user_interview_date">Interview date</label>
             <input class="form-control is-invalid" placeholder="Interview date" type="date" name="user[interview_date]" id="user_interview_date" />
@@ -106,7 +106,7 @@ RSpec.describe RailsBootstrapForm::Inputs::DateField do
       user.errors.add(:interview_date, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="row mb-3">
             <label class="col-form-label col-sm-2 is-invalid" for="user_interview_date">Interview date</label>
             <div class="col-sm-10">

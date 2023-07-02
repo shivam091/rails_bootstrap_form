@@ -97,7 +97,7 @@ To get started, use the `bootstrap_form_for` helper in place of the Rails [`form
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
     <label class="form-label required" for="user_email">Email address</label>
     <input class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
@@ -135,7 +135,7 @@ To get started, use the `bootstrap_form_with` helper in place of the Rails [`for
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
     <label class="form-label required" for="user_email">Email address</label>
     <input class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
@@ -203,7 +203,7 @@ Here's an example of a form where one field uses different layout:
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
     <label class="form-label required" for="user_name">Name</label>
     <input class="form-control" aria-required="true" required="required" type="text" name="user[name]" id="user_name">
@@ -346,7 +346,7 @@ Here's an example of how it looks like:
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
     <label class="form-label required" for="user_email">Email address</label>
     <input class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
@@ -379,7 +379,7 @@ Here's an example of how it looks like by default:
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="row mb-3">
     <label class="col-form-label col-sm-2 required" for="user_email">Email address</label>
     <div class="col-sm-10">
@@ -416,7 +416,7 @@ The `label_col_wrapper_class` and `field_col_wrapper_class` css classes can also
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="row mb-3">
     <label class="col-form-label col-sm-2 required" for="user_name">Name</label>
     <div class="col-sm-10">
@@ -470,7 +470,7 @@ Here's an example of how it looks like:
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user row row-cols-lg-auto g-3 align-items-center" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user row row-cols-lg-auto g-3 align-items-center" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="col-12">
     <label class="form-label visually-hidden required" for="user_email">Email address</label>
     <input class="form-control" aria-required="true" required="required" placeholder="Email address" type="email" name="user[email]" id="user_email">
@@ -921,7 +921,7 @@ Our `fields_for` helper accepts the same arguments as the [default Rails helper]
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
     <label class="form-label required" for="user_email">Email address</label>
     <input autocomplete="new-email" class="form-control" aria-required="true" required="required" type="email" name="user[email]" id="user_email">
@@ -984,7 +984,7 @@ By setting `bootstrap` option on `bootstrap_form_for` or `bootstrap_form_with`, 
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="row mb-3">
     <label class="col-form-label col-sm-2 required" for="user_email">Email address</label>
     <div class="col-sm-10">
@@ -1930,7 +1930,7 @@ The `floating` option can be used to enable Bootstrap floating labels. This opti
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
     <div class="form-floating">
       <input class="form-control" aria-required="true" required="required" placeholder="Name" type="text" name="user[name]" id="user_name">
@@ -1994,7 +1994,7 @@ By default, fields that have validation errors will be outlined in red and the e
 This generates the following HTML:
 
 ```html
-<form role="form" novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
+<form novalidate="novalidate" class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
   <div class="mb-3">
     <label class="form-label required is-invalid" for="user_email">Email address</label>
     <input class="form-control is-invalid" aria-required="true" required="required" type="email" name="user[email]" id="user_email">

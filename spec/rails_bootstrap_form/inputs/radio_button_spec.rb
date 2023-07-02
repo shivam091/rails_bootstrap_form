@@ -266,7 +266,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       user.errors.add(:gender, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="mb-3">
             <div class="form-check">
               <input class="form-check-input is-invalid" type="radio" value="male" name="user[gender]" id="user_gender_male" />
@@ -288,7 +288,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       user.errors.add(:gender, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" class="row row-cols-lg-auto g-3 align-items-center" action="/test" accept-charset="UTF-8" method="post">
           <div class="col-12">
             <div class="form-check">
               <input class="form-check-input is-invalid" type="radio" value="male" name="user[gender]" id="user_gender_male" />
@@ -310,7 +310,7 @@ RSpec.describe RailsBootstrapForm::Inputs::RadioButton do
       user.errors.add(:gender, :blank)
 
       expected = <<~HTML
-        <form role="form" novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
+        <form novalidate="novalidate" action="/test" accept-charset="UTF-8" method="post">
           <div class="row mb-3">
             <div class="col-sm-10 offset-sm-2">
               <div class="form-check">
