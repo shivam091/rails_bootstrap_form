@@ -177,6 +177,8 @@ module RailsBootstrapForm
       self.field_class ||= css_class
     end
 
+    private
+
     def set_defaults
       @disabled = false
 
@@ -216,7 +218,5 @@ module RailsBootstrapForm
 
       @render_as_button = false
     end
-
-    private :set_defaults
   end
 end

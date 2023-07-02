@@ -36,6 +36,8 @@ module RailsBootstrapForm
         end
       end
 
+      private
+
       def supress_form_field_errors
         original_proc = ActionView::Base.field_error_proc
         ActionView::Base.field_error_proc = RailsBootstrapForm.field_error_proc
@@ -43,8 +45,6 @@ module RailsBootstrapForm
       ensure
         ActionView::Base.field_error_proc = original_proc
       end
-
-      private :supress_form_field_errors
     end
   end
 end
